@@ -9,9 +9,7 @@
   []
   (rf/dispatch [:initialize])
   (rf/dispatch [:spieler-namen])
-  (rf/dispatch [:spiel-typ])
   (rf/dispatch [:historie])
-  #_(rf/dispatch [:testspiel])
   (rf/dispatch [:gespeichertes-spiel?])
   (rdom/render [cv/main-panel]
                (js/document.getElementById "app")))

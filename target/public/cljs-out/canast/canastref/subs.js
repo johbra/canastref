@@ -1,40 +1,28 @@
-// Compiled by ClojureScript 1.10.844 {:static-fns true, :optimize-constants true}
+// Compiled by ClojureScript 1.10.844 {}
 goog.provide('canastref.subs');
 goog.require('cljs.core');
-goog.require('cljs.core.constants');
 goog.require('re_frame.core');
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$name,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
-return cljs.core.cst$kw$name.cljs$core$IFn$_invoke$arity$1(db);
-})], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$historie,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
-return cljs.core.cst$kw$historie.cljs$core$IFn$_invoke$arity$1(db);
-})], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$spieler_DASH_namen,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
-return cljs.core.cst$kw$spieler_DASH_namen.cljs$core$IFn$_invoke$arity$1(db);
-})], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$spiel_DASH_typ,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
-return cljs.core.cst$kw$spiel_DASH_typ.cljs$core$IFn$_invoke$arity$1(db);
-})], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$testspiel,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
-return cljs.core.cst$kw$spiel.cljs$core$IFn$_invoke$arity$1(db);
-})], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$gespeichertes_DASH_spiel_QMARK_,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
-return cljs.core.cst$kw$gespeichertes_DASH_spiel_QMARK_.cljs$core$IFn$_invoke$arity$1(db);
-})], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$spiel,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
-return cljs.core.cst$kw$spiel.cljs$core$IFn$_invoke$arity$1(db);
-})], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$teilnehmer,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
-return cljs.core.cst$kw$teilnehmer.cljs$core$IFn$_invoke$arity$1(cljs.core.cst$kw$spiel.cljs$core$IFn$_invoke$arity$1(db));
-})], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$runde,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
-return cljs.core.cst$kw$runde.cljs$core$IFn$_invoke$arity$1(cljs.core.cst$kw$spiel.cljs$core$IFn$_invoke$arity$1(db));
-})], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$letztes_DASH_resultat,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db,p__21739){
-var vec__21740 = p__21739;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__21740,(0),null);
-var tln = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__21740,(1),null);
-cljs.core.prn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([tln], 0));
-
-return (0);
-})], 0));
+re_frame.core.reg_sub.call(null,new cljs.core.Keyword(null,"name","name",1843675177),(function (db){
+return new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(db);
+}));
+re_frame.core.reg_sub.call(null,new cljs.core.Keyword(null,"historie","historie",893875268),(function (db){
+return new cljs.core.Keyword(null,"historie","historie",893875268).cljs$core$IFn$_invoke$arity$1(db);
+}));
+re_frame.core.reg_sub.call(null,new cljs.core.Keyword(null,"spieler-namen","spieler-namen",-1834217911),(function (db){
+return new cljs.core.Keyword(null,"spieler-namen","spieler-namen",-1834217911).cljs$core$IFn$_invoke$arity$1(db);
+}));
+re_frame.core.reg_sub.call(null,new cljs.core.Keyword(null,"testspiel","testspiel",239318893),(function (db){
+return new cljs.core.Keyword(null,"spiel","spiel",-831112206).cljs$core$IFn$_invoke$arity$1(db);
+}));
+re_frame.core.reg_sub.call(null,new cljs.core.Keyword(null,"gespeichertes-spiel?","gespeichertes-spiel?",147195637),(function (db){
+return new cljs.core.Keyword(null,"gespeichertes-spiel?","gespeichertes-spiel?",147195637).cljs$core$IFn$_invoke$arity$1(db);
+}));
+re_frame.core.reg_sub.call(null,new cljs.core.Keyword(null,"spiel","spiel",-831112206),(function (db){
+return new cljs.core.Keyword(null,"spiel","spiel",-831112206).cljs$core$IFn$_invoke$arity$1(db);
+}));
+re_frame.core.reg_sub.call(null,new cljs.core.Keyword(null,"teilnehmer","teilnehmer",-1866934245),(function (db){
+return new cljs.core.Keyword(null,"teilnehmer","teilnehmer",-1866934245).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"spiel","spiel",-831112206).cljs$core$IFn$_invoke$arity$1(db));
+}));
+re_frame.core.reg_sub.call(null,new cljs.core.Keyword(null,"runde","runde",-1618531444),(function (db){
+return new cljs.core.Keyword(null,"runde","runde",-1618531444).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"spiel","spiel",-831112206).cljs$core$IFn$_invoke$arity$1(db));
+}));

@@ -1,7 +1,6 @@
-// Compiled by ClojureScript 1.10.844 {:static-fns true, :optimize-constants true}
+// Compiled by ClojureScript 1.10.844 {}
 goog.provide('re_com.config');
 goog.require('cljs.core');
-goog.require('cljs.core.constants');
 re_com.config.debug_QMARK_ = goog.DEBUG;
 
 /**

@@ -8,7 +8,7 @@
 
 (rf/reg-event-db
  :initialize
- (fn [db]
+ (fn [_]
    (reset! re-frame.db/app-db db/default-db)))
 
 
@@ -25,13 +25,6 @@
    {:db         (assoc db :loading true)  
     :http-xhrio (df/ajax-request-read-edn-from-dropbox
                  "r-namen.edn" :spieler-namen)}))
-
-(rf/reg-event-fx
- :spiel-typ
- (fn [{:keys [db]} _]
-   {:db         (assoc db :loading true)  
-    :http-xhrio (df/ajax-request-read-edn-from-dropbox
-                 "r-spieltyp.edn" :spiel-typ)}))
 
 (rf/reg-event-fx
  :welt
@@ -68,7 +61,6 @@
      {:db         (assoc db :loading true)  
       :http-xhrio (df/ajax-request-delete-file-from-dropbox
                    "r-welt.edn" :gespeichertes-spiel?)})))
-
 
 (rf/reg-event-db
  :process-exists
@@ -110,13 +102,11 @@
 (rf/reg-event-db
  :resultat
  [re-frame.core/debug]
- (fn [db [_ tln val runde]]
-   (let [res (get-in db [:spiel :teilnehmer tln :resultate])
-         resultate (assoc res runde val)]
-     (-> db
-         (assoc-in [:spiel :teilnehmer tln :resultate] resultate)
-         (assoc-in  [:spiel :teilnehmer tln :summe]
-                    (s/zwischen-summe resultate (inc runde)))))))
+ (fn [db [_ tln index runde]]
+   (-> db
+       (assoc-in [:spiel :teilnehmer index] tln)
+       (assoc-in [:spiel :teilnehmer index :summe]
+                 (s/zwischen-summe (:resultate tln) (inc runde))))))
 
 (rf/reg-event-db
  :schliesse-runde-ab
@@ -125,7 +115,7 @@
    (let [spiel (sp/schliesse-runde-ab (:spiel db))]
      (-> db
          (assoc :spiel spiel)
-         (assoc :historie (sp/registriere-sieger (:historie db) (:sieger spiel)))))))
+         (assoc :historie (sp/registriere-sieger (:historie db) (sp/sieger spiel)))))))
 
 (rf/reg-event-db
  :korrigiere-ergebnis
@@ -139,11 +129,6 @@
  :geber
  (fn [db [_  geber]] 
    (assoc-in db [:spiel :geber] geber)))
-
-#_(rf/reg-event-db
-   :testspiel
-   (fn [db [_ _]] 
-     (assoc db :spiel db/testspiel)))
 
 (rf/reg-event-db
  :neues-spiel

@@ -17,11 +17,6 @@
    (:spieler-namen db)))
 
 (rf/reg-sub
- :spiel-typ
- (fn [db] 
-   (:spiel-typ db)))
-
-(rf/reg-sub
  :testspiel
  (fn [db] 
    (:spiel db)))
@@ -46,7 +41,7 @@
  (fn [db] 
    (:runde (:spiel db))))
 
-(rf/reg-sub
- :letztes-resultat
- (fn [db [_ tln]] 
-   (prn tln) 0))
+#_(rf/reg-sub
+   :letztes-resultat
+   (fn [db [_ tln]] 
+     (prn tln) 0))

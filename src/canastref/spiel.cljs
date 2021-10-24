@@ -15,6 +15,10 @@
   [spiel]
   (:runde spiel))
 
+(defn teilnehmer
+  [spiel]
+  (:teilnehmer spiel))
+
 (defn spiel-beendet?
   [spiel]
   (:spiel-beendet? spiel))
@@ -26,13 +30,17 @@
 
 ;; diverse
 
+(defn anzahl-teilnehmer
+  [spiel]
+  (count (:teilnehmer spiel)))
+
 (defn geber-festgelegt?
   [spiel]
   (not (nil? (:geber spiel))))
 
 (defn neues-spiel 
   [sp-namen] 
-  (assoc (->Spiel) :teilnehmer (into {} (map #(hash-map % (s/->Spieler)) sp-namen))))
+  (assoc (->Spiel) :teilnehmer (mapv #(s/->Spieler %) sp-namen)))
 
 (defn naechster-geber
   [index anzahl-spieler]
@@ -42,24 +50,33 @@
   [index anzahl-spieler]
   (if (= index 0) (dec anzahl-spieler) (dec index)))
 
+(defn ergaenze-standard-werte-in-resultaten
+  [teilnehmer runde]
+  (mapv #(if (nil? (get (s/resultate %) runde))
+           (s/null-resultat runde %)
+           %)
+        teilnehmer))
+
 (defn schliesse-runde-ab
-  [spiel ]
-  (let [teiln (:teilnehmer spiel)
-        sieger (first (last (sort-by #(:summe (val %)) teiln)))
-        geber (naechster-geber (:geber spiel) (count teiln))]
+  [spiel]
+  (let [teiln (ergaenze-standard-werte-in-resultaten (teilnehmer spiel) (runde spiel))
+        sieger (last (sort-by #(s/summe %) teiln))
+        geber (naechster-geber (geber spiel) (count teiln))]
     (assoc spiel
-           :runde (inc (:runde spiel))
-           :sieger (when (>= (:summe (teiln sieger)) 5000) sieger)
-           :spiel-beendet? (>= (:summe (teiln sieger)) 5000)
-           :geber geber)))
+           :runde (inc (runde spiel))
+           :geber geber
+           :teilnehmer teiln
+           :sieger (when (>= (s/summe sieger) 5000) sieger)
+           :spiel-beendet? (>= (s/summe sieger) 5000)
+           )))
 
 (defn registriere-sieger
   [historie sieger]  
-  (if sieger (update historie sieger inc) historie))
+  (if sieger (update historie (s/spieler-name sieger) inc) historie))
 
 (defn eliminiere-sieger
   [historie sieger]  
-  (if sieger (update historie sieger dec) historie))
+  (if sieger (update historie (s/spieler-name sieger) dec) historie))
 
 (defn korrigiere
   [spiel]   
@@ -67,10 +84,10 @@
       (update :runde dec)
       (assoc :spiel-beendet? false 
              :sieger nil
-             :geber (vorheriger-geber (:geber spiel) (count (:teilnehmer spiel))))))
+             :geber (vorheriger-geber (geber spiel) (count (teilnehmer spiel))))))
 
 (defn resultat-in-runde
-  [spiel tln runde]
-  (let [resultate (s/resultate (get (:teilnehmer spiel) tln))] 
-    (if (>= runde (count resultate)) nil (resultate runde))))
+  [tln runde]
+  (let [resultate (:resultate tln)]
+    (if (>= runde (count resultate)) 0 (resultate runde))))
 

@@ -1,34 +1,31 @@
-// Compiled by ClojureScript 1.10.844 {:static-fns true, :optimize-constants true}
+// Compiled by ClojureScript 1.10.844 {}
 goog.provide('canastref.core');
 goog.require('cljs.core');
-goog.require('cljs.core.constants');
 goog.require('re_frame.core');
 goog.require('reagent.dom');
 goog.require('canastref.views');
 goog.require('canastref.events');
 canastref.core.main = (function canastref$core$main(){
-re_frame.core.dispatch(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$initialize], null));
+re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"initialize","initialize",609952913)], null));
 
-re_frame.core.dispatch(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$spieler_DASH_namen], null));
+re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"spieler-namen","spieler-namen",-1834217911)], null));
 
-re_frame.core.dispatch(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$spiel_DASH_typ], null));
+re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"historie","historie",893875268)], null));
 
-re_frame.core.dispatch(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$historie], null));
+re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"gespeichertes-spiel?","gespeichertes-spiel?",147195637)], null));
 
-re_frame.core.dispatch(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$gespeichertes_DASH_spiel_QMARK_], null));
-
-return reagent.dom.render.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [canastref.views.main_panel], null),document.getElementById("app"));
+return reagent.dom.render.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [canastref.views.main_panel], null),document.getElementById("app"));
 });
 goog.exportSymbol('canastref.core.main', canastref.core.main);
 canastref.core.re_render = (function canastref$core$re_render(){
-return canastref.core.main();
+return canastref.core.main.call(null);
 });
 if((typeof canastref !== 'undefined') && (typeof canastref.core !== 'undefined') && (typeof canastref.core.start_up !== 'undefined')){
 } else {
 canastref.core.start_up = (function (){
-canastref.core.main();
+canastref.core.main.call(null);
 
-console.log(cljs.core.deref(re_frame.db.app_db));
+console.log(cljs.core.deref.call(null,re_frame.db.app_db));
 
 return true;
 })()

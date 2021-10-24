@@ -1,56 +1,55 @@
-// Compiled by ClojureScript 1.10.844 {:static-fns true, :optimize-constants true}
+// Compiled by ClojureScript 1.10.844 {}
 goog.provide('re_frame.settings');
 goog.require('cljs.core');
-goog.require('cljs.core.constants');
 goog.require('re_frame.interop');
 goog.require('re_frame.loggers');
-re_frame.settings.defaults = new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$loaded_QMARK_,false,cljs.core.cst$kw$global_DASH_interceptors,re_frame.interop.empty_queue], null);
-re_frame.settings.store = cljs.core.atom.cljs$core$IFn$_invoke$arity$1(re_frame.settings.defaults);
-re_frame.interop.on_load((function (){
-return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$2(re_frame.settings.store,(function (m){
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(m,cljs.core.cst$kw$loaded_QMARK_,true);
+re_frame.settings.defaults = new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"loaded?","loaded?",-1108015206),false,new cljs.core.Keyword(null,"global-interceptors","global-interceptors",-1995759472),re_frame.interop.empty_queue], null);
+re_frame.settings.store = cljs.core.atom.call(null,re_frame.settings.defaults);
+re_frame.interop.on_load.call(null,(function (){
+return cljs.core.swap_BANG_.call(null,re_frame.settings.store,(function (m){
+return cljs.core.assoc.call(null,m,new cljs.core.Keyword(null,"loaded?","loaded?",-1108015206),true);
 }));
 }));
 re_frame.settings.loaded_QMARK_ = (function re_frame$settings$loaded_QMARK_(){
-return cljs.core.cst$kw$loaded_QMARK_.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(re_frame.settings.store));
+return new cljs.core.Keyword(null,"loaded?","loaded?",-1108015206).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,re_frame.settings.store));
 });
 re_frame.settings._replace_global_interceptor = (function re_frame$settings$_replace_global_interceptor(global_interceptors,interceptor){
-return cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (ret,existing_interceptor){
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$id.cljs$core$IFn$_invoke$arity$1(interceptor),cljs.core.cst$kw$id.cljs$core$IFn$_invoke$arity$1(existing_interceptor))){
+return cljs.core.reduce.call(null,(function (ret,existing_interceptor){
+if(cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(interceptor),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(existing_interceptor))){
 if(re_frame.interop.debug_enabled_QMARK_){
-if(cljs.core.not(re_frame.settings.loaded_QMARK_())){
-re_frame.loggers.console.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$warn,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["re-frame: replacing duplicate global interceptor id: ",cljs.core.cst$kw$id.cljs$core$IFn$_invoke$arity$1(interceptor)], 0));
+if(cljs.core.not.call(null,re_frame.settings.loaded_QMARK_.call(null))){
+re_frame.loggers.console.call(null,new cljs.core.Keyword(null,"warn","warn",-436710552),"re-frame: replacing duplicate global interceptor id: ",new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(interceptor));
 } else {
 }
 } else {
 }
 
-return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(ret,interceptor);
+return cljs.core.conj.call(null,ret,interceptor);
 } else {
-return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(ret,existing_interceptor);
+return cljs.core.conj.call(null,ret,existing_interceptor);
 }
 }),re_frame.interop.empty_queue,global_interceptors);
 });
-re_frame.settings.reg_global_interceptor = (function re_frame$settings$reg_global_interceptor(p__21093){
-var map__21094 = p__21093;
-var map__21094__$1 = cljs.core.__destructure_map(map__21094);
-var interceptor = map__21094__$1;
-var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__21094__$1,cljs.core.cst$kw$id);
-return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(re_frame.settings.store,cljs.core.update,cljs.core.cst$kw$global_DASH_interceptors,(function (global_interceptors){
-var ids = cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$id,global_interceptors);
-if(cljs.core.truth_(cljs.core.some(cljs.core.PersistentHashSet.createAsIfByAssoc([id]),ids))){
-return re_frame.settings._replace_global_interceptor(global_interceptors,interceptor);
+re_frame.settings.reg_global_interceptor = (function re_frame$settings$reg_global_interceptor(p__13506){
+var map__13507 = p__13506;
+var map__13507__$1 = cljs.core.__destructure_map.call(null,map__13507);
+var interceptor = map__13507__$1;
+var id = cljs.core.get.call(null,map__13507__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
+return cljs.core.swap_BANG_.call(null,re_frame.settings.store,cljs.core.update,new cljs.core.Keyword(null,"global-interceptors","global-interceptors",-1995759472),(function (global_interceptors){
+var ids = cljs.core.map.call(null,new cljs.core.Keyword(null,"id","id",-1388402092),global_interceptors);
+if(cljs.core.truth_(cljs.core.some.call(null,cljs.core.PersistentHashSet.createAsIfByAssoc([id]),ids))){
+return re_frame.settings._replace_global_interceptor.call(null,global_interceptors,interceptor);
 } else {
-return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(global_interceptors,interceptor);
+return cljs.core.conj.call(null,global_interceptors,interceptor);
 }
 }));
 });
 re_frame.settings.get_global_interceptors = (function re_frame$settings$get_global_interceptors(){
-return cljs.core.cst$kw$global_DASH_interceptors.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(re_frame.settings.store));
+return new cljs.core.Keyword(null,"global-interceptors","global-interceptors",-1995759472).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,re_frame.settings.store));
 });
 re_frame.settings.clear_global_interceptors = (function re_frame$settings$clear_global_interceptors(var_args){
-var G__21097 = arguments.length;
-switch (G__21097) {
+var G__13510 = arguments.length;
+switch (G__13510) {
 case 0:
 return re_frame.settings.clear_global_interceptors.cljs$core$IFn$_invoke$arity$0();
 
@@ -66,13 +65,13 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.settings.clear_global_interceptors.cljs$core$IFn$_invoke$arity$0 = (function (){
-return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(re_frame.settings.store,cljs.core.assoc,cljs.core.cst$kw$global_DASH_interceptors,re_frame.interop.empty_queue);
+return cljs.core.swap_BANG_.call(null,re_frame.settings.store,cljs.core.assoc,new cljs.core.Keyword(null,"global-interceptors","global-interceptors",-1995759472),re_frame.interop.empty_queue);
 }));
 
 (re_frame.settings.clear_global_interceptors.cljs$core$IFn$_invoke$arity$1 = (function (id){
-return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(re_frame.settings.store,cljs.core.update,cljs.core.cst$kw$global_DASH_interceptors,(function (global_interceptors){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$2(re_frame.interop.empty_queue,cljs.core.remove.cljs$core$IFn$_invoke$arity$2((function (p1__21095_SHARP_){
-return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(id,cljs.core.cst$kw$id.cljs$core$IFn$_invoke$arity$1(p1__21095_SHARP_));
+return cljs.core.swap_BANG_.call(null,re_frame.settings.store,cljs.core.update,new cljs.core.Keyword(null,"global-interceptors","global-interceptors",-1995759472),(function (global_interceptors){
+return cljs.core.into.call(null,re_frame.interop.empty_queue,cljs.core.remove.call(null,(function (p1__13508_SHARP_){
+return cljs.core._EQ_.call(null,id,new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(p1__13508_SHARP_));
 }),global_interceptors));
 }));
 }));
