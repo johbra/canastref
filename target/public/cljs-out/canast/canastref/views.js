@@ -65,7 +65,7 @@ canastref.views.ergebnis_eingabe = (function canastref$views$ergebnis_eingabe(sp
 var runde = canastref.spiel.runde.call(null,spiel);
 var alle_teilnehmer = canastref.spiel.teilnehmer.call(null,spiel);
 return cljs.core.doall.call(null,cljs.core.mapv.call(null,(function (tln){
-return cljs.core.with_meta(new cljs.core.PersistentVector(null, 17, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.core.input_text,new cljs.core.Keyword(null,"model","model",331153215),cljs.core.str.cljs$core$IFn$_invoke$arity$1((cljs.core.truth_(cljs.core.get.call(null,canastref.spieler.resultate.call(null,tln),runde))?cljs.core.get.call(null,canastref.spieler.resultate.call(null,tln),runde):(0))),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__20786_SHARP_){
+return cljs.core.with_meta(new cljs.core.PersistentVector(null, 17, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.core.input_text,new cljs.core.Keyword(null,"model","model",331153215),cljs.core.str.cljs$core$IFn$_invoke$arity$1((cljs.core.truth_(cljs.core.get.call(null,canastref.spieler.resultate.call(null,tln),runde))?cljs.core.get.call(null,canastref.spieler.resultate.call(null,tln),runde):"")),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__20786_SHARP_){
 var v = parseInt(p1__20786_SHARP_);
 var index = alle_teilnehmer.indexOf(tln);
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"resultat","resultat",1627423071),canastref.spieler.neues_resultat.call(null,tln,v,runde),index,runde], null));

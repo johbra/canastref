@@ -116,7 +116,7 @@
       (fn [tln]
         ^{:key tln} 
         [input-text
-         :model (str (if (get (s/resultate tln) runde) (get (s/resultate tln) runde) 0))
+         :model (str (if (get (s/resultate tln) runde) (get (s/resultate tln) runde) ""))
          :on-change #(let [v (js/parseInt %)
                            index (.indexOf alle-teilnehmer tln)]
                        (rf/dispatch [:resultat (s/neues-resultat tln v runde) index runde]))
