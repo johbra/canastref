@@ -15,12 +15,13 @@ body { background-color: #eaede9;
     border: none;
     color: white;
     text-align: center;
-    font-size: 12px;
+    font-size: 18px;
     margin: 1px 1px ;
-    height: 24px;
+    height: 36px;
 }
 
 .gewinner { position: relative; top: -5%; left: 40%; 
-            font-size: 24px; font-weight: bold }
+            font-size: 24px; font-weight: bold; }
 
-.form-control {font-size: 18px}
+.form-control {font-size: 18px;}
+.rc-input-text-field  {height: 36px;}

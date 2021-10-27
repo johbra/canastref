@@ -123,7 +123,6 @@
          :change-on-blur? true
          :validation-regex  #"^[-+]?[0-9]*$"
          :width (str spielerbreite "px")
-         :height "24px"
          :attr {:type "number"}
          :style {:padding-right "2px" :background-color "beige"}])
       alle-teilnehmer))))
