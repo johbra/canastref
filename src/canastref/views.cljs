@@ -6,7 +6,7 @@
             [canastref.spieler :as s] 
             [re-com.core :refer [v-box h-box box gap button title alert-box
                                  scroller label input-text single-dropdown]]))
-(def spielerbreite 75)
+(def spielerbreite 85)
 
 (defn gewonnene-spiele
   [historie] 
@@ -143,7 +143,7 @@
   [namen]
   [h-box :gap "12px" :children
    [[label :label "Geber festegen!"]
-    [single-dropdown  :width "6em"
+    [single-dropdown  :width "6em" :style {:font-size "24px"}
      :choices (cons {:id "?" :label "?"}
                     (mapv (fn [n] {:id n :label n}) namen))
      :model "?"
