@@ -7,9 +7,9 @@
 
 (defn ^:export main     ;; call this to bootstrap your app
   []
-  (rf/dispatch [:initialize])
+  (rf/dispatch-sync [:initialize])
   (rf/dispatch [:spieler-namen])
-  (rf/dispatch [:historie])
+  (rf/dispatch [:historien])
   (rf/dispatch [:gespeichertes-spiel?])
   (rdom/render [cv/main-panel]
                (js/document.getElementById "app")))

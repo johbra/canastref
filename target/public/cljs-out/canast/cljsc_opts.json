@@ -1,1 +1,1 @@
-{"optimizations":"whitespace","main":"canastref.core","closure-defines":{"re_frame.trace.trace_enabled_QMARK_":true},"output-to":"target\/public\/cljs-out\/canast-main.js","output-dir":"target\/public\/cljs-out\/canast","asset-path":"\/cljs-out\/canast","aot-cache":false}
+{"optimizations":"advanced","main":"canastref.core","closure-defines":{"re_frame.trace.trace_enabled_QMARK_":true},"output-to":"target\/public\/cljs-out\/canast-main.js","output-dir":"target\/public\/cljs-out\/canast","asset-path":"\/cljs-out\/canast","aot-cache":false}

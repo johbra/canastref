@@ -91,3 +91,10 @@
   (let [resultate (:resultate tln)]
     (if (>= runde (count resultate)) 0 (resultate runde))))
 
+(defn fuehrende
+  [monatshistorie]
+  #_(println "fuehrende: " historie)
+  (if (empty? monatshistorie)
+    ""
+    (key (apply max-key val monatshistorie))))
+

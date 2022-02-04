@@ -1,8 +1,13 @@
-(ns canastref.db)
+(ns canastref.db
+  (:require [cljs-time.core :as t]))
 
 (def default-db
-  {:historie {}
+  {:hist-aus-datei nil
+   :historie nil
+   :monatshistorie nil
+   :monatsbilanz {1 "Meike", 2 "X"}
+   :monat (t/month (t/now))
    :loading false
-   :spieler-namen []
+   :spieler-namen nil
    :spiel nil
    })

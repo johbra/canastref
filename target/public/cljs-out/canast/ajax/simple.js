@@ -1,6 +1,7 @@
-// Compiled by ClojureScript 1.10.844 {}
+// Compiled by ClojureScript 1.10.844 {:static-fns true, :optimize-constants true}
 goog.provide('ajax.simple');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('clojure.string');
 goog.require('ajax.protocols');
 goog.require('ajax.interceptors');
@@ -9,41 +10,41 @@ goog.require('ajax.util');
 goog.require('goog.net.XhrIo');
 ajax.simple.normalize_method = (function ajax$simple$normalize_method(method){
 if((method instanceof cljs.core.Keyword)){
-return clojure.string.upper_case.call(null,cljs.core.name.call(null,method));
+return clojure.string.upper_case(cljs.core.name(method));
 } else {
 return method;
 }
 });
 ajax.simple.process_response = (function ajax$simple$process_response(response,interceptor){
-return ajax.protocols._process_response.call(null,interceptor,response);
+return ajax.protocols._process_response(interceptor,response);
 });
 ajax.simple.make_js_handler = (function ajax$simple$make_js_handler(handler,interceptors){
 return (function ajax$simple$make_js_handler_$_js_handler(response){
-var processed = cljs.core.reduce.call(null,ajax.simple.process_response,response,interceptors);
-return handler.call(null,processed);
+var processed = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(ajax.simple.process_response,response,interceptors);
+return (handler.cljs$core$IFn$_invoke$arity$1 ? handler.cljs$core$IFn$_invoke$arity$1(processed) : handler.call(null,processed));
 });
 });
-ajax.simple.base_handler = (function ajax$simple$base_handler(interceptors,p__15002){
-var map__15003 = p__15002;
-var map__15003__$1 = cljs.core.__destructure_map.call(null,map__15003);
-var handler = cljs.core.get.call(null,map__15003__$1,new cljs.core.Keyword(null,"handler","handler",-195596612));
+ajax.simple.base_handler = (function ajax$simple$base_handler(interceptors,p__14851){
+var map__14852 = p__14851;
+var map__14852__$1 = cljs.core.__destructure_map(map__14852);
+var handler = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14852__$1,cljs.core.cst$kw$handler);
 if(cljs.core.truth_(handler)){
-return ajax.simple.make_js_handler.call(null,handler,interceptors);
+return ajax.simple.make_js_handler(handler,interceptors);
 } else {
-return ajax.util.throw_error.call(null,"No ajax handler provided.");
+return ajax.util.throw_error("No ajax handler provided.");
 }
 });
-ajax.simple.default_interceptors = cljs.core.atom.call(null,cljs.core.PersistentVector.EMPTY);
+ajax.simple.default_interceptors = cljs.core.atom.cljs$core$IFn$_invoke$arity$1(cljs.core.PersistentVector.EMPTY);
 ajax.simple.normalize_request = (function ajax$simple$normalize_request(request){
-var response_format = ajax.interceptors.get_response_format.call(null,ajax.formats.detect_response_format,request);
-return cljs.core.update.call(null,cljs.core.update.call(null,request,new cljs.core.Keyword(null,"method","method",55703592),ajax.simple.normalize_method),new cljs.core.Keyword(null,"interceptors","interceptors",-1546782951),(function (p1__15004_SHARP_){
-return cljs.core.concat.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [response_format], null),(function (){var or__4160__auto__ = p1__15004_SHARP_;
+var response_format = ajax.interceptors.get_response_format(ajax.formats.detect_response_format,request);
+return cljs.core.update.cljs$core$IFn$_invoke$arity$3(cljs.core.update.cljs$core$IFn$_invoke$arity$3(request,cljs.core.cst$kw$method,ajax.simple.normalize_method),cljs.core.cst$kw$interceptors,(function (p1__14853_SHARP_){
+return cljs.core.concat.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [response_format], null),(function (){var or__4160__auto__ = p1__14853_SHARP_;
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
-return cljs.core.deref.call(null,ajax.simple.default_interceptors);
+return cljs.core.deref(ajax.simple.default_interceptors);
 }
-})(),ajax.interceptors.request_interceptors);
+})(),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([ajax.interceptors.request_interceptors], 0));
 }));
 });
 ajax.simple.new_default_api = (function ajax$simple$new_default_api(){
@@ -53,27 +54,27 @@ return (new goog.net.XhrIo());
  * -process-request with the arguments flipped for use in reduce
  */
 ajax.simple.process_request = (function ajax$simple$process_request(request,interceptor){
-return ajax.protocols._process_request.call(null,interceptor,request);
+return ajax.protocols._process_request(interceptor,request);
 });
 /**
  * The main request function.
  */
-ajax.simple.raw_ajax_request = (function ajax$simple$raw_ajax_request(p__15005){
-var map__15006 = p__15005;
-var map__15006__$1 = cljs.core.__destructure_map.call(null,map__15006);
-var request = map__15006__$1;
-var interceptors = cljs.core.get.call(null,map__15006__$1,new cljs.core.Keyword(null,"interceptors","interceptors",-1546782951));
-var request__$1 = cljs.core.reduce.call(null,ajax.simple.process_request,request,interceptors);
-var handler = ajax.simple.base_handler.call(null,cljs.core.reverse.call(null,interceptors),request__$1);
-var api = (function (){var or__4160__auto__ = new cljs.core.Keyword(null,"api","api",-899839580).cljs$core$IFn$_invoke$arity$1(request__$1);
+ajax.simple.raw_ajax_request = (function ajax$simple$raw_ajax_request(p__14854){
+var map__14855 = p__14854;
+var map__14855__$1 = cljs.core.__destructure_map(map__14855);
+var request = map__14855__$1;
+var interceptors = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14855__$1,cljs.core.cst$kw$interceptors);
+var request__$1 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(ajax.simple.process_request,request,interceptors);
+var handler = ajax.simple.base_handler(cljs.core.reverse(interceptors),request__$1);
+var api = (function (){var or__4160__auto__ = cljs.core.cst$kw$api.cljs$core$IFn$_invoke$arity$1(request__$1);
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
-return ajax.simple.new_default_api.call(null);
+return ajax.simple.new_default_api();
 }
 })();
-return ajax.protocols._js_ajax_request.call(null,api,request__$1,handler);
+return ajax.protocols._js_ajax_request(api,request__$1,handler);
 });
 ajax.simple.ajax_request = (function ajax$simple$ajax_request(request){
-return ajax.simple.raw_ajax_request.call(null,ajax.simple.normalize_request.call(null,request));
+return ajax.simple.raw_ajax_request(ajax.simple.normalize_request(request));
 });

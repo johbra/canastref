@@ -13,11 +13,11 @@
 
 
 (rf/reg-event-fx
- :historie
+ :historien
  (fn [{:keys [db]} _]
    {:db         (assoc db :loading true)  
     :http-xhrio (df/ajax-request-read-edn-from-dropbox
-                 "r-hist.edn" :historie)}))
+                 "r-hist.edn" :historien)}))
 
 (rf/reg-event-fx
  :spieler-namen
@@ -41,11 +41,11 @@
                  db "r-welt.edn" :gespeichertes-spiel?)}))
 
 (rf/reg-event-fx
- :speichere-historie
- (fn [{:keys [db]} [_ historie]] 
+ :speichere-historien
+ (fn [{:keys [db]} [_ historien]] 
    {:db         (assoc db :loading true)  
     :http-xhrio (df/ajax-request-write-edn-to-dropbox
-                 historie "r-hist.edn" :historie-gespeichert?)}))
+                 historien "r-hist.edn" :historie-gespeichert?)}))
 
 (rf/reg-event-fx
  :gespeichertes-spiel?
@@ -56,8 +56,8 @@
 
 (rf/reg-event-fx
  :spiel-beendet
- (fn [{:keys [db]} [_ historie]]
-   (let [_ (rf/dispatch [:speichere-historie historie])]
+ (fn [{:keys [db]} [_ historien]]
+   (let [_ (rf/dispatch [:speichere-historien historien])]
      {:db         (assoc db :loading true)  
       :http-xhrio (df/ajax-request-delete-file-from-dropbox
                    "r-welt.edn" :gespeichertes-spiel?)})))
@@ -86,18 +86,26 @@
 (rf/reg-event-db
  :process-resp
  (fn [db [_ db-key item]]
-   (if (= db-key :welt)
-     (reset! re-frame.db/app-db (cljs.reader/read-string  item))
-     (assoc db
-            db-key (cljs.reader/read-string  item)
-            :loading false))))
+   (let [data (cljs.reader/read-string item)]
+     (cond
+       (= db-key :welt) (reset! re-frame.db/app-db data)
+       (= db-key :historien)
+       (assoc db
+              :hist-aus-datei data
+              :historie       (data 0)
+              :monatshistorie (data 1)
+              :monatsbilanz   (data 2)
+              :loading false)
+       :else (assoc db
+                    db-key data 
+                    :loading false)))))
 
 (rf/reg-event-db
  :bad-resp
  (fn [db [_ db-key _ ]] 
    (-> db
        (assoc :loading false )
-       (assoc db-key false))))
+       (assoc db-key nil))))
 
 (rf/reg-event-db
  :resultat
@@ -115,7 +123,10 @@
    (let [spiel (sp/schliesse-runde-ab (:spiel db))]
      (-> db
          (assoc :spiel spiel)
-         (assoc :historie (sp/registriere-sieger (:historie db) (sp/sieger spiel)))))))
+         (assoc :historie
+                (sp/registriere-sieger (:historie db) (sp/sieger spiel)))
+         (assoc :monatshistorie
+                (sp/registriere-sieger (:monatshistorie db) (sp/sieger spiel)))))))
 
 (rf/reg-event-db
  :korrigiere-ergebnis
@@ -123,6 +134,8 @@
  (fn [db]
    (-> db
        (assoc :historie (sp/eliminiere-sieger (:historie db) (:sieger (:spiel db))))
+       (assoc :monatshistorie
+              (sp/eliminiere-sieger (:monatshistorie db) (:sieger (:spiel db))))
        (assoc :spiel (sp/korrigiere (:spiel db))))))
 
 (rf/reg-event-db
@@ -134,3 +147,9 @@
  :neues-spiel
  (fn [db [_ _]] 
    (assoc db :spiel (sp/neues-spiel @(rf/subscribe [:spieler-namen])))))
+
+(rf/reg-event-db
+ :monatsbilanz
+ [re-frame.core/debug]
+ (fn [db [_ bilanz]]
+   (assoc db :monatsbilanz bilanz)))

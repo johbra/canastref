@@ -1,6 +1,7 @@
-// Compiled by ClojureScript 1.10.844 {}
+// Compiled by ClojureScript 1.10.844 {:static-fns true, :optimize-constants true}
 goog.provide('re_com.v_table');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('reagent.core');
 goog.require('re_com.config');
 goog.require('re_com.debug');
@@ -11,7 +12,7 @@ goog.require('re_com.dmm_tracker');
 re_com.v_table.scrollbar_thickness = (10);
 re_com.v_table.scrollbar_margin = (2);
 re_com.v_table.scrollbar_tot_thick = (re_com.v_table.scrollbar_thickness + ((2) * re_com.v_table.scrollbar_margin));
-re_com.v_table.px = cljs.core.memoize.call(null,re_com.util.px);
+re_com.v_table.px = cljs.core.memoize(re_com.util.px);
 /**
  * Make a call to this function in the click event of your row renderer, then every time they Alt+Click on a row,
  *   The raw cljs object used to render that row will be popped into DevTools :-)
@@ -40,14 +41,14 @@ return null;
  */
 re_com.v_table.scrollbar = (function re_com$v_table$scrollbar(var_args){
 var args__4777__auto__ = [];
-var len__4771__auto___15831 = arguments.length;
-var i__4772__auto___15832 = (0);
+var len__4771__auto___16364 = arguments.length;
+var i__4772__auto___16365 = (0);
 while(true){
-if((i__4772__auto___15832 < len__4771__auto___15831)){
-args__4777__auto__.push((arguments[i__4772__auto___15832]));
+if((i__4772__auto___16365 < len__4771__auto___16364)){
+args__4777__auto__.push((arguments[i__4772__auto___16365]));
 
-var G__15833 = (i__4772__auto___15832 + (1));
-i__4772__auto___15832 = G__15833;
+var G__16366 = (i__4772__auto___16365 + (1));
+i__4772__auto___16365 = G__16366;
 continue;
 } else {
 }
@@ -58,55 +59,58 @@ var argseq__4778__auto__ = ((((0) < args__4777__auto__.length))?(new cljs.core.I
 return re_com.v_table.scrollbar.cljs$core$IFn$_invoke$arity$variadic(argseq__4778__auto__);
 });
 
-(re_com.v_table.scrollbar.cljs$core$IFn$_invoke$arity$variadic = (function (p__15827){
-var map__15828 = p__15827;
-var map__15828__$1 = cljs.core.__destructure_map.call(null,map__15828);
-var type = cljs.core.get.call(null,map__15828__$1,new cljs.core.Keyword(null,"type","type",1174270348));
-var width = cljs.core.get.call(null,map__15828__$1,new cljs.core.Keyword(null,"width","width",-384071477),(10));
-var on_change = cljs.core.get.call(null,map__15828__$1,new cljs.core.Keyword(null,"on-change","on-change",-732046149));
-var horizontal_QMARK_ = cljs.core._EQ_.call(null,type,new cljs.core.Keyword(null,"horizontal","horizontal",2062109475));
-var radius = re_com.v_table.px.call(null,(width / (2)));
+(re_com.v_table.scrollbar.cljs$core$IFn$_invoke$arity$variadic = (function (p__16352){
+var map__16353 = p__16352;
+var map__16353__$1 = cljs.core.__destructure_map(map__16353);
+var type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16353__$1,cljs.core.cst$kw$type);
+var width = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__16353__$1,cljs.core.cst$kw$width,(10));
+var on_change = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16353__$1,cljs.core.cst$kw$on_DASH_change);
+var horizontal_QMARK_ = cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(type,cljs.core.cst$kw$horizontal);
+var radius = (function (){var G__16354 = (width / (2));
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16354) : re_com.v_table.px.call(null,G__16354));
+})();
 var scrollbar_color = "#eee";
 var scrollbar_hover_color = "#ccc";
 var thumb_color = "#bbb";
 var thumb_hover_color = "#999";
 var thumb_drag_color = "#777";
-var mouse_over_QMARK_ = reagent.core.atom.call(null,false);
-var dragging_QMARK_ = reagent.core.atom.call(null,false);
-var pos_on_scrollbar = reagent.core.atom.call(null,(0));
-var pos_on_thumb = reagent.core.atom.call(null,(0));
-var tracker = cljs.core.atom.call(null,null);
-var calcs = cljs.core.atom.call(null,cljs.core.PersistentArrayMap.EMPTY);
+var mouse_over_QMARK_ = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(false);
+var dragging_QMARK_ = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(false);
+var pos_on_scrollbar = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var pos_on_thumb = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var tracker = cljs.core.atom.cljs$core$IFn$_invoke$arity$1(null);
+var calcs = cljs.core.atom.cljs$core$IFn$_invoke$arity$1(cljs.core.PersistentArrayMap.EMPTY);
 var on_drag_change = (function re_com$v_table$on_drag_change(_delta_x,_delta_y,curr_x,curr_y,_ctrlKey,_shiftKey,_event){
 var curr_pos = ((horizontal_QMARK_)?curr_x:curr_y);
-var pos_on_scrollbar__$1 = (curr_pos - cljs.core.deref.call(null,pos_on_scrollbar));
-var new_internal_scroll_pos = (pos_on_scrollbar__$1 - cljs.core.deref.call(null,pos_on_thumb));
+var pos_on_scrollbar__$1 = (curr_pos - cljs.core.deref(pos_on_scrollbar));
+var new_internal_scroll_pos = (pos_on_scrollbar__$1 - cljs.core.deref(pos_on_thumb));
 var beginning_or_beyond_QMARK_ = (new_internal_scroll_pos <= (0));
-var end_or_beyond_QMARK_ = (new_internal_scroll_pos >= new cljs.core.Keyword(null,"max-scroll-pos","max-scroll-pos",-325462965).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)));
-var new_external_scroll_pos = Math.round((new_internal_scroll_pos * new cljs.core.Keyword(null,"scrollbar-content-ratio","scrollbar-content-ratio",1658723056).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs))));
+var end_or_beyond_QMARK_ = (new_internal_scroll_pos >= cljs.core.cst$kw$max_DASH_scroll_DASH_pos.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs)));
+var new_external_scroll_pos = Math.round((new_internal_scroll_pos * cljs.core.cst$kw$scrollbar_DASH_content_DASH_ratio.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs))));
 if(beginning_or_beyond_QMARK_){
-return on_change.call(null,(0));
+return (on_change.cljs$core$IFn$_invoke$arity$1 ? on_change.cljs$core$IFn$_invoke$arity$1((0)) : on_change.call(null,(0)));
 } else {
 if(end_or_beyond_QMARK_){
-return on_change.call(null,Math.round((new cljs.core.Keyword(null,"max-scroll-pos","max-scroll-pos",-325462965).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)) * new cljs.core.Keyword(null,"scrollbar-content-ratio","scrollbar-content-ratio",1658723056).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)))));
+var G__16355 = Math.round((cljs.core.cst$kw$max_DASH_scroll_DASH_pos.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs)) * cljs.core.cst$kw$scrollbar_DASH_content_DASH_ratio.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs))));
+return (on_change.cljs$core$IFn$_invoke$arity$1 ? on_change.cljs$core$IFn$_invoke$arity$1(G__16355) : on_change.call(null,G__16355));
 } else {
-return on_change.call(null,new_external_scroll_pos);
+return (on_change.cljs$core$IFn$_invoke$arity$1 ? on_change.cljs$core$IFn$_invoke$arity$1(new_external_scroll_pos) : on_change.call(null,new_external_scroll_pos));
 
 }
 }
 });
 var on_drag_end = (function re_com$v_table$on_drag_end(_ctrlKey,_shiftKey,_event){
-cljs.core.reset_BANG_.call(null,dragging_QMARK_,false);
+cljs.core.reset_BANG_(dragging_QMARK_,false);
 
-return cljs.core.reset_BANG_.call(null,tracker,null);
+return cljs.core.reset_BANG_(tracker,null);
 });
 var on_mouse_enter = (function (event){
-cljs.core.reset_BANG_.call(null,mouse_over_QMARK_,true);
+cljs.core.reset_BANG_(mouse_over_QMARK_,true);
 
 return null;
 });
 var on_mouse_leave = (function (event){
-cljs.core.reset_BANG_.call(null,mouse_over_QMARK_,false);
+cljs.core.reset_BANG_(mouse_over_QMARK_,false);
 
 return null;
 });
@@ -114,18 +118,24 @@ var scrollbar_mouse_down = (function re_com$v_table$scrollbar_mouse_down(event){
 var target = event.target;
 var bounding_rect = (((target == null))?cljs.core.PersistentArrayMap.EMPTY:target.getBoundingClientRect());
 var click_pos = ((horizontal_QMARK_)?(event.clientX - bounding_rect.left):(event.clientY - bounding_rect.top));
-var op = (((click_pos <= new cljs.core.Keyword(null,"internal-scroll-pos","internal-scroll-pos",1183420691).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs))))?cljs.core._:cljs.core._PLUS_);
-var new_internal_scroll_pos = (new cljs.core.Keyword(null,"internal-scroll-pos","internal-scroll-pos",1183420691).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)) + op.call(null,(new cljs.core.Keyword(null,"length","length",588987862).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)) / new cljs.core.Keyword(null,"thumb-ratio","thumb-ratio",634209799).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)))));
-var new_external_scroll_pos = op.call(null,new cljs.core.Keyword(null,"scroll-pos","scroll-pos",292123569).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)),new cljs.core.Keyword(null,"length","length",588987862).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)));
+var op = (((click_pos <= cljs.core.cst$kw$internal_DASH_scroll_DASH_pos.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs))))?cljs.core._:cljs.core._PLUS_);
+var new_internal_scroll_pos = (cljs.core.cst$kw$internal_DASH_scroll_DASH_pos.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs)) + (function (){var G__16356 = (cljs.core.cst$kw$length.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs)) / cljs.core.cst$kw$thumb_DASH_ratio.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs)));
+return (op.cljs$core$IFn$_invoke$arity$1 ? op.cljs$core$IFn$_invoke$arity$1(G__16356) : op.call(null,G__16356));
+})());
+var new_external_scroll_pos = (function (){var G__16357 = cljs.core.cst$kw$scroll_DASH_pos.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs));
+var G__16358 = cljs.core.cst$kw$length.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs));
+return (op.cljs$core$IFn$_invoke$arity$2 ? op.cljs$core$IFn$_invoke$arity$2(G__16357,G__16358) : op.call(null,G__16357,G__16358));
+})();
 var beginning_or_beyond_QMARK_ = (new_internal_scroll_pos <= (0));
-var end_or_beyond_QMARK_ = (new_internal_scroll_pos >= new cljs.core.Keyword(null,"max-scroll-pos","max-scroll-pos",-325462965).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)));
+var end_or_beyond_QMARK_ = (new_internal_scroll_pos >= cljs.core.cst$kw$max_DASH_scroll_DASH_pos.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs)));
 if(beginning_or_beyond_QMARK_){
-return on_change.call(null,(0));
+return (on_change.cljs$core$IFn$_invoke$arity$1 ? on_change.cljs$core$IFn$_invoke$arity$1((0)) : on_change.call(null,(0)));
 } else {
 if(end_or_beyond_QMARK_){
-return on_change.call(null,Math.round((new cljs.core.Keyword(null,"max-scroll-pos","max-scroll-pos",-325462965).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)) * new cljs.core.Keyword(null,"scrollbar-content-ratio","scrollbar-content-ratio",1658723056).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,calcs)))));
+var G__16359 = Math.round((cljs.core.cst$kw$max_DASH_scroll_DASH_pos.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs)) * cljs.core.cst$kw$scrollbar_DASH_content_DASH_ratio.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(calcs))));
+return (on_change.cljs$core$IFn$_invoke$arity$1 ? on_change.cljs$core$IFn$_invoke$arity$1(G__16359) : on_change.call(null,G__16359));
 } else {
-return on_change.call(null,new_external_scroll_pos);
+return (on_change.cljs$core$IFn$_invoke$arity$1 ? on_change.cljs$core$IFn$_invoke$arity$1(new_external_scroll_pos) : on_change.call(null,new_external_scroll_pos));
 
 }
 }
@@ -133,28 +143,28 @@ return on_change.call(null,new_external_scroll_pos);
 var thumb_mouse_down = (function re_com$v_table$thumb_mouse_down(event,internal_scroll_pos){
 var parent = event.target.parentNode;
 var bounding_rect = (((parent == null))?cljs.core.PersistentArrayMap.EMPTY:parent.getBoundingClientRect());
-cljs.core.reset_BANG_.call(null,pos_on_scrollbar,((horizontal_QMARK_)?bounding_rect.left:bounding_rect.top));
+cljs.core.reset_BANG_(pos_on_scrollbar,((horizontal_QMARK_)?bounding_rect.left:bounding_rect.top));
 
-cljs.core.reset_BANG_.call(null,pos_on_thumb,((horizontal_QMARK_)?((event.clientX - cljs.core.deref.call(null,pos_on_scrollbar)) - internal_scroll_pos):((event.clientY - cljs.core.deref.call(null,pos_on_scrollbar)) - internal_scroll_pos)));
+cljs.core.reset_BANG_(pos_on_thumb,((horizontal_QMARK_)?((event.clientX - cljs.core.deref(pos_on_scrollbar)) - internal_scroll_pos):((event.clientY - cljs.core.deref(pos_on_scrollbar)) - internal_scroll_pos)));
 
-cljs.core.reset_BANG_.call(null,tracker,re_com.dmm_tracker.make_dmm_tracker.call(null,on_drag_change,on_drag_end));
+cljs.core.reset_BANG_(tracker,re_com.dmm_tracker.make_dmm_tracker(on_drag_change,on_drag_end));
 
-re_com.dmm_tracker.captureMouseMoves.call(null,cljs.core.deref.call(null,tracker),event);
+re_com.dmm_tracker.captureMouseMoves(cljs.core.deref(tracker),event);
 
-cljs.core.reset_BANG_.call(null,dragging_QMARK_,true);
+cljs.core.reset_BANG_(dragging_QMARK_,true);
 
 return event.stopPropagation();
 });
 return (function() { 
-var re_com$v_table$scrollbar_renderer__delegate = function (p__15829){
-var map__15830 = p__15829;
-var map__15830__$1 = cljs.core.__destructure_map.call(null,map__15830);
-var length = cljs.core.get.call(null,map__15830__$1,new cljs.core.Keyword(null,"length","length",588987862));
-var width__$1 = cljs.core.get.call(null,map__15830__$1,new cljs.core.Keyword(null,"width","width",-384071477),(10));
-var content_length = cljs.core.get.call(null,map__15830__$1,new cljs.core.Keyword(null,"content-length","content-length",441319507));
-var scroll_pos = cljs.core.get.call(null,map__15830__$1,new cljs.core.Keyword(null,"scroll-pos","scroll-pos",292123569));
-var style = cljs.core.get.call(null,map__15830__$1,new cljs.core.Keyword(null,"style","style",-496642736));
-var src = cljs.core.get.call(null,map__15830__$1,new cljs.core.Keyword(null,"src","src",-1651076051));
+var re_com$v_table$scrollbar_renderer__delegate = function (p__16360){
+var map__16361 = p__16360;
+var map__16361__$1 = cljs.core.__destructure_map(map__16361);
+var length = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16361__$1,cljs.core.cst$kw$length);
+var width__$1 = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__16361__$1,cljs.core.cst$kw$width,(10));
+var content_length = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16361__$1,cljs.core.cst$kw$content_DASH_length);
+var scroll_pos = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16361__$1,cljs.core.cst$kw$scroll_DASH_pos);
+var style = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16361__$1,cljs.core.cst$kw$style);
+var src = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16361__$1,cljs.core.cst$kw$src);
 var thumb_ratio = (content_length / length);
 var thumb_length = (function (){var x__4249__auto__ = (1.5 * width__$1);
 var y__4250__auto__ = (length / thumb_ratio);
@@ -164,45 +174,49 @@ var show_QMARK_ = (content_length > length);
 var max_scroll_pos = (length - thumb_length);
 var scrollbar_content_ratio = ((content_length - length) / max_scroll_pos);
 var internal_scroll_pos = (scroll_pos / scrollbar_content_ratio);
-cljs.core.reset_BANG_.call(null,calcs,new cljs.core.PersistentArrayMap(null, 7, [new cljs.core.Keyword(null,"length","length",588987862),length,new cljs.core.Keyword(null,"scroll-pos","scroll-pos",292123569),scroll_pos,new cljs.core.Keyword(null,"thumb-ratio","thumb-ratio",634209799),thumb_ratio,new cljs.core.Keyword(null,"thumb-length","thumb-length",725479795),thumb_length,new cljs.core.Keyword(null,"max-scroll-pos","max-scroll-pos",-325462965),max_scroll_pos,new cljs.core.Keyword(null,"scrollbar-content-ratio","scrollbar-content-ratio",1658723056),scrollbar_content_ratio,new cljs.core.Keyword(null,"internal-scroll-pos","internal-scroll-pos",1183420691),internal_scroll_pos], null));
+cljs.core.reset_BANG_(calcs,new cljs.core.PersistentArrayMap(null, 7, [cljs.core.cst$kw$length,length,cljs.core.cst$kw$scroll_DASH_pos,scroll_pos,cljs.core.cst$kw$thumb_DASH_ratio,thumb_ratio,cljs.core.cst$kw$thumb_DASH_length,thumb_length,cljs.core.cst$kw$max_DASH_scroll_DASH_pos,max_scroll_pos,cljs.core.cst$kw$scrollbar_DASH_content_DASH_ratio,scrollbar_content_ratio,cljs.core.cst$kw$internal_DASH_scroll_DASH_pos,internal_scroll_pos], null));
 
-return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),src,new cljs.core.Keyword(null,"width","width",-384071477),((horizontal_QMARK_)?(cljs.core.truth_(length)?re_com.v_table.px.call(null,length):null):re_com.v_table.px.call(null,width__$1)),new cljs.core.Keyword(null,"height","height",1025178622),((horizontal_QMARK_)?re_com.v_table.px.call(null,width__$1):(cljs.core.truth_(length)?re_com.v_table.px.call(null,length):null)),new cljs.core.Keyword(null,"class","class",-2030961996),[((horizontal_QMARK_)?"horizontal":"vertical"),"-scrollbar"].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"background-color","background-color",570434026),((show_QMARK_)?(cljs.core.truth_((function (){var or__4160__auto__ = cljs.core.deref.call(null,mouse_over_QMARK_);
+return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,src,cljs.core.cst$kw$width,((horizontal_QMARK_)?(cljs.core.truth_(length)?(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(length) : re_com.v_table.px.call(null,length)):null):(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(width__$1) : re_com.v_table.px.call(null,width__$1))),cljs.core.cst$kw$height,((horizontal_QMARK_)?(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(width__$1) : re_com.v_table.px.call(null,width__$1)):(cljs.core.truth_(length)?(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(length) : re_com.v_table.px.call(null,length)):null)),cljs.core.cst$kw$class,[((horizontal_QMARK_)?"horizontal":"vertical"),"-scrollbar"].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$background_DASH_color,((show_QMARK_)?(cljs.core.truth_((function (){var or__4160__auto__ = cljs.core.deref(mouse_over_QMARK_);
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
-return cljs.core.deref.call(null,dragging_QMARK_);
+return cljs.core.deref(dragging_QMARK_);
 }
-})())?scrollbar_hover_color:scrollbar_color):null),new cljs.core.Keyword(null,"border-radius","border-radius",419594011),radius,new cljs.core.Keyword(null,"overflow","overflow",2058931880),"hidden"], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"on-mouse-enter","on-mouse-enter",-1664921661),on_mouse_enter,new cljs.core.Keyword(null,"on-mouse-leave","on-mouse-leave",-1864319528),on_mouse_leave,new cljs.core.Keyword(null,"on-mouse-down","on-mouse-down",1147755470),(function (event){
+})())?scrollbar_hover_color:scrollbar_color):null),cljs.core.cst$kw$border_DASH_radius,radius,cljs.core.cst$kw$overflow,"hidden"], null),style], 0)),cljs.core.cst$kw$attr,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$on_DASH_mouse_DASH_enter,on_mouse_enter,cljs.core.cst$kw$on_DASH_mouse_DASH_leave,on_mouse_leave,cljs.core.cst$kw$on_DASH_mouse_DASH_down,(function (event){
 if(show_QMARK_){
-scrollbar_mouse_down.call(null,event);
+scrollbar_mouse_down(event);
 } else {
 }
 
 return null;
-})], null),new cljs.core.Keyword(null,"child","child",623967545),new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),144], null)),new cljs.core.Keyword(null,"width","width",-384071477),((horizontal_QMARK_)?re_com.v_table.px.call(null,((show_QMARK_)?thumb_length:(0))):re_com.v_table.px.call(null,width__$1)),new cljs.core.Keyword(null,"height","height",1025178622),((horizontal_QMARK_)?re_com.v_table.px.call(null,width__$1):re_com.v_table.px.call(null,((show_QMARK_)?thumb_length:(0)))),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.PersistentArrayMap.createAsIfByAssoc([new cljs.core.Keyword(null,"background-color","background-color",570434026),(cljs.core.truth_((function (){var or__4160__auto__ = cljs.core.deref.call(null,mouse_over_QMARK_);
+})], null),cljs.core.cst$kw$child,new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,144], null)),cljs.core.cst$kw$width,((horizontal_QMARK_)?(function (){var G__16362 = ((show_QMARK_)?thumb_length:(0));
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16362) : re_com.v_table.px.call(null,G__16362));
+})():(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(width__$1) : re_com.v_table.px.call(null,width__$1))),cljs.core.cst$kw$height,((horizontal_QMARK_)?(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(width__$1) : re_com.v_table.px.call(null,width__$1)):(function (){var G__16363 = ((show_QMARK_)?thumb_length:(0));
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16363) : re_com.v_table.px.call(null,G__16363));
+})()),cljs.core.cst$kw$style,cljs.core.PersistentArrayMap.createAsIfByAssoc([cljs.core.cst$kw$background_DASH_color,(cljs.core.truth_((function (){var or__4160__auto__ = cljs.core.deref(mouse_over_QMARK_);
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
-return cljs.core.deref.call(null,dragging_QMARK_);
+return cljs.core.deref(dragging_QMARK_);
 }
-})())?(cljs.core.truth_(cljs.core.deref.call(null,dragging_QMARK_))?thumb_drag_color:thumb_hover_color):thumb_color),new cljs.core.Keyword(null,"cursor","cursor",1011937484),"default",new cljs.core.Keyword(null,"border-radius","border-radius",419594011),radius,((horizontal_QMARK_)?new cljs.core.Keyword(null,"margin-left","margin-left",2015598377):new cljs.core.Keyword(null,"margin-top","margin-top",392161226)),re_com.v_table.px.call(null,internal_scroll_pos)]),new cljs.core.Keyword(null,"attr","attr",-604132353),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-mouse-down","on-mouse-down",1147755470),(function (event){
-thumb_mouse_down.call(null,event,internal_scroll_pos);
+})())?(cljs.core.truth_(cljs.core.deref(dragging_QMARK_))?thumb_drag_color:thumb_hover_color):thumb_color),cljs.core.cst$kw$cursor,"default",cljs.core.cst$kw$border_DASH_radius,radius,((horizontal_QMARK_)?cljs.core.cst$kw$margin_DASH_left:cljs.core.cst$kw$margin_DASH_top),(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(internal_scroll_pos) : re_com.v_table.px.call(null,internal_scroll_pos))]),cljs.core.cst$kw$attr,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$on_DASH_mouse_DASH_down,(function (event){
+thumb_mouse_down(event,internal_scroll_pos);
 
 return null;
-})], null),new cljs.core.Keyword(null,"child","child",623967545),""], null)], null);
+})], null),cljs.core.cst$kw$child,""], null)], null);
 };
 var re_com$v_table$scrollbar_renderer = function (var_args){
-var p__15829 = null;
+var p__16360 = null;
 if (arguments.length > 0) {
-var G__15834__i = 0, G__15834__a = new Array(arguments.length -  0);
-while (G__15834__i < G__15834__a.length) {G__15834__a[G__15834__i] = arguments[G__15834__i + 0]; ++G__15834__i;}
-  p__15829 = new cljs.core.IndexedSeq(G__15834__a,0,null);
+var G__16367__i = 0, G__16367__a = new Array(arguments.length -  0);
+while (G__16367__i < G__16367__a.length) {G__16367__a[G__16367__i] = arguments[G__16367__i + 0]; ++G__16367__i;}
+  p__16360 = new cljs.core.IndexedSeq(G__16367__a,0,null);
 } 
-return re_com$v_table$scrollbar_renderer__delegate.call(this,p__15829);};
+return re_com$v_table$scrollbar_renderer__delegate.call(this,p__16360);};
 re_com$v_table$scrollbar_renderer.cljs$lang$maxFixedArity = 0;
-re_com$v_table$scrollbar_renderer.cljs$lang$applyTo = (function (arglist__15835){
-var p__15829 = cljs.core.seq(arglist__15835);
-return re_com$v_table$scrollbar_renderer__delegate(p__15829);
+re_com$v_table$scrollbar_renderer.cljs$lang$applyTo = (function (arglist__16368){
+var p__16360 = cljs.core.seq(arglist__16368);
+return re_com$v_table$scrollbar_renderer__delegate(p__16360);
 });
 re_com$v_table$scrollbar_renderer.cljs$core$IFn$_invoke$arity$variadic = re_com$v_table$scrollbar_renderer__delegate;
 return re_com$v_table$scrollbar_renderer;
@@ -213,22 +227,24 @@ return re_com$v_table$scrollbar_renderer;
 (re_com.v_table.scrollbar.cljs$lang$maxFixedArity = (0));
 
 /** @this {Function} */
-(re_com.v_table.scrollbar.cljs$lang$applyTo = (function (seq15826){
+(re_com.v_table.scrollbar.cljs$lang$applyTo = (function (seq16351){
 var self__4759__auto__ = this;
-return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq15826));
+return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq16351));
 }));
 
 /**
  * Render section 1 - the content component
  */
 re_com.v_table.top_left_content = (function re_com$v_table$top_left_content(top_left_renderer,column_header_height,class$,style,attr){
-return new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),169], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-top-left rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"overflow","overflow",2058931880),"hidden"], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"height","height",1025178622),re_com.v_table.px.call(null,(function (){var or__4160__auto__ = column_header_height;
+return new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,169], null)),cljs.core.cst$kw$class,["rc-v-table-top-left rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$overflow,"hidden"], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$height,(function (){var G__16369 = (function (){var or__4160__auto__ = column_header_height;
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
 return (0);
 }
-})()),new cljs.core.Keyword(null,"child","child",623967545),(cljs.core.truth_(top_left_renderer)?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [top_left_renderer], null):"")], null);
+})();
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16369) : re_com.v_table.px.call(null,G__16369));
+})(),cljs.core.cst$kw$child,(cljs.core.truth_(top_left_renderer)?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [top_left_renderer], null):"")], null);
 });
 /**
  * The row-header section 'content' component. Takes a function that renders row-headers and draws all of
@@ -245,44 +261,56 @@ return (0);
  *   
  */
 re_com.v_table.row_header_content = (function re_com$v_table$row_header_content(row_header_renderer,key_fn,top_row_index,rows,scroll_y,class$,style,attr){
-return new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),195], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-row-header-content rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"margin-top","margin-top",392161226),re_com.v_table.px.call(null,scroll_y,new cljs.core.Keyword(null,"negative","negative",-1562068438))], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"children","children",-940561982),cljs.core.map.call(null,(function (index,row){
-return cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [row_header_renderer,index,row], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),(cljs.core.truth_(key_fn)?key_fn.call(null,row):index)], null));
-}),cljs.core.iterate.call(null,cljs.core.inc,top_row_index),rows)], null);
+return new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,195], null)),cljs.core.cst$kw$class,["rc-v-table-row-header-content rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$margin_DASH_top,(function (){var G__16370 = scroll_y;
+var G__16371 = cljs.core.cst$kw$negative;
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$2 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$2(G__16370,G__16371) : re_com.v_table.px.call(null,G__16370,G__16371));
+})()], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$children,cljs.core.map.cljs$core$IFn$_invoke$arity$3((function (index,row){
+return cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [row_header_renderer,index,row], null),new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$key,(cljs.core.truth_(key_fn)?(key_fn.cljs$core$IFn$_invoke$arity$1 ? key_fn.cljs$core$IFn$_invoke$arity$1(row) : key_fn.call(null,row)):index)], null));
+}),cljs.core.iterate(cljs.core.inc,top_row_index),rows)], null);
 });
 /**
  * Render section 2 - the viewport component (which renders the content component as its child)
  */
-re_com.v_table.row_header_viewport = (function re_com$v_table$row_header_viewport(row_header_renderer,key_fn,top_row_index,rows,scroll_y,row_header_selection_fn,p__15836,selection_allowed_QMARK_,row_viewport_height,content_rows_height,class$,style,attr,sel_class,sel_style,sel_attr,content_class,content_style,content_attr){
-var vec__15837 = p__15836;
-var selection_renderer = cljs.core.nth.call(null,vec__15837,(0),null);
-var on_mouse_down = cljs.core.nth.call(null,vec__15837,(1),null);
-var on_mouse_enter = cljs.core.nth.call(null,vec__15837,(2),null);
-var on_mouse_leave = cljs.core.nth.call(null,vec__15837,(3),null);
-return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),216], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-row-headers rc-v-table-viewport ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"position","position",-2011731912),"relative",new cljs.core.Keyword(null,"overflow","overflow",2058931880),"hidden",new cljs.core.Keyword(null,"max-height","max-height",-612563804),re_com.v_table.px.call(null,content_rows_height)], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),cljs.core.merge.call(null,(cljs.core.truth_(row_header_selection_fn)?new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"on-mouse-down","on-mouse-down",1147755470),(function (event){
-on_mouse_down.call(null,new cljs.core.Keyword(null,"row-header","row-header",1799050794),row_header_selection_fn,content_rows_height,(0),event);
+re_com.v_table.row_header_viewport = (function re_com$v_table$row_header_viewport(row_header_renderer,key_fn,top_row_index,rows,scroll_y,row_header_selection_fn,p__16372,selection_allowed_QMARK_,row_viewport_height,content_rows_height,class$,style,attr,sel_class,sel_style,sel_attr,content_class,content_style,content_attr){
+var vec__16373 = p__16372;
+var selection_renderer = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16373,(0),null);
+var on_mouse_down = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16373,(1),null);
+var on_mouse_enter = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16373,(2),null);
+var on_mouse_leave = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16373,(3),null);
+return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,216], null)),cljs.core.cst$kw$class,["rc-v-table-row-headers rc-v-table-viewport ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$position,"relative",cljs.core.cst$kw$overflow,"hidden",cljs.core.cst$kw$max_DASH_height,(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(content_rows_height) : re_com.v_table.px.call(null,content_rows_height))], null),style], 0)),cljs.core.cst$kw$attr,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(cljs.core.truth_(row_header_selection_fn)?new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$on_DASH_mouse_DASH_down,(function (event){
+var G__16376_16383 = cljs.core.cst$kw$row_DASH_header;
+var G__16377_16384 = row_header_selection_fn;
+var G__16378_16385 = content_rows_height;
+var G__16379_16386 = (0);
+var G__16380_16387 = event;
+(on_mouse_down.cljs$core$IFn$_invoke$arity$5 ? on_mouse_down.cljs$core$IFn$_invoke$arity$5(G__16376_16383,G__16377_16384,G__16378_16385,G__16379_16386,G__16380_16387) : on_mouse_down.call(null,G__16376_16383,G__16377_16384,G__16378_16385,G__16379_16386,G__16380_16387));
 
 return null;
-}),new cljs.core.Keyword(null,"on-mouse-enter","on-mouse-enter",-1664921661),(function (event){
-on_mouse_enter.call(null,new cljs.core.Keyword(null,"row-header","row-header",1799050794));
+}),cljs.core.cst$kw$on_DASH_mouse_DASH_enter,(function (event){
+var G__16381_16388 = cljs.core.cst$kw$row_DASH_header;
+(on_mouse_enter.cljs$core$IFn$_invoke$arity$1 ? on_mouse_enter.cljs$core$IFn$_invoke$arity$1(G__16381_16388) : on_mouse_enter.call(null,G__16381_16388));
 
 return null;
-}),new cljs.core.Keyword(null,"on-mouse-leave","on-mouse-leave",-1864319528),(function (event){
-on_mouse_leave.call(null,new cljs.core.Keyword(null,"row-header","row-header",1799050794));
+}),cljs.core.cst$kw$on_DASH_mouse_DASH_leave,(function (event){
+var G__16382_16389 = cljs.core.cst$kw$row_DASH_header;
+(on_mouse_leave.cljs$core$IFn$_invoke$arity$1 ? on_mouse_leave.cljs$core$IFn$_invoke$arity$1(G__16382_16389) : on_mouse_leave.call(null,G__16382_16389));
 
 return null;
-})], null):null),attr),new cljs.core.Keyword(null,"size","size",1098693007),(cljs.core.truth_(row_viewport_height)?"none":"auto"),new cljs.core.Keyword(null,"height","height",1025178622),(cljs.core.truth_(row_viewport_height)?re_com.v_table.px.call(null,row_viewport_height):null),new cljs.core.Keyword(null,"children","children",-940561982),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(cljs.core.truth_(selection_allowed_QMARK_)?new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [selection_renderer,sel_class,sel_style,sel_attr], null):null),(cljs.core.truth_(row_header_renderer)?new cljs.core.PersistentVector(null, 9, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_header_content,row_header_renderer,key_fn,top_row_index,rows,scroll_y,content_class,content_style,content_attr], null):"")], null)], null);
+})], null):null),attr], 0)),cljs.core.cst$kw$size,(cljs.core.truth_(row_viewport_height)?"none":"auto"),cljs.core.cst$kw$height,(cljs.core.truth_(row_viewport_height)?(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(row_viewport_height) : re_com.v_table.px.call(null,row_viewport_height)):null),cljs.core.cst$kw$children,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(cljs.core.truth_(selection_allowed_QMARK_)?new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [selection_renderer,sel_class,sel_style,sel_attr], null):null),(cljs.core.truth_(row_header_renderer)?new cljs.core.PersistentVector(null, 9, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_header_content,row_header_renderer,key_fn,top_row_index,rows,scroll_y,content_class,content_style,content_attr], null):"")], null)], null);
 });
 /**
  * Render section 3 - the content component
  */
 re_com.v_table.bottom_left_content = (function re_com$v_table$bottom_left_content(bottom_left_renderer,column_footer_height,class$,style,attr){
-return new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),242], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-bottom-left rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"overflow","overflow",2058931880),"hidden"], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"height","height",1025178622),re_com.v_table.px.call(null,(function (){var or__4160__auto__ = column_footer_height;
+return new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,242], null)),cljs.core.cst$kw$class,["rc-v-table-bottom-left rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$overflow,"hidden"], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$height,(function (){var G__16390 = (function (){var or__4160__auto__ = column_footer_height;
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
 return (0);
 }
-})()),new cljs.core.Keyword(null,"child","child",623967545),(cljs.core.truth_(bottom_left_renderer)?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [bottom_left_renderer], null):"")], null);
+})();
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16390) : re_com.v_table.px.call(null,G__16390));
+})(),cljs.core.cst$kw$child,(cljs.core.truth_(bottom_left_renderer)?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [bottom_left_renderer], null):"")], null);
 });
 /**
  * The column-header section 'content' component. Takes a function that renders column-headers and draws all of
@@ -295,36 +323,48 @@ return (0);
  *   
  */
 re_com.v_table.column_header_content = (function re_com$v_table$column_header_content(column_header_renderer,scroll_x,class$,style,attr){
-return new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),264], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-column-header-content rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"margin-left","margin-left",2015598377),re_com.v_table.px.call(null,scroll_x,new cljs.core.Keyword(null,"negative","negative",-1562068438))], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"child","child",623967545),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [column_header_renderer], null)], null);
+return new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,264], null)),cljs.core.cst$kw$class,["rc-v-table-column-header-content rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$margin_DASH_left,(function (){var G__16391 = scroll_x;
+var G__16392 = cljs.core.cst$kw$negative;
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$2 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$2(G__16391,G__16392) : re_com.v_table.px.call(null,G__16391,G__16392));
+})()], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$child,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [column_header_renderer], null)], null);
 });
 /**
  * Render section 4 - the viewport component (which renders the content component as its child)
  */
-re_com.v_table.column_header_viewport = (function re_com$v_table$column_header_viewport(column_header_renderer,scroll_x,column_header_selection_fn,p__15840,selection_allowed_QMARK_,row_viewport_width,column_header_height,content_rows_width,class$,style,attr,sel_class,sel_style,sel_attr,content_class,content_style,content_attr){
-var vec__15841 = p__15840;
-var selection_renderer = cljs.core.nth.call(null,vec__15841,(0),null);
-var on_mouse_down = cljs.core.nth.call(null,vec__15841,(1),null);
-var on_mouse_enter = cljs.core.nth.call(null,vec__15841,(2),null);
-var on_mouse_leave = cljs.core.nth.call(null,vec__15841,(3),null);
-return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),281], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-column-headers rc-v-table-viewport ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"overflow","overflow",2058931880),"hidden",new cljs.core.Keyword(null,"position","position",-2011731912),"relative"], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),cljs.core.merge.call(null,(cljs.core.truth_(column_header_selection_fn)?new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"on-mouse-down","on-mouse-down",1147755470),(function (event){
-on_mouse_down.call(null,new cljs.core.Keyword(null,"column-header","column-header",-1495823888),column_header_selection_fn,column_header_height,content_rows_width,event);
+re_com.v_table.column_header_viewport = (function re_com$v_table$column_header_viewport(column_header_renderer,scroll_x,column_header_selection_fn,p__16393,selection_allowed_QMARK_,row_viewport_width,column_header_height,content_rows_width,class$,style,attr,sel_class,sel_style,sel_attr,content_class,content_style,content_attr){
+var vec__16394 = p__16393;
+var selection_renderer = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16394,(0),null);
+var on_mouse_down = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16394,(1),null);
+var on_mouse_enter = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16394,(2),null);
+var on_mouse_leave = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16394,(3),null);
+return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,281], null)),cljs.core.cst$kw$class,["rc-v-table-column-headers rc-v-table-viewport ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$overflow,"hidden",cljs.core.cst$kw$position,"relative"], null),style], 0)),cljs.core.cst$kw$attr,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(cljs.core.truth_(column_header_selection_fn)?new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$on_DASH_mouse_DASH_down,(function (event){
+var G__16397_16405 = cljs.core.cst$kw$column_DASH_header;
+var G__16398_16406 = column_header_selection_fn;
+var G__16399_16407 = column_header_height;
+var G__16400_16408 = content_rows_width;
+var G__16401_16409 = event;
+(on_mouse_down.cljs$core$IFn$_invoke$arity$5 ? on_mouse_down.cljs$core$IFn$_invoke$arity$5(G__16397_16405,G__16398_16406,G__16399_16407,G__16400_16408,G__16401_16409) : on_mouse_down.call(null,G__16397_16405,G__16398_16406,G__16399_16407,G__16400_16408,G__16401_16409));
 
 return null;
-}),new cljs.core.Keyword(null,"on-mouse-enter","on-mouse-enter",-1664921661),(function (event){
-on_mouse_enter.call(null,new cljs.core.Keyword(null,"column-header","column-header",-1495823888));
+}),cljs.core.cst$kw$on_DASH_mouse_DASH_enter,(function (event){
+var G__16402_16410 = cljs.core.cst$kw$column_DASH_header;
+(on_mouse_enter.cljs$core$IFn$_invoke$arity$1 ? on_mouse_enter.cljs$core$IFn$_invoke$arity$1(G__16402_16410) : on_mouse_enter.call(null,G__16402_16410));
 
 return null;
-}),new cljs.core.Keyword(null,"on-mouse-leave","on-mouse-leave",-1864319528),(function (event){
-on_mouse_leave.call(null,new cljs.core.Keyword(null,"column-header","column-header",-1495823888));
+}),cljs.core.cst$kw$on_DASH_mouse_DASH_leave,(function (event){
+var G__16403_16411 = cljs.core.cst$kw$column_DASH_header;
+(on_mouse_leave.cljs$core$IFn$_invoke$arity$1 ? on_mouse_leave.cljs$core$IFn$_invoke$arity$1(G__16403_16411) : on_mouse_leave.call(null,G__16403_16411));
 
 return null;
-})], null):null),attr),new cljs.core.Keyword(null,"width","width",-384071477),(cljs.core.truth_(row_viewport_width)?re_com.v_table.px.call(null,row_viewport_width):null),new cljs.core.Keyword(null,"height","height",1025178622),re_com.v_table.px.call(null,(function (){var or__4160__auto__ = column_header_height;
+})], null):null),attr], 0)),cljs.core.cst$kw$width,(cljs.core.truth_(row_viewport_width)?(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(row_viewport_width) : re_com.v_table.px.call(null,row_viewport_width)):null),cljs.core.cst$kw$height,(function (){var G__16404 = (function (){var or__4160__auto__ = column_header_height;
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
 return (0);
 }
-})()),new cljs.core.Keyword(null,"children","children",-940561982),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(cljs.core.truth_(selection_allowed_QMARK_)?new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [selection_renderer,sel_class,sel_style,sel_attr], null):null),(cljs.core.truth_(column_header_renderer)?new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.column_header_content,column_header_renderer,scroll_x,content_class,content_style,content_attr], null):"")], null)], null);
+})();
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16404) : re_com.v_table.px.call(null,G__16404));
+})(),cljs.core.cst$kw$children,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(cljs.core.truth_(selection_allowed_QMARK_)?new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [selection_renderer,sel_class,sel_style,sel_attr], null):null),(cljs.core.truth_(column_header_renderer)?new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.column_header_content,column_header_renderer,scroll_x,content_class,content_style,content_attr], null):"")], null)], null);
 });
 /**
  * The rows section 'content' component. Takes a function that renders rows and draws all of them in section 5 (sections explained below).
@@ -341,32 +381,45 @@ return (0);
  *   
  */
 re_com.v_table.row_content = (function re_com$v_table$row_content(row_renderer,key_fn,top_row_index,rows,scroll_x,scroll_y,class$,style,attr){
-return new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),317], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-row-content rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"margin-left","margin-left",2015598377),re_com.v_table.px.call(null,scroll_x,new cljs.core.Keyword(null,"negative","negative",-1562068438)),new cljs.core.Keyword(null,"margin-top","margin-top",392161226),re_com.v_table.px.call(null,scroll_y,new cljs.core.Keyword(null,"negative","negative",-1562068438))], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"children","children",-940561982),cljs.core.map.call(null,(function (index,row){
-return cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [row_renderer,index,row], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),(cljs.core.truth_(key_fn)?key_fn.call(null,row):index)], null));
-}),cljs.core.iterate.call(null,cljs.core.inc,top_row_index),rows)], null);
+return new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,317], null)),cljs.core.cst$kw$class,["rc-v-table-row-content rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$margin_DASH_left,(function (){var G__16412 = scroll_x;
+var G__16413 = cljs.core.cst$kw$negative;
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$2 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$2(G__16412,G__16413) : re_com.v_table.px.call(null,G__16412,G__16413));
+})(),cljs.core.cst$kw$margin_DASH_top,(function (){var G__16414 = scroll_y;
+var G__16415 = cljs.core.cst$kw$negative;
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$2 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$2(G__16414,G__16415) : re_com.v_table.px.call(null,G__16414,G__16415));
+})()], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$children,cljs.core.map.cljs$core$IFn$_invoke$arity$3((function (index,row){
+return cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [row_renderer,index,row], null),new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$key,(cljs.core.truth_(key_fn)?(key_fn.cljs$core$IFn$_invoke$arity$1 ? key_fn.cljs$core$IFn$_invoke$arity$1(row) : key_fn.call(null,row)):index)], null));
+}),cljs.core.iterate(cljs.core.inc,top_row_index),rows)], null);
 });
 /**
  * Render section 5 - the viewport component (which renders the content component as its child)
  */
-re_com.v_table.row_viewport = (function re_com$v_table$row_viewport(row_renderer,key_fn,top_row_index,rows,scroll_x,scroll_y,row_selection_fn,p__15844,selection_allowed_QMARK_,row_viewport_height,row_viewport_width,row_viewport_id,content_rows_height,content_rows_width,class$,style,attr,sel_class,sel_style,sel_attr,content_class,content_style,content_attr){
-var vec__15845 = p__15844;
-var selection_renderer = cljs.core.nth.call(null,vec__15845,(0),null);
-var on_mouse_down = cljs.core.nth.call(null,vec__15845,(1),null);
-var on_mouse_enter = cljs.core.nth.call(null,vec__15845,(2),null);
-var on_mouse_leave = cljs.core.nth.call(null,vec__15845,(3),null);
-return new cljs.core.PersistentVector(null, 17, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),339], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-rows rc-v-table-viewport ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"overflow","overflow",2058931880),"hidden",new cljs.core.Keyword(null,"position","position",-2011731912),"relative",new cljs.core.Keyword(null,"max-height","max-height",-612563804),re_com.v_table.px.call(null,content_rows_height)], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),cljs.core.merge.call(null,(cljs.core.truth_(row_selection_fn)?new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"on-mouse-down","on-mouse-down",1147755470),(function (event){
-on_mouse_down.call(null,new cljs.core.Keyword(null,"row","row",-570139521),row_selection_fn,content_rows_height,content_rows_width,event);
+re_com.v_table.row_viewport = (function re_com$v_table$row_viewport(row_renderer,key_fn,top_row_index,rows,scroll_x,scroll_y,row_selection_fn,p__16416,selection_allowed_QMARK_,row_viewport_height,row_viewport_width,row_viewport_id,content_rows_height,content_rows_width,class$,style,attr,sel_class,sel_style,sel_attr,content_class,content_style,content_attr){
+var vec__16417 = p__16416;
+var selection_renderer = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16417,(0),null);
+var on_mouse_down = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16417,(1),null);
+var on_mouse_enter = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16417,(2),null);
+var on_mouse_leave = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16417,(3),null);
+return new cljs.core.PersistentVector(null, 17, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,339], null)),cljs.core.cst$kw$class,["rc-v-table-rows rc-v-table-viewport ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$overflow,"hidden",cljs.core.cst$kw$position,"relative",cljs.core.cst$kw$max_DASH_height,(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(content_rows_height) : re_com.v_table.px.call(null,content_rows_height))], null),style], 0)),cljs.core.cst$kw$attr,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(cljs.core.truth_(row_selection_fn)?new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$on_DASH_mouse_DASH_down,(function (event){
+var G__16420_16427 = cljs.core.cst$kw$row;
+var G__16421_16428 = row_selection_fn;
+var G__16422_16429 = content_rows_height;
+var G__16423_16430 = content_rows_width;
+var G__16424_16431 = event;
+(on_mouse_down.cljs$core$IFn$_invoke$arity$5 ? on_mouse_down.cljs$core$IFn$_invoke$arity$5(G__16420_16427,G__16421_16428,G__16422_16429,G__16423_16430,G__16424_16431) : on_mouse_down.call(null,G__16420_16427,G__16421_16428,G__16422_16429,G__16423_16430,G__16424_16431));
 
 return null;
-}),new cljs.core.Keyword(null,"on-mouse-enter","on-mouse-enter",-1664921661),(function (event){
-on_mouse_enter.call(null,new cljs.core.Keyword(null,"row","row",-570139521));
+}),cljs.core.cst$kw$on_DASH_mouse_DASH_enter,(function (event){
+var G__16425_16432 = cljs.core.cst$kw$row;
+(on_mouse_enter.cljs$core$IFn$_invoke$arity$1 ? on_mouse_enter.cljs$core$IFn$_invoke$arity$1(G__16425_16432) : on_mouse_enter.call(null,G__16425_16432));
 
 return null;
-}),new cljs.core.Keyword(null,"on-mouse-leave","on-mouse-leave",-1864319528),(function (event){
-on_mouse_leave.call(null,new cljs.core.Keyword(null,"row","row",-570139521));
+}),cljs.core.cst$kw$on_DASH_mouse_DASH_leave,(function (event){
+var G__16426_16433 = cljs.core.cst$kw$row;
+(on_mouse_leave.cljs$core$IFn$_invoke$arity$1 ? on_mouse_leave.cljs$core$IFn$_invoke$arity$1(G__16426_16433) : on_mouse_leave.call(null,G__16426_16433));
 
 return null;
-})], null):null),attr,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"id","id",-1388402092),row_viewport_id], null)),new cljs.core.Keyword(null,"size","size",1098693007),(cljs.core.truth_(row_viewport_height)?"none":"auto"),new cljs.core.Keyword(null,"width","width",-384071477),(cljs.core.truth_(row_viewport_width)?re_com.v_table.px.call(null,row_viewport_width):null),new cljs.core.Keyword(null,"height","height",1025178622),(cljs.core.truth_(row_viewport_height)?re_com.v_table.px.call(null,row_viewport_height):null),new cljs.core.Keyword(null,"children","children",-940561982),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(cljs.core.truth_(selection_allowed_QMARK_)?new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [selection_renderer,sel_class,sel_style,sel_attr], null):null),new cljs.core.PersistentVector(null, 10, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_content,row_renderer,key_fn,top_row_index,rows,scroll_x,scroll_y,content_class,content_style,content_attr], null)], null)], null);
+})], null):null),attr,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$id,row_viewport_id], null)], 0)),cljs.core.cst$kw$size,(cljs.core.truth_(row_viewport_height)?"none":"auto"),cljs.core.cst$kw$width,(cljs.core.truth_(row_viewport_width)?(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(row_viewport_width) : re_com.v_table.px.call(null,row_viewport_width)):null),cljs.core.cst$kw$height,(cljs.core.truth_(row_viewport_height)?(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(row_viewport_height) : re_com.v_table.px.call(null,row_viewport_height)):null),cljs.core.cst$kw$children,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(cljs.core.truth_(selection_allowed_QMARK_)?new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [selection_renderer,sel_class,sel_style,sel_attr], null):null),new cljs.core.PersistentVector(null, 10, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_content,row_renderer,key_fn,top_row_index,rows,scroll_x,scroll_y,content_class,content_style,content_attr], null)], null)], null);
 });
 /**
  * The column-footer section 'content' component. Takes a function that renders column-footers and draws all of
@@ -379,31 +432,38 @@ return null;
  *   
  */
 re_com.v_table.column_footer_content = (function re_com$v_table$column_footer_content(column_footer_renderer,scroll_x,class$,style,attr){
-return new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),372], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-column-footer-content rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"margin-left","margin-left",2015598377),re_com.v_table.px.call(null,scroll_x,new cljs.core.Keyword(null,"negative","negative",-1562068438))], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"child","child",623967545),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [column_footer_renderer], null)], null);
+return new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,372], null)),cljs.core.cst$kw$class,["rc-v-table-column-footer-content rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$margin_DASH_left,(function (){var G__16434 = scroll_x;
+var G__16435 = cljs.core.cst$kw$negative;
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$2 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$2(G__16434,G__16435) : re_com.v_table.px.call(null,G__16434,G__16435));
+})()], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$child,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [column_footer_renderer], null)], null);
 });
 /**
  * Render section 6 - the viewport component (which renders the content component as its child)
  */
 re_com.v_table.column_footer_viewport = (function re_com$v_table$column_footer_viewport(column_footer_renderer,scroll_x,row_viewport_width,column_footer_height,class$,style,attr,content_class,content_style,content_attr){
-return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),386], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-column-footers rc-v-table-viewport ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"overflow","overflow",2058931880),"hidden"], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"width","width",-384071477),(cljs.core.truth_(row_viewport_width)?re_com.v_table.px.call(null,row_viewport_width):null),new cljs.core.Keyword(null,"height","height",1025178622),re_com.v_table.px.call(null,(function (){var or__4160__auto__ = column_footer_height;
+return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,386], null)),cljs.core.cst$kw$class,["rc-v-table-column-footers rc-v-table-viewport ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$overflow,"hidden"], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$width,(cljs.core.truth_(row_viewport_width)?(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(row_viewport_width) : re_com.v_table.px.call(null,row_viewport_width)):null),cljs.core.cst$kw$height,(function (){var G__16436 = (function (){var or__4160__auto__ = column_footer_height;
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
 return (0);
 }
-})()),new cljs.core.Keyword(null,"child","child",623967545),(cljs.core.truth_(column_footer_renderer)?new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.column_footer_content,column_footer_renderer,scroll_x,content_class,content_style,content_attr], null):"")], null);
+})();
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16436) : re_com.v_table.px.call(null,G__16436));
+})(),cljs.core.cst$kw$child,(cljs.core.truth_(column_footer_renderer)?new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.column_footer_content,column_footer_renderer,scroll_x,content_class,content_style,content_attr], null):"")], null);
 });
 /**
  * Render section 7 - the content component
  */
 re_com.v_table.top_right_content = (function re_com$v_table$top_right_content(top_right_renderer,column_header_height,class$,style,attr){
-return new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),404], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-top-right rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"overflow","overflow",2058931880),"hidden"], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"height","height",1025178622),re_com.v_table.px.call(null,(function (){var or__4160__auto__ = column_header_height;
+return new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,404], null)),cljs.core.cst$kw$class,["rc-v-table-top-right rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$overflow,"hidden"], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$height,(function (){var G__16437 = (function (){var or__4160__auto__ = column_header_height;
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
 return (0);
 }
-})()),new cljs.core.Keyword(null,"child","child",623967545),(cljs.core.truth_(top_right_renderer)?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [top_right_renderer], null):"")], null);
+})();
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16437) : re_com.v_table.px.call(null,G__16437));
+})(),cljs.core.cst$kw$child,(cljs.core.truth_(top_right_renderer)?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [top_right_renderer], null):"")], null);
 });
 /**
  * The row-footer section 'content' component. Takes a function that renders row-footers and draws all of
@@ -420,31 +480,36 @@ return (0);
  *   
  */
 re_com.v_table.row_footer_content = (function re_com$v_table$row_footer_content(row_footer_renderer,key_fn,top_row_index,rows,scroll_y,class$,style,attr){
-return new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),430], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-row-footer-content rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"margin-top","margin-top",392161226),re_com.v_table.px.call(null,scroll_y,new cljs.core.Keyword(null,"negative","negative",-1562068438))], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"children","children",-940561982),cljs.core.map.call(null,(function (index,row){
-return cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [row_footer_renderer,index,row], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),(cljs.core.truth_(key_fn)?key_fn.call(null,row):index)], null));
-}),cljs.core.iterate.call(null,cljs.core.inc,top_row_index),rows)], null);
+return new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,430], null)),cljs.core.cst$kw$class,["rc-v-table-row-footer-content rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$margin_DASH_top,(function (){var G__16438 = scroll_y;
+var G__16439 = cljs.core.cst$kw$negative;
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$2 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$2(G__16438,G__16439) : re_com.v_table.px.call(null,G__16438,G__16439));
+})()], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$children,cljs.core.map.cljs$core$IFn$_invoke$arity$3((function (index,row){
+return cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [row_footer_renderer,index,row], null),new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$key,(cljs.core.truth_(key_fn)?(key_fn.cljs$core$IFn$_invoke$arity$1 ? key_fn.cljs$core$IFn$_invoke$arity$1(row) : key_fn.call(null,row)):index)], null));
+}),cljs.core.iterate(cljs.core.inc,top_row_index),rows)], null);
 });
 /**
  * Render section 8 - the viewport component (which renders the content component as its child)
  */
 re_com.v_table.row_footer_viewport = (function re_com$v_table$row_footer_viewport(row_footer_renderer,key_fn,top_row_index,rows,scroll_y,row_viewport_height,content_rows_height,class$,style,attr,content_class,content_style,content_attr){
-return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),449], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-row-footers rc-v-table-viewport ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"overflow","overflow",2058931880),"hidden",new cljs.core.Keyword(null,"max-height","max-height",-612563804),re_com.v_table.px.call(null,content_rows_height)], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"size","size",1098693007),(cljs.core.truth_(row_viewport_height)?"none":"auto"),new cljs.core.Keyword(null,"height","height",1025178622),(cljs.core.truth_(row_viewport_height)?re_com.v_table.px.call(null,row_viewport_height):null),new cljs.core.Keyword(null,"child","child",623967545),(cljs.core.truth_(row_footer_renderer)?new cljs.core.PersistentVector(null, 9, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_footer_content,row_footer_renderer,key_fn,top_row_index,rows,scroll_y,content_class,content_style,content_attr], null):"")], null);
+return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,449], null)),cljs.core.cst$kw$class,["rc-v-table-row-footers rc-v-table-viewport ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$overflow,"hidden",cljs.core.cst$kw$max_DASH_height,(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(content_rows_height) : re_com.v_table.px.call(null,content_rows_height))], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$size,(cljs.core.truth_(row_viewport_height)?"none":"auto"),cljs.core.cst$kw$height,(cljs.core.truth_(row_viewport_height)?(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(row_viewport_height) : re_com.v_table.px.call(null,row_viewport_height)):null),cljs.core.cst$kw$child,(cljs.core.truth_(row_footer_renderer)?new cljs.core.PersistentVector(null, 9, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_footer_content,row_footer_renderer,key_fn,top_row_index,rows,scroll_y,content_class,content_style,content_attr], null):"")], null);
 });
 /**
  * Render section 9 - the content component
  */
 re_com.v_table.bottom_right_content = (function re_com$v_table$bottom_right_content(bottom_right_renderer,column_footer_height,class$,style,attr){
-return new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),468], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-bottom-right rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"overflow","overflow",2058931880),"hidden"], null),style),new cljs.core.Keyword(null,"attr","attr",-604132353),attr,new cljs.core.Keyword(null,"height","height",1025178622),re_com.v_table.px.call(null,(function (){var or__4160__auto__ = column_footer_height;
+return new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,468], null)),cljs.core.cst$kw$class,["rc-v-table-bottom-right rc-v-table-content ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$overflow,"hidden"], null),style], 0)),cljs.core.cst$kw$attr,attr,cljs.core.cst$kw$height,(function (){var G__16440 = (function (){var or__4160__auto__ = column_footer_height;
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
 return (0);
 }
-})()),new cljs.core.Keyword(null,"child","child",623967545),(cljs.core.truth_(bottom_right_renderer)?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [bottom_right_renderer], null):"")], null);
+})();
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16440) : re_com.v_table.px.call(null,G__16440));
+})(),cljs.core.cst$kw$child,(cljs.core.truth_(bottom_right_renderer)?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [bottom_right_renderer], null):"")], null);
 });
-re_com.v_table.v_table_parts_desc = ((re_com.config.include_args_desc_QMARK_)?new cljs.core.PersistentVector(null, 25, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"wrapper","wrapper",-969103524),new cljs.core.Keyword(null,"level","level",1290497552),(0),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-wrapper",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-table]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Outer container of the v-table"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"left-section","left-section",1725153983),new cljs.core.Keyword(null,"level","level",1290497552),(1),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-left-section",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The left v-box container section of the table, containing sections 1,2,3"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"top-left","top-left",-1396159636),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-top-left rc-v-table-content",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Top left section (1)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-headers","row-headers",1790514903),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-row-headers rc-v-table-viewport",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Row header viewport section (2)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-header-selection-rect","row-header-selection-rect",-1802701930),new cljs.core.Keyword(null,"level","level",1290497552),(3),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-selection",new cljs.core.Keyword(null,"impl","impl",1677848700),"[:div]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The row-header rectangle used for click+drag selection of row headers"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-header-content","row-header-content",-594512165),new cljs.core.Keyword(null,"level","level",1290497552),(3),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-row-header-content rc-v-table-content",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The v-box containing one row header (row-header-render renders in here)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"bottom-left","bottom-left",1607421488),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-bottom-left rc-v-table-content",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Bottom left section (3)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"middle-section","middle-section",-353695846),new cljs.core.Keyword(null,"level","level",1290497552),(1),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-middle-section",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The middle v-box container section of the table, containing sections 4,5,6"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"column-headers","column-headers",-966500841),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-column-headers rc-v-table-viewport",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Column header viewport section (4)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"column-header-selection-rect","column-header-selection-rect",-790796749),new cljs.core.Keyword(null,"level","level",1290497552),(3),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-selection",new cljs.core.Keyword(null,"impl","impl",1677848700),"[:div]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The column-header rectangle used for click+drag selection of column headers"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"column-header-content","column-header-content",-2026517060),new cljs.core.Keyword(null,"level","level",1290497552),(3),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-column-header-content rc-v-table-content",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The box containing the column header (column-header-render renders in here)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"rows","rows",850049680),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-rows rc-v-table-viewport",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Main row viewport section (5)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-selection-rect","row-selection-rect",-1945553775),new cljs.core.Keyword(null,"level","level",1290497552),(3),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-selection",new cljs.core.Keyword(null,"impl","impl",1677848700),"[:div]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The ROW rectangle used for click+drag selection of rows"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-content","row-content",-203238520),new cljs.core.Keyword(null,"level","level",1290497552),(3),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-row-content rc-v-table-content",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The v-box containing one row (row-render renders in here)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"column-footers","column-footers",-1188771065),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-column-footers rc-v-table-viewport",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Column footer viewport section (6)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"column-footer-content","column-footer-content",-2077092556),new cljs.core.Keyword(null,"level","level",1290497552),(3),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-column-footer-content rc-v-table-content",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The box containing the column footer (column-footer-render renders in here)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"h-scroll","h-scroll",-1200000150),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-h-scroll",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The horizontal scrollbar"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"right-section","right-section",-1581313735),new cljs.core.Keyword(null,"level","level",1290497552),(1),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-right-section",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The right container section v-box of the table, containing sections 7,8,9"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"top-right","top-right",284698505),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-top-right rc-v-table-content",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Top right section (7)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-footers","row-footers",-681026731),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-row-footers rc-v-table-viewport",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Row footer viewport section (8)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-footer-content","row-footer-content",1483533894),new cljs.core.Keyword(null,"level","level",1290497552),(3),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-row-footer-content rc-v-table-content",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The v-box containing one row footer (row-footer-render renders in here)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"bottom-right","bottom-right",956401646),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-bottom-right rc-v-table-content",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Bottom right section (9)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"v-scroll-section","v-scroll-section",-72114244),new cljs.core.Keyword(null,"level","level",1290497552),(1),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-v-scroll-section",new cljs.core.Keyword(null,"impl","impl",1677848700),"[v-box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The v-box containing the vertical scrollbar:"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"legacy","legacy",1434943289),new cljs.core.Keyword(null,"level","level",1290497552),(2),new cljs.core.Keyword(null,"name-label","name-label",1051389241),"-",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"Legacy"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"v-scroll","v-scroll",-1842185668),new cljs.core.Keyword(null,"level","level",1290497552),(3),new cljs.core.Keyword(null,"class","class",-2030961996),"rc-v-table-v-scroll",new cljs.core.Keyword(null,"impl","impl",1677848700),"[box]",new cljs.core.Keyword(null,"notes","notes",-1039600523),"The vertical scrollbar"], null)], null):null);
-re_com.v_table.v_table_parts = ((re_com.config.include_args_desc_QMARK_)?cljs.core.set.call(null,cljs.core.map.call(null,new cljs.core.Keyword(null,"name","name",1843675177),re_com.v_table.v_table_parts_desc)):null);
-re_com.v_table.v_table_args_desc = ((re_com.config.include_args_desc_QMARK_)?new cljs.core.PersistentVector(null, 30, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"model","model",331153215),new cljs.core.Keyword(null,"required","required",1807647006),true,new cljs.core.Keyword(null,"type","type",1174270348),"atom containing vec of maps",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),re_com.validate.vector_atom_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"One element for each row displayed in the table. Typically, a vector of maps, but can be a seq of anything, with your functions like ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":key-fn"], null)," extracting values."], null)], null),new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"key-fn","key-fn",-636154479),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"default","default",-1987822328),"nil",new cljs.core.Keyword(null,"type","type",1174270348),"map -> anything",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),re_com.validate.ifn_or_nil_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"A function/keyword or nil. Given an element of ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":model"], null),", it should return its unique identifier which is used by Reagent as a unique id. If not specified or nil passed, the element's 0-based row-index will be used"], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"virtual?","virtual?",1554264002),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"default","default",-1987822328),true,new cljs.core.Keyword(null,"type","type",1174270348),"boolean",new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"when true, only those rows that are visible are rendered to the DOM. Otherwise DOM will be generated for all rows, which might be prohibitive if there are a large number of rows."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-height","row-height",527360749),new cljs.core.Keyword(null,"required","required",1807647006),true,new cljs.core.Keyword(null,"type","type",1174270348),"integer",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.number_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"px height of each row, in sections 2, 5 and 8."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"column-header-height","column-header-height",-1680092558),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"integer",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.number_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"px height of the column header. Impacts the upper sections 1, 4 and 7. If not provided, defaults to 0, meaning these three sections will not be visible."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"column-footer-height","column-footer-height",-1662618224),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"integer",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.number_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"px height of the column footer. Impacts the lower sections 3, 6 and 9. If not provided, defaults to 0, meaning these three sections will not be visible."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-content-width","row-content-width",-1986261648),new cljs.core.Keyword(null,"required","required",1807647006),true,new cljs.core.Keyword(null,"type","type",1174270348),"integer",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.number_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"px width of sections 4, 5, 6. The renderers for these sections are expected to return hiccup to fill these spaces."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"max-width","max-width",-1939924051),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"string",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.string_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"Standard CSS max-width setting of the entire table. If not provided, table will fill available space"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"top-left-renderer","top-left-renderer",2010514596),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"-> hiccup",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"A function taking no args which returns the hiccup for the top left (section 1). The hiccup should fill the height specified via ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":column-header-height"], null),". The width of the three left sections is self-determined as the maximum of their own content."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-header-renderer","row-header-renderer",-355094585),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"row-index, row -> hiccup",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"A function. Given the 0-based row-index and an element of ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":model"], null),", it will return the hiccup for the row header (section 2)."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"bottom-left-renderer","bottom-left-renderer",768170713),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"-> hiccup",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"A function taking no args which returns the hiccup for the bottom left (section 3)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"column-header-renderer","column-header-renderer",-1886265578),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"-> hiccup",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"A function taking no args which returns the hiccup for the column header (section 4)."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-renderer","row-renderer",314053346),new cljs.core.Keyword(null,"required","required",1807647006),true,new cljs.core.Keyword(null,"type","type",1174270348),"row-index, row -> hiccup",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"A function. Given the 0-based row-index and an element of ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":model"], null),", it will return the hiccup for a single content row (section 5). This renderer is called once for each displayed row. As vertical scrolling occurs, more calls will be made."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"column-footer-renderer","column-footer-renderer",1437275846),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"-> hiccup",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"A function taking no args which returns the hiccup for the entire column footer (section 6)."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"top-right-renderer","top-right-renderer",-1691262321),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"-> hiccup",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"A function taking no args which returns the hiccup for the top right (section 7)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-footer-renderer","row-footer-renderer",2060844986),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"row-index, row -> hiccup",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"A function. Given the 0-based row-index and an element of ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":model"], null),", it will return the hiccup for the row footer (section 8)."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"bottom-right-renderer","bottom-right-renderer",1863950426),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"-> hiccup",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"A function taking no args which returns the hiccup for the bottom right (section 9)."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-header-selection-fn","row-header-selection-fn",1835057464),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"(5 args) -> ",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"See v-table docstring for arg details. If present, this function will be called on mouse-down, mouse-move and mouse-up events, allowing you to capture user selection of cells, columns or rows in section 2."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"column-header-selection-fn","column-header-selection-fn",2096757610),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"(5 args) -> ",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"See v-table docstring for arg details. If present, this function will be called on mouse-down, mouse-move and mouse-up events, allowing you to capture user selection of cells, columns or rows in section 4."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-selection-fn","row-selection-fn",274335562),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"(5 args) -> ",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.fn_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"See v-table docstring for arg details. If present, this function will be called on mouse-down, mouse-move and mouse-up events, allowing you to capture user selection of cells, columns or rows in section 5."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-viewport-width","row-viewport-width",1520708232),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"integer",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.number_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"px width of the row viewport area (section 5). If not specified, the component takes all the horizontal space available."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"row-viewport-height","row-viewport-height",-532496779),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"integer",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.number_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"px height of the row viewport area (section 5). If not specified,the component takes all the vertical space available."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"max-row-viewport-height","max-row-viewport-height",2061202688),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"integer",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.number_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"The ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"b","b",1482224470),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"i","i",-1386841315),"maximum"], null)], null)," px height of the row viewport area (section 5), excluding height of sections 4 and 6 (and horizontal scrollbar). If not specified, value determined by parent height and number of rows"], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"scroll-rows-into-view","scroll-rows-into-view",-984076694),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"atom containing map",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),re_com.validate.map_atom_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"Scrolls the table to a particular row range. Must be an atom. The map contains the keys ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":start-row"], null)," and ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":end-row"], null)," (row indexes)."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"scroll-columns-into-view","scroll-columns-into-view",1543196851),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"atom containing map",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),re_com.validate.map_atom_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"Scrolls the table of a particular column range. Must be an atom. Map that contains the keys ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":start-col"], null)," and ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":end-col"], null)," in pixel units."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"remove-empty-row-space?","remove-empty-row-space?",2140501449),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"default","default",-1987822328),true,new cljs.core.Keyword(null,"type","type",1174270348),"boolean",new cljs.core.Keyword(null,"description","description",-1428560544),"If true, removes whitespace between the last row and the horizontal scrollbar. Useful for tables without many rows where otherwise there would be a big gap between the last row and the horizontal scrollbar at the bottom of the available space."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"class","class",-2030961996),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"string",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.string_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),"CSS class names, space separated (these are applied to the table's outer container)"], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"parts","parts",849007691),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"map",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),re_com.validate.parts_QMARK_.call(null,re_com.v_table.v_table_parts),new cljs.core.Keyword(null,"description","description",-1428560544),"See Parts section below."], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"src","src",-1651076051),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"map",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.map_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"Used in dev builds to assist with debugging. Source code coordinates map containing keys",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":file"], null),"and",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":line"], null),". See 'Debugging'."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"debug-as","debug-as",283322354),new cljs.core.Keyword(null,"required","required",1807647006),false,new cljs.core.Keyword(null,"type","type",1174270348),"map",new cljs.core.Keyword(null,"validate-fn","validate-fn",1430169944),cljs.core.map_QMARK_,new cljs.core.Keyword(null,"description","description",-1428560544),new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),"Used in dev builds to assist with debugging, when one component is used implement another component, and we want the implementation component to masquerade as the original component in debug output, such as component stacks. A map optionally containing keys",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":component"], null),"and",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"code","code",1586293142),":args"], null),"."], null)], null)], null):null);
+re_com.v_table.v_table_parts_desc = ((re_com.config.include_args_desc_QMARK_)?new cljs.core.PersistentVector(null, 25, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$wrapper,cljs.core.cst$kw$level,(0),cljs.core.cst$kw$class,"rc-v-table-wrapper",cljs.core.cst$kw$impl,"[v-table]",cljs.core.cst$kw$notes,"Outer container of the v-table"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$left_DASH_section,cljs.core.cst$kw$level,(1),cljs.core.cst$kw$class,"rc-v-table-left-section",cljs.core.cst$kw$impl,"[v-box]",cljs.core.cst$kw$notes,"The left v-box container section of the table, containing sections 1,2,3"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$top_DASH_left,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$class,"rc-v-table-top-left rc-v-table-content",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"Top left section (1)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_headers,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$class,"rc-v-table-row-headers rc-v-table-viewport",cljs.core.cst$kw$impl,"[v-box]",cljs.core.cst$kw$notes,"Row header viewport section (2)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_header_DASH_selection_DASH_rect,cljs.core.cst$kw$level,(3),cljs.core.cst$kw$class,"rc-v-table-selection",cljs.core.cst$kw$impl,"[:div]",cljs.core.cst$kw$notes,"The row-header rectangle used for click+drag selection of row headers"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_header_DASH_content,cljs.core.cst$kw$level,(3),cljs.core.cst$kw$class,"rc-v-table-row-header-content rc-v-table-content",cljs.core.cst$kw$impl,"[v-box]",cljs.core.cst$kw$notes,"The v-box containing one row header (row-header-render renders in here)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$bottom_DASH_left,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$class,"rc-v-table-bottom-left rc-v-table-content",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"Bottom left section (3)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$middle_DASH_section,cljs.core.cst$kw$level,(1),cljs.core.cst$kw$class,"rc-v-table-middle-section",cljs.core.cst$kw$impl,"[v-box]",cljs.core.cst$kw$notes,"The middle v-box container section of the table, containing sections 4,5,6"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$column_DASH_headers,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$class,"rc-v-table-column-headers rc-v-table-viewport",cljs.core.cst$kw$impl,"[v-box]",cljs.core.cst$kw$notes,"Column header viewport section (4)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$column_DASH_header_DASH_selection_DASH_rect,cljs.core.cst$kw$level,(3),cljs.core.cst$kw$class,"rc-v-table-selection",cljs.core.cst$kw$impl,"[:div]",cljs.core.cst$kw$notes,"The column-header rectangle used for click+drag selection of column headers"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$column_DASH_header_DASH_content,cljs.core.cst$kw$level,(3),cljs.core.cst$kw$class,"rc-v-table-column-header-content rc-v-table-content",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"The box containing the column header (column-header-render renders in here)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$rows,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$class,"rc-v-table-rows rc-v-table-viewport",cljs.core.cst$kw$impl,"[v-box]",cljs.core.cst$kw$notes,"Main row viewport section (5)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_selection_DASH_rect,cljs.core.cst$kw$level,(3),cljs.core.cst$kw$class,"rc-v-table-selection",cljs.core.cst$kw$impl,"[:div]",cljs.core.cst$kw$notes,"The ROW rectangle used for click+drag selection of rows"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_content,cljs.core.cst$kw$level,(3),cljs.core.cst$kw$class,"rc-v-table-row-content rc-v-table-content",cljs.core.cst$kw$impl,"[v-box]",cljs.core.cst$kw$notes,"The v-box containing one row (row-render renders in here)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$column_DASH_footers,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$class,"rc-v-table-column-footers rc-v-table-viewport",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"Column footer viewport section (6)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$column_DASH_footer_DASH_content,cljs.core.cst$kw$level,(3),cljs.core.cst$kw$class,"rc-v-table-column-footer-content rc-v-table-content",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"The box containing the column footer (column-footer-render renders in here)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$h_DASH_scroll,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$class,"rc-v-table-h-scroll",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"The horizontal scrollbar"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$right_DASH_section,cljs.core.cst$kw$level,(1),cljs.core.cst$kw$class,"rc-v-table-right-section",cljs.core.cst$kw$impl,"[v-box]",cljs.core.cst$kw$notes,"The right container section v-box of the table, containing sections 7,8,9"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$top_DASH_right,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$class,"rc-v-table-top-right rc-v-table-content",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"Top right section (7)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_footers,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$class,"rc-v-table-row-footers rc-v-table-viewport",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"Row footer viewport section (8)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_footer_DASH_content,cljs.core.cst$kw$level,(3),cljs.core.cst$kw$class,"rc-v-table-row-footer-content rc-v-table-content",cljs.core.cst$kw$impl,"[v-box]",cljs.core.cst$kw$notes,"The v-box containing one row footer (row-footer-render renders in here)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$bottom_DASH_right,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$class,"rc-v-table-bottom-right rc-v-table-content",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"Bottom right section (9)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$v_DASH_scroll_DASH_section,cljs.core.cst$kw$level,(1),cljs.core.cst$kw$class,"rc-v-table-v-scroll-section",cljs.core.cst$kw$impl,"[v-box]",cljs.core.cst$kw$notes,"The v-box containing the vertical scrollbar:"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$type,cljs.core.cst$kw$legacy,cljs.core.cst$kw$level,(2),cljs.core.cst$kw$name_DASH_label,"-",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"Legacy"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$v_DASH_scroll,cljs.core.cst$kw$level,(3),cljs.core.cst$kw$class,"rc-v-table-v-scroll",cljs.core.cst$kw$impl,"[box]",cljs.core.cst$kw$notes,"The vertical scrollbar"], null)], null):null);
+re_com.v_table.v_table_parts = ((re_com.config.include_args_desc_QMARK_)?cljs.core.set(cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$name,re_com.v_table.v_table_parts_desc)):null);
+re_com.v_table.v_table_args_desc = ((re_com.config.include_args_desc_QMARK_)?new cljs.core.PersistentVector(null, 30, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$model,cljs.core.cst$kw$required,true,cljs.core.cst$kw$type,"atom containing vec of maps",cljs.core.cst$kw$validate_DASH_fn,re_com.validate.vector_atom_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"One element for each row displayed in the table. Typically, a vector of maps, but can be a seq of anything, with your functions like ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":key-fn"], null)," extracting values."], null)], null),new cljs.core.PersistentArrayMap(null, 6, [cljs.core.cst$kw$name,cljs.core.cst$kw$key_DASH_fn,cljs.core.cst$kw$required,false,cljs.core.cst$kw$default,"nil",cljs.core.cst$kw$type,"map -> anything",cljs.core.cst$kw$validate_DASH_fn,re_com.validate.ifn_or_nil_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"A function/keyword or nil. Given an element of ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":model"], null),", it should return its unique identifier which is used by Reagent as a unique id. If not specified or nil passed, the element's 0-based row-index will be used"], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$virtual_QMARK_,cljs.core.cst$kw$required,false,cljs.core.cst$kw$default,true,cljs.core.cst$kw$type,"boolean",cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"when true, only those rows that are visible are rendered to the DOM. Otherwise DOM will be generated for all rows, which might be prohibitive if there are a large number of rows."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_height,cljs.core.cst$kw$required,true,cljs.core.cst$kw$type,"integer",cljs.core.cst$kw$validate_DASH_fn,cljs.core.number_QMARK_,cljs.core.cst$kw$description,"px height of each row, in sections 2, 5 and 8."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$column_DASH_header_DASH_height,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"integer",cljs.core.cst$kw$validate_DASH_fn,cljs.core.number_QMARK_,cljs.core.cst$kw$description,"px height of the column header. Impacts the upper sections 1, 4 and 7. If not provided, defaults to 0, meaning these three sections will not be visible."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$column_DASH_footer_DASH_height,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"integer",cljs.core.cst$kw$validate_DASH_fn,cljs.core.number_QMARK_,cljs.core.cst$kw$description,"px height of the column footer. Impacts the lower sections 3, 6 and 9. If not provided, defaults to 0, meaning these three sections will not be visible."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_content_DASH_width,cljs.core.cst$kw$required,true,cljs.core.cst$kw$type,"integer",cljs.core.cst$kw$validate_DASH_fn,cljs.core.number_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"px width of sections 4, 5, 6. The renderers for these sections are expected to return hiccup to fill these spaces."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$max_DASH_width,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"string",cljs.core.cst$kw$validate_DASH_fn,cljs.core.string_QMARK_,cljs.core.cst$kw$description,"Standard CSS max-width setting of the entire table. If not provided, table will fill available space"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$top_DASH_left_DASH_renderer,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"-> hiccup",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"A function taking no args which returns the hiccup for the top left (section 1). The hiccup should fill the height specified via ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":column-header-height"], null),". The width of the three left sections is self-determined as the maximum of their own content."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_header_DASH_renderer,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"row-index, row -> hiccup",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"A function. Given the 0-based row-index and an element of ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":model"], null),", it will return the hiccup for the row header (section 2)."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$bottom_DASH_left_DASH_renderer,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"-> hiccup",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,"A function taking no args which returns the hiccup for the bottom left (section 3)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$column_DASH_header_DASH_renderer,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"-> hiccup",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,"A function taking no args which returns the hiccup for the column header (section 4)."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_renderer,cljs.core.cst$kw$required,true,cljs.core.cst$kw$type,"row-index, row -> hiccup",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"A function. Given the 0-based row-index and an element of ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":model"], null),", it will return the hiccup for a single content row (section 5). This renderer is called once for each displayed row. As vertical scrolling occurs, more calls will be made."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$column_DASH_footer_DASH_renderer,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"-> hiccup",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,"A function taking no args which returns the hiccup for the entire column footer (section 6)."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$top_DASH_right_DASH_renderer,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"-> hiccup",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,"A function taking no args which returns the hiccup for the top right (section 7)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_footer_DASH_renderer,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"row-index, row -> hiccup",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"A function. Given the 0-based row-index and an element of ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":model"], null),", it will return the hiccup for the row footer (section 8)."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$bottom_DASH_right_DASH_renderer,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"-> hiccup",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,"A function taking no args which returns the hiccup for the bottom right (section 9)."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_header_DASH_selection_DASH_fn,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"(5 args) -> ",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,"See v-table docstring for arg details. If present, this function will be called on mouse-down, mouse-move and mouse-up events, allowing you to capture user selection of cells, columns or rows in section 2."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$column_DASH_header_DASH_selection_DASH_fn,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"(5 args) -> ",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,"See v-table docstring for arg details. If present, this function will be called on mouse-down, mouse-move and mouse-up events, allowing you to capture user selection of cells, columns or rows in section 4."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_selection_DASH_fn,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"(5 args) -> ",cljs.core.cst$kw$validate_DASH_fn,cljs.core.fn_QMARK_,cljs.core.cst$kw$description,"See v-table docstring for arg details. If present, this function will be called on mouse-down, mouse-move and mouse-up events, allowing you to capture user selection of cells, columns or rows in section 5."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_viewport_DASH_width,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"integer",cljs.core.cst$kw$validate_DASH_fn,cljs.core.number_QMARK_,cljs.core.cst$kw$description,"px width of the row viewport area (section 5). If not specified, the component takes all the horizontal space available."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$row_DASH_viewport_DASH_height,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"integer",cljs.core.cst$kw$validate_DASH_fn,cljs.core.number_QMARK_,cljs.core.cst$kw$description,"px height of the row viewport area (section 5). If not specified,the component takes all the vertical space available."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$max_DASH_row_DASH_viewport_DASH_height,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"integer",cljs.core.cst$kw$validate_DASH_fn,cljs.core.number_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"The ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$b,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$i,"maximum"], null)], null)," px height of the row viewport area (section 5), excluding height of sections 4 and 6 (and horizontal scrollbar). If not specified, value determined by parent height and number of rows"], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$scroll_DASH_rows_DASH_into_DASH_view,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"atom containing map",cljs.core.cst$kw$validate_DASH_fn,re_com.validate.map_atom_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"Scrolls the table to a particular row range. Must be an atom. The map contains the keys ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":start-row"], null)," and ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":end-row"], null)," (row indexes)."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$scroll_DASH_columns_DASH_into_DASH_view,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"atom containing map",cljs.core.cst$kw$validate_DASH_fn,re_com.validate.map_atom_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"Scrolls the table of a particular column range. Must be an atom. Map that contains the keys ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":start-col"], null)," and ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":end-col"], null)," in pixel units."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$remove_DASH_empty_DASH_row_DASH_space_QMARK_,cljs.core.cst$kw$required,false,cljs.core.cst$kw$default,true,cljs.core.cst$kw$type,"boolean",cljs.core.cst$kw$description,"If true, removes whitespace between the last row and the horizontal scrollbar. Useful for tables without many rows where otherwise there would be a big gap between the last row and the horizontal scrollbar at the bottom of the available space."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$class,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"string",cljs.core.cst$kw$validate_DASH_fn,cljs.core.string_QMARK_,cljs.core.cst$kw$description,"CSS class names, space separated (these are applied to the table's outer container)"], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$parts,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"map",cljs.core.cst$kw$validate_DASH_fn,re_com.validate.parts_QMARK_(re_com.v_table.v_table_parts),cljs.core.cst$kw$description,"See Parts section below."], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$src,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"map",cljs.core.cst$kw$validate_DASH_fn,cljs.core.map_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"Used in dev builds to assist with debugging. Source code coordinates map containing keys",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":file"], null),"and",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":line"], null),". See 'Debugging'."], null)], null),new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$name,cljs.core.cst$kw$debug_DASH_as,cljs.core.cst$kw$required,false,cljs.core.cst$kw$type,"map",cljs.core.cst$kw$validate_DASH_fn,cljs.core.map_QMARK_,cljs.core.cst$kw$description,new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,"Used in dev builds to assist with debugging, when one component is used implement another component, and we want the implementation component to masquerade as the original component in debug output, such as component stacks. A map optionally containing keys",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":component"], null),"and",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$code,":args"], null),"."], null)], null)], null):null);
 /**
  * Renders a scrollable table with optional fixed column and row headers and footers, totalling nine addressable sections
  *   By default, it only displays rows that are visible, so is very efficient for large data structures
@@ -722,14 +787,14 @@ re_com.v_table.v_table_args_desc = ((re_com.config.include_args_desc_QMARK_)?new
  */
 re_com.v_table.v_table = (function re_com$v_table$v_table(var_args){
 var args__4777__auto__ = [];
-var len__4771__auto___15857 = arguments.length;
-var i__4772__auto___15858 = (0);
+var len__4771__auto___16468 = arguments.length;
+var i__4772__auto___16469 = (0);
 while(true){
-if((i__4772__auto___15858 < len__4771__auto___15857)){
-args__4777__auto__.push((arguments[i__4772__auto___15858]));
+if((i__4772__auto___16469 < len__4771__auto___16468)){
+args__4777__auto__.push((arguments[i__4772__auto___16469]));
 
-var G__15859 = (i__4772__auto___15858 + (1));
-i__4772__auto___15858 = G__15859;
+var G__16470 = (i__4772__auto___16469 + (1));
+i__4772__auto___16469 = G__16470;
 continue;
 } else {
 }
@@ -740,80 +805,80 @@ var argseq__4778__auto__ = ((((0) < args__4777__auto__.length))?(new cljs.core.I
 return re_com.v_table.v_table.cljs$core$IFn$_invoke$arity$variadic(argseq__4778__auto__);
 });
 
-(re_com.v_table.v_table.cljs$core$IFn$_invoke$arity$variadic = (function (p__15851){
-var map__15852 = p__15851;
-var map__15852__$1 = cljs.core.__destructure_map.call(null,map__15852);
-var args = map__15852__$1;
-var model = cljs.core.get.call(null,map__15852__$1,new cljs.core.Keyword(null,"model","model",331153215));
-var virtual_QMARK_ = cljs.core.get.call(null,map__15852__$1,new cljs.core.Keyword(null,"virtual?","virtual?",1554264002),true);
-var row_height = cljs.core.get.call(null,map__15852__$1,new cljs.core.Keyword(null,"row-height","row-height",527360749));
-var row_viewport_width = cljs.core.get.call(null,map__15852__$1,new cljs.core.Keyword(null,"row-viewport-width","row-viewport-width",1520708232));
-var row_viewport_height = cljs.core.get.call(null,map__15852__$1,new cljs.core.Keyword(null,"row-viewport-height","row-viewport-height",-532496779));
-var max_row_viewport_height = cljs.core.get.call(null,map__15852__$1,new cljs.core.Keyword(null,"max-row-viewport-height","max-row-viewport-height",2061202688));
-var src = cljs.core.get.call(null,map__15852__$1,new cljs.core.Keyword(null,"src","src",-1651076051));
-var or__4160__auto__ = (((!(goog.DEBUG)))?null:re_com.validate.validate_args.call(null,re_com.validate.extract_arg_data.call(null,re_com.v_table.v_table_args_desc),args));
+(re_com.v_table.v_table.cljs$core$IFn$_invoke$arity$variadic = (function (p__16444){
+var map__16445 = p__16444;
+var map__16445__$1 = cljs.core.__destructure_map(map__16445);
+var args = map__16445__$1;
+var model = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16445__$1,cljs.core.cst$kw$model);
+var virtual_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__16445__$1,cljs.core.cst$kw$virtual_QMARK_,true);
+var row_height = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16445__$1,cljs.core.cst$kw$row_DASH_height);
+var row_viewport_width = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16445__$1,cljs.core.cst$kw$row_DASH_viewport_DASH_width);
+var row_viewport_height = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16445__$1,cljs.core.cst$kw$row_DASH_viewport_DASH_height);
+var max_row_viewport_height = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16445__$1,cljs.core.cst$kw$max_DASH_row_DASH_viewport_DASH_height);
+var src = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16445__$1,cljs.core.cst$kw$src);
+var or__4160__auto__ = (((!(goog.DEBUG)))?null:re_com.validate.validate_args(re_com.validate.extract_arg_data(re_com.v_table.v_table_args_desc),args));
 if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
-var scroll_x = reagent.core.atom.call(null,(0));
-var scroll_y = reagent.core.atom.call(null,(0));
-var content_rows_width = reagent.core.atom.call(null,(0));
-var content_rows_height = reagent.core.atom.call(null,(0));
-var row_viewport_id = cljs.core.gensym.call(null,"row-viewport-");
-var row_viewport_element = reagent.core.atom.call(null,null);
-var rl_row_viewport_width = reagent.core.atom.call(null,(0));
-var rl_row_viewport_height = reagent.core.atom.call(null,(function (){var x__4252__auto__ = (row_height * cljs.core.count.call(null,cljs.core.deref.call(null,model)));
+var scroll_x = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var scroll_y = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var content_rows_width = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var content_rows_height = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var row_viewport_id = cljs.core.gensym.cljs$core$IFn$_invoke$arity$1("row-viewport-");
+var row_viewport_element = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
+var rl_row_viewport_width = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var rl_row_viewport_height = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((function (){var x__4252__auto__ = (row_height * cljs.core.count(cljs.core.deref(model)));
 var y__4253__auto__ = max_row_viewport_height;
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })());
-var internal_scroll_rows_into_view = reagent.core.atom.call(null,null);
-var internal_scroll_columns_into_view = reagent.core.atom.call(null,null);
-var m_size = reagent.ratom.make_reaction.call(null,(function (){
-return cljs.core.count.call(null,cljs.core.deref.call(null,model));
+var internal_scroll_rows_into_view = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
+var internal_scroll_columns_into_view = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
+var m_size = reagent.ratom.make_reaction((function (){
+return cljs.core.count(cljs.core.deref(model));
 }));
-var rows_per_viewport = reagent.ratom.make_reaction.call(null,(function (){
-return Math.round((cljs.core.deref.call(null,rl_row_viewport_height) / row_height));
+var rows_per_viewport = reagent.ratom.make_reaction((function (){
+return Math.round((cljs.core.deref(rl_row_viewport_height) / row_height));
 }));
-var max_scroll_x = reagent.ratom.make_reaction.call(null,(function (){
-return (cljs.core.deref.call(null,content_rows_width) - cljs.core.deref.call(null,rl_row_viewport_width));
+var max_scroll_x = reagent.ratom.make_reaction((function (){
+return (cljs.core.deref(content_rows_width) - cljs.core.deref(rl_row_viewport_width));
 }));
-var max_scroll_y = reagent.ratom.make_reaction.call(null,(function (){
-return (cljs.core.deref.call(null,content_rows_height) - cljs.core.deref.call(null,rl_row_viewport_height));
+var max_scroll_y = reagent.ratom.make_reaction((function (){
+return (cljs.core.deref(content_rows_height) - cljs.core.deref(rl_row_viewport_height));
 }));
-var top_row_index = reagent.ratom.make_reaction.call(null,(function (){
-return ((cljs.core.deref.call(null,scroll_y) / row_height) | (0));
+var top_row_index = reagent.ratom.make_reaction((function (){
+return ((cljs.core.deref(scroll_y) / row_height) | (0));
 }));
-var bot_row_index = reagent.ratom.make_reaction.call(null,(function (){
-var x__4252__auto__ = (cljs.core.deref.call(null,top_row_index) + (cljs.core.deref.call(null,rows_per_viewport) - (1)));
-var y__4253__auto__ = cljs.core.deref.call(null,m_size);
+var bot_row_index = reagent.ratom.make_reaction((function (){
+var x__4252__auto__ = (cljs.core.deref(top_row_index) + (cljs.core.deref(rows_per_viewport) - (1)));
+var y__4253__auto__ = cljs.core.deref(m_size);
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 }));
-var virtual_scroll_y = reagent.ratom.make_reaction.call(null,(function (){
-return cljs.core.mod.call(null,cljs.core.deref.call(null,scroll_y),row_height);
+var virtual_scroll_y = reagent.ratom.make_reaction((function (){
+return cljs.core.mod(cljs.core.deref(scroll_y),row_height);
 }));
-var virtual_rows = reagent.ratom.make_reaction.call(null,(function (){
-if((cljs.core.deref.call(null,m_size) > (0))){
-return cljs.core.subvec.call(null,cljs.core.deref.call(null,model),(function (){var x__4252__auto__ = cljs.core.deref.call(null,top_row_index);
-var y__4253__auto__ = cljs.core.deref.call(null,m_size);
+var virtual_rows = reagent.ratom.make_reaction((function (){
+if((cljs.core.deref(m_size) > (0))){
+return cljs.core.subvec.cljs$core$IFn$_invoke$arity$3(cljs.core.deref(model),(function (){var x__4252__auto__ = cljs.core.deref(top_row_index);
+var y__4253__auto__ = cljs.core.deref(m_size);
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
-})(),(function (){var x__4252__auto__ = ((cljs.core.deref.call(null,top_row_index) + cljs.core.deref.call(null,rows_per_viewport)) + (2));
-var y__4253__auto__ = cljs.core.deref.call(null,m_size);
+})(),(function (){var x__4252__auto__ = ((cljs.core.deref(top_row_index) + cljs.core.deref(rows_per_viewport)) + (2));
+var y__4253__auto__ = cljs.core.deref(m_size);
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })());
 } else {
 return null;
 }
 }));
-var on_h_scroll_change = (function (p1__15848_SHARP_){
-return cljs.core.reset_BANG_.call(null,scroll_x,p1__15848_SHARP_);
+var on_h_scroll_change = (function (p1__16441_SHARP_){
+return cljs.core.reset_BANG_(scroll_x,p1__16441_SHARP_);
 });
-var on_v_scroll_change = (function (p1__15849_SHARP_){
-return cljs.core.reset_BANG_.call(null,scroll_y,p1__15849_SHARP_);
+var on_v_scroll_change = (function (p1__16442_SHARP_){
+return cljs.core.reset_BANG_(scroll_y,p1__16442_SHARP_);
 });
 var on_viewport_resize = (function re_com$v_table$on_viewport_resize(event){
 var target = event.target;
 var bounding_rect = (((target == null))?cljs.core.PersistentArrayMap.EMPTY:target.getBoundingClientRect());
-cljs.core.reset_BANG_.call(null,rl_row_viewport_width,(function (){var or__4160__auto____$1 = row_viewport_width;
+cljs.core.reset_BANG_(rl_row_viewport_width,(function (){var or__4160__auto____$1 = row_viewport_width;
 if(cljs.core.truth_(or__4160__auto____$1)){
 return or__4160__auto____$1;
 } else {
@@ -821,7 +886,7 @@ return bounding_rect.width;
 }
 })());
 
-cljs.core.reset_BANG_.call(null,rl_row_viewport_height,(function (){var or__4160__auto____$1 = row_viewport_height;
+cljs.core.reset_BANG_(rl_row_viewport_height,(function (){var or__4160__auto____$1 = row_viewport_height;
 if(cljs.core.truth_(or__4160__auto____$1)){
 return or__4160__auto____$1;
 } else {
@@ -829,17 +894,17 @@ return bounding_rect.height;
 }
 })());
 
-cljs.core.reset_BANG_.call(null,scroll_x,(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,max_scroll_x);
-var y__4253__auto__ = cljs.core.deref.call(null,scroll_x);
+cljs.core.reset_BANG_(scroll_x,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(max_scroll_x);
+var y__4253__auto__ = cljs.core.deref(scroll_x);
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
 })());
 
-return cljs.core.reset_BANG_.call(null,scroll_y,(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,max_scroll_y);
-var y__4253__auto__ = cljs.core.deref.call(null,scroll_y);
+return cljs.core.reset_BANG_(scroll_y,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(max_scroll_y);
+var y__4253__auto__ = cljs.core.deref(scroll_y);
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
@@ -850,80 +915,80 @@ var delta_x = event.deltaX;
 var new_delta_x = delta_x;
 var delta_y = event.deltaY;
 var new_delta_y = delta_y;
-cljs.core.reset_BANG_.call(null,scroll_x,(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,max_scroll_x);
-var y__4253__auto__ = (cljs.core.deref.call(null,scroll_x) + new_delta_x);
+cljs.core.reset_BANG_(scroll_x,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(max_scroll_x);
+var y__4253__auto__ = (cljs.core.deref(scroll_x) + new_delta_x);
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
 })());
 
-return cljs.core.reset_BANG_.call(null,scroll_y,(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,max_scroll_y);
-var y__4253__auto__ = (cljs.core.deref.call(null,scroll_y) + new_delta_y);
+return cljs.core.reset_BANG_(scroll_y,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(max_scroll_y);
+var y__4253__auto__ = (cljs.core.deref(scroll_y) + new_delta_y);
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
 })());
 });
-var dmm_tracker = cljs.core.atom.call(null,null);
-var sel_parent_bounding_rect = reagent.core.atom.call(null,null);
-var sel_content_x_start = reagent.core.atom.call(null,(0));
-var sel_content_y_start = reagent.core.atom.call(null,(0));
-var sel_content_x_end = reagent.core.atom.call(null,(0));
-var sel_content_y_end = reagent.core.atom.call(null,(0));
+var dmm_tracker = cljs.core.atom.cljs$core$IFn$_invoke$arity$1(null);
+var sel_parent_bounding_rect = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
+var sel_content_x_start = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var sel_content_y_start = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var sel_content_x_end = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var sel_content_y_end = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
 var selection_renderer = (function re_com$v_table$selection_renderer(class$,style,attr){
-var selecting_down_QMARK_ = (cljs.core.deref.call(null,sel_content_y_end) > cljs.core.deref.call(null,sel_content_y_start));
-var selecting_right_QMARK_ = (cljs.core.deref.call(null,sel_content_x_end) > cljs.core.deref.call(null,sel_content_x_start));
-var width = ((selecting_right_QMARK_)?(cljs.core.deref.call(null,sel_content_x_end) - cljs.core.deref.call(null,sel_content_x_start)):(cljs.core.deref.call(null,sel_content_x_start) - cljs.core.deref.call(null,sel_content_x_end)));
-var height = ((selecting_down_QMARK_)?(cljs.core.deref.call(null,sel_content_y_end) - cljs.core.deref.call(null,sel_content_y_start)):(cljs.core.deref.call(null,sel_content_y_start) - cljs.core.deref.call(null,sel_content_y_end)));
-var top = ((selecting_down_QMARK_)?(cljs.core.deref.call(null,sel_content_y_start) - cljs.core.deref.call(null,scroll_y)):((cljs.core.deref.call(null,sel_content_y_start) - cljs.core.deref.call(null,scroll_y)) - height));
-var left = ((selecting_right_QMARK_)?(cljs.core.deref.call(null,sel_content_x_start) - cljs.core.deref.call(null,scroll_x)):((cljs.core.deref.call(null,sel_content_x_start) - cljs.core.deref.call(null,scroll_x)) - width));
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-selection ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 8, [new cljs.core.Keyword(null,"position","position",-2011731912),"absolute",new cljs.core.Keyword(null,"z-index","z-index",1892827090),(1),new cljs.core.Keyword(null,"top","top",-1856271961),re_com.v_table.px.call(null,top),new cljs.core.Keyword(null,"left","left",-399115937),re_com.v_table.px.call(null,left),new cljs.core.Keyword(null,"width","width",-384071477),re_com.v_table.px.call(null,width),new cljs.core.Keyword(null,"height","height",1025178622),re_com.v_table.px.call(null,height),new cljs.core.Keyword(null,"background-color","background-color",570434026),"rgba(0,0,255,0.1)",new cljs.core.Keyword(null,"border","border",1444987323),"1px solid rgba(0,0,255,0.4)"], null),style)], null),attr),""], null);
+var selecting_down_QMARK_ = (cljs.core.deref(sel_content_y_end) > cljs.core.deref(sel_content_y_start));
+var selecting_right_QMARK_ = (cljs.core.deref(sel_content_x_end) > cljs.core.deref(sel_content_x_start));
+var width = ((selecting_right_QMARK_)?(cljs.core.deref(sel_content_x_end) - cljs.core.deref(sel_content_x_start)):(cljs.core.deref(sel_content_x_start) - cljs.core.deref(sel_content_x_end)));
+var height = ((selecting_down_QMARK_)?(cljs.core.deref(sel_content_y_end) - cljs.core.deref(sel_content_y_start)):(cljs.core.deref(sel_content_y_start) - cljs.core.deref(sel_content_y_end)));
+var top = ((selecting_down_QMARK_)?(cljs.core.deref(sel_content_y_start) - cljs.core.deref(scroll_y)):((cljs.core.deref(sel_content_y_start) - cljs.core.deref(scroll_y)) - height));
+var left = ((selecting_right_QMARK_)?(cljs.core.deref(sel_content_x_start) - cljs.core.deref(scroll_x)):((cljs.core.deref(sel_content_x_start) - cljs.core.deref(scroll_x)) - width));
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$class,["rc-v-table-selection ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 8, [cljs.core.cst$kw$position,"absolute",cljs.core.cst$kw$z_DASH_index,(1),cljs.core.cst$kw$top,(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(top) : re_com.v_table.px.call(null,top)),cljs.core.cst$kw$left,(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(left) : re_com.v_table.px.call(null,left)),cljs.core.cst$kw$width,(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(width) : re_com.v_table.px.call(null,width)),cljs.core.cst$kw$height,(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(height) : re_com.v_table.px.call(null,height)),cljs.core.cst$kw$background_DASH_color,"rgba(0,0,255,0.1)",cljs.core.cst$kw$border,"1px solid rgba(0,0,255,0.4)"], null),style], 0))], null),attr], 0)),""], null);
 });
-var coords_debug = reagent.core.atom.call(null,null);
-var event_debug = reagent.core.atom.call(null,null);
-var selection_target = reagent.core.atom.call(null,null);
-var sel_max_content_rows_px = reagent.core.atom.call(null,(0));
-var sel_max_content_cols_px = reagent.core.atom.call(null,(0));
+var coords_debug = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
+var event_debug = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
+var selection_target = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
+var sel_max_content_rows_px = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
+var sel_max_content_cols_px = reagent.core.atom.cljs$core$IFn$_invoke$arity$1((0));
 var selection_coords = (function re_com$v_table$selection_coords(){
-if(cljs.core.truth_(cljs.core.deref.call(null,sel_parent_bounding_rect))){
-var selecting_down_QMARK_ = (cljs.core.deref.call(null,sel_content_y_end) > cljs.core.deref.call(null,sel_content_y_start));
-var selecting_right_QMARK_ = (cljs.core.deref.call(null,sel_content_x_end) > cljs.core.deref.call(null,sel_content_x_start));
-var use_rows_numbers_QMARK_ = cljs.core.not_EQ_.call(null,cljs.core.deref.call(null,selection_target),new cljs.core.Keyword(null,"column-header","column-header",-1495823888));
-var start_row_px = ((selecting_down_QMARK_)?cljs.core.deref.call(null,sel_content_y_start):cljs.core.deref.call(null,sel_content_y_end));
-var end_row_px = ((selecting_down_QMARK_)?cljs.core.deref.call(null,sel_content_y_end):cljs.core.deref.call(null,sel_content_y_start));
-var start_col_px = ((selecting_right_QMARK_)?cljs.core.deref.call(null,sel_content_x_start):cljs.core.deref.call(null,sel_content_x_end));
-var end_col_px = ((selecting_right_QMARK_)?cljs.core.deref.call(null,sel_content_x_end):cljs.core.deref.call(null,sel_content_x_start));
+if(cljs.core.truth_(cljs.core.deref(sel_parent_bounding_rect))){
+var selecting_down_QMARK_ = (cljs.core.deref(sel_content_y_end) > cljs.core.deref(sel_content_y_start));
+var selecting_right_QMARK_ = (cljs.core.deref(sel_content_x_end) > cljs.core.deref(sel_content_x_start));
+var use_rows_numbers_QMARK_ = cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(selection_target),cljs.core.cst$kw$column_DASH_header);
+var start_row_px = ((selecting_down_QMARK_)?cljs.core.deref(sel_content_y_start):cljs.core.deref(sel_content_y_end));
+var end_row_px = ((selecting_down_QMARK_)?cljs.core.deref(sel_content_y_end):cljs.core.deref(sel_content_y_start));
+var start_col_px = ((selecting_right_QMARK_)?cljs.core.deref(sel_content_x_start):cljs.core.deref(sel_content_x_end));
+var end_col_px = ((selecting_right_QMARK_)?cljs.core.deref(sel_content_x_end):cljs.core.deref(sel_content_x_start));
 var start_row_px_clipped = (function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,sel_max_content_rows_px);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(sel_max_content_rows_px);
 var y__4253__auto__ = start_row_px;
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
 })();
 var end_row_px_clipped = (function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,sel_max_content_rows_px);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(sel_max_content_rows_px);
 var y__4253__auto__ = end_row_px;
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
 })();
-var coords = new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"start-row","start-row",164678470),((use_rows_numbers_QMARK_)?((start_row_px_clipped / row_height) | (0)):start_row_px_clipped),new cljs.core.Keyword(null,"end-row","end-row",-545103581),((use_rows_numbers_QMARK_)?((end_row_px_clipped / row_height) | (0)):end_row_px_clipped),new cljs.core.Keyword(null,"start-col","start-col",668080143),(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,sel_max_content_cols_px);
+var coords = new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$start_DASH_row,((use_rows_numbers_QMARK_)?((start_row_px_clipped / row_height) | (0)):start_row_px_clipped),cljs.core.cst$kw$end_DASH_row,((use_rows_numbers_QMARK_)?((end_row_px_clipped / row_height) | (0)):end_row_px_clipped),cljs.core.cst$kw$start_DASH_col,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(sel_max_content_cols_px);
 var y__4253__auto__ = start_col_px;
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
-})(),new cljs.core.Keyword(null,"end-col","end-col",-724155879),(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,sel_max_content_cols_px);
+})(),cljs.core.cst$kw$end_DASH_col,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(sel_max_content_cols_px);
 var y__4253__auto__ = end_col_px;
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
 })()], null);
 if(re_com.config.debug_QMARK_){
-cljs.core.reset_BANG_.call(null,coords_debug,coords);
+cljs.core.reset_BANG_(coords_debug,coords);
 } else {
 }
 
@@ -932,139 +997,154 @@ return coords;
 return cljs.core.PersistentArrayMap.EMPTY;
 }
 });
-var dragging_QMARK_ = reagent.core.atom.call(null,false);
-var dragging_outside_QMARK_ = reagent.core.atom.call(null,false);
+var dragging_QMARK_ = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(false);
+var dragging_outside_QMARK_ = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(false);
 var on_drag_change = (function re_com$v_table$on_drag_change(sel_fn,_delta_x,_delta_y,curr_x,curr_y,ctrlKey,shiftKey,event){
-var top_offset = cljs.core.deref.call(null,sel_parent_bounding_rect).top;
-var left_offset = cljs.core.deref.call(null,sel_parent_bounding_rect).left;
-var bottom_offset = cljs.core.deref.call(null,sel_parent_bounding_rect).bottom;
-var right_offset = cljs.core.deref.call(null,sel_parent_bounding_rect).right;
-var scroll_delta_y = (cljs.core.truth_((function (){var and__4149__auto__ = cljs.core.deref.call(null,dragging_outside_QMARK_);
+var top_offset = cljs.core.deref(sel_parent_bounding_rect).top;
+var left_offset = cljs.core.deref(sel_parent_bounding_rect).left;
+var bottom_offset = cljs.core.deref(sel_parent_bounding_rect).bottom;
+var right_offset = cljs.core.deref(sel_parent_bounding_rect).right;
+var scroll_delta_y = (cljs.core.truth_((function (){var and__4149__auto__ = cljs.core.deref(dragging_outside_QMARK_);
 if(cljs.core.truth_(and__4149__auto__)){
-return cljs.core.not_EQ_.call(null,cljs.core.deref.call(null,selection_target),new cljs.core.Keyword(null,"column-header","column-header",-1495823888));
+return cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(selection_target),cljs.core.cst$kw$column_DASH_header);
 } else {
 return and__4149__auto__;
 }
 })())?(((curr_y < top_offset))?(curr_y - top_offset):(((curr_y > bottom_offset))?(curr_y - bottom_offset):(0)
 )):(0));
-var scroll_delta_x = (cljs.core.truth_((function (){var and__4149__auto__ = cljs.core.deref.call(null,dragging_outside_QMARK_);
+var scroll_delta_x = (cljs.core.truth_((function (){var and__4149__auto__ = cljs.core.deref(dragging_outside_QMARK_);
 if(cljs.core.truth_(and__4149__auto__)){
-return cljs.core.not_EQ_.call(null,cljs.core.deref.call(null,selection_target),new cljs.core.Keyword(null,"row-header","row-header",1799050794));
+return cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(selection_target),cljs.core.cst$kw$row_DASH_header);
 } else {
 return and__4149__auto__;
 }
 })())?(((curr_x < left_offset))?(curr_x - left_offset):(((curr_x > right_offset))?(curr_x - right_offset):(0)
 )):(0));
-cljs.core.reset_BANG_.call(null,sel_content_x_end,((curr_x + (- left_offset)) + cljs.core.deref.call(null,scroll_x)));
+cljs.core.reset_BANG_(sel_content_x_end,((curr_x + (- left_offset)) + cljs.core.deref(scroll_x)));
 
-cljs.core.reset_BANG_.call(null,sel_content_y_end,((curr_y + (- top_offset)) + cljs.core.deref.call(null,scroll_y)));
+cljs.core.reset_BANG_(sel_content_y_end,((curr_y + (- top_offset)) + cljs.core.deref(scroll_y)));
 
-cljs.core.reset_BANG_.call(null,scroll_x,(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,max_scroll_x);
-var y__4253__auto__ = (cljs.core.deref.call(null,scroll_x) + scroll_delta_x);
+cljs.core.reset_BANG_(scroll_x,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(max_scroll_x);
+var y__4253__auto__ = (cljs.core.deref(scroll_x) + scroll_delta_x);
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
 })());
 
-cljs.core.reset_BANG_.call(null,scroll_y,(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,max_scroll_y);
-var y__4253__auto__ = (cljs.core.deref.call(null,scroll_y) + scroll_delta_y);
+cljs.core.reset_BANG_(scroll_y,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(max_scroll_y);
+var y__4253__auto__ = (cljs.core.deref(scroll_y) + scroll_delta_y);
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
 })());
 
 if(re_com.config.debug_QMARK_){
-cljs.core.reset_BANG_.call(null,event_debug,event);
+cljs.core.reset_BANG_(event_debug,event);
 } else {
 }
 
-return sel_fn.call(null,new cljs.core.Keyword(null,"selecting","selecting",-1699771909),selection_coords.call(null),ctrlKey,shiftKey,event);
+var G__16446 = cljs.core.cst$kw$selecting;
+var G__16447 = selection_coords();
+var G__16448 = ctrlKey;
+var G__16449 = shiftKey;
+var G__16450 = event;
+return (sel_fn.cljs$core$IFn$_invoke$arity$5 ? sel_fn.cljs$core$IFn$_invoke$arity$5(G__16446,G__16447,G__16448,G__16449,G__16450) : sel_fn.call(null,G__16446,G__16447,G__16448,G__16449,G__16450));
 });
 var on_drag_end = (function re_com$v_table$on_drag_end(sel_fn,ctrlKey,shiftKey,event){
 if(re_com.config.debug_QMARK_){
-cljs.core.reset_BANG_.call(null,coords_debug,null);
+cljs.core.reset_BANG_(coords_debug,null);
 } else {
 }
 
 if(re_com.config.debug_QMARK_){
-cljs.core.reset_BANG_.call(null,event_debug,event);
+cljs.core.reset_BANG_(event_debug,event);
 } else {
 }
 
-sel_fn.call(null,new cljs.core.Keyword(null,"selection-end","selection-end",696987835),selection_coords.call(null),ctrlKey,shiftKey,event);
+var G__16451_16471 = cljs.core.cst$kw$selection_DASH_end;
+var G__16452_16472 = selection_coords();
+var G__16453_16473 = ctrlKey;
+var G__16454_16474 = shiftKey;
+var G__16455_16475 = event;
+(sel_fn.cljs$core$IFn$_invoke$arity$5 ? sel_fn.cljs$core$IFn$_invoke$arity$5(G__16451_16471,G__16452_16472,G__16453_16473,G__16454_16474,G__16455_16475) : sel_fn.call(null,G__16451_16471,G__16452_16472,G__16453_16473,G__16454_16474,G__16455_16475));
 
-cljs.core.reset_BANG_.call(null,dragging_QMARK_,false);
+cljs.core.reset_BANG_(dragging_QMARK_,false);
 
-cljs.core.reset_BANG_.call(null,dragging_outside_QMARK_,false);
+cljs.core.reset_BANG_(dragging_outside_QMARK_,false);
 
-cljs.core.reset_BANG_.call(null,sel_parent_bounding_rect,null);
+cljs.core.reset_BANG_(sel_parent_bounding_rect,null);
 
-return cljs.core.reset_BANG_.call(null,dmm_tracker,null);
+return cljs.core.reset_BANG_(dmm_tracker,null);
 });
 var on_mouse_down = (function re_com$v_table$on_mouse_down(sel_target,sel_fn,max_rows_px,max_cols_px,event){
-cljs.core.reset_BANG_.call(null,selection_target,sel_target);
+cljs.core.reset_BANG_(selection_target,sel_target);
 
-cljs.core.reset_BANG_.call(null,sel_max_content_rows_px,(max_rows_px - (1)));
+cljs.core.reset_BANG_(sel_max_content_rows_px,(max_rows_px - (1)));
 
-cljs.core.reset_BANG_.call(null,sel_max_content_cols_px,(max_cols_px - (1)));
+cljs.core.reset_BANG_(sel_max_content_cols_px,(max_cols_px - (1)));
 
-cljs.core.reset_BANG_.call(null,sel_parent_bounding_rect,event.currentTarget.getBoundingClientRect());
+cljs.core.reset_BANG_(sel_parent_bounding_rect,event.currentTarget.getBoundingClientRect());
 
-var top_offset = (- cljs.core.deref.call(null,sel_parent_bounding_rect).top);
-var left_offset = (- cljs.core.deref.call(null,sel_parent_bounding_rect).left);
-cljs.core.reset_BANG_.call(null,sel_content_x_start,((event.clientX + left_offset) + cljs.core.deref.call(null,scroll_x)));
+var top_offset = (- cljs.core.deref(sel_parent_bounding_rect).top);
+var left_offset = (- cljs.core.deref(sel_parent_bounding_rect).left);
+cljs.core.reset_BANG_(sel_content_x_start,((event.clientX + left_offset) + cljs.core.deref(scroll_x)));
 
-cljs.core.reset_BANG_.call(null,sel_content_y_start,((event.clientY + top_offset) + cljs.core.deref.call(null,scroll_y)));
+cljs.core.reset_BANG_(sel_content_y_start,((event.clientY + top_offset) + cljs.core.deref(scroll_y)));
 
-cljs.core.reset_BANG_.call(null,sel_content_x_end,cljs.core.deref.call(null,sel_content_x_start));
+cljs.core.reset_BANG_(sel_content_x_end,cljs.core.deref(sel_content_x_start));
 
-cljs.core.reset_BANG_.call(null,sel_content_y_end,cljs.core.deref.call(null,sel_content_y_start));
+cljs.core.reset_BANG_(sel_content_y_end,cljs.core.deref(sel_content_y_start));
 
 if(re_com.config.debug_QMARK_){
-cljs.core.reset_BANG_.call(null,event_debug,event);
+cljs.core.reset_BANG_(event_debug,event);
 } else {
 }
 
-sel_fn.call(null,new cljs.core.Keyword(null,"selection-start","selection-start",-888859581),selection_coords.call(null),event.ctrlKey,event.shiftKey,event);
+var G__16456_16476 = cljs.core.cst$kw$selection_DASH_start;
+var G__16457_16477 = selection_coords();
+var G__16458_16478 = event.ctrlKey;
+var G__16459_16479 = event.shiftKey;
+var G__16460_16480 = event;
+(sel_fn.cljs$core$IFn$_invoke$arity$5 ? sel_fn.cljs$core$IFn$_invoke$arity$5(G__16456_16476,G__16457_16477,G__16458_16478,G__16459_16479,G__16460_16480) : sel_fn.call(null,G__16456_16476,G__16457_16477,G__16458_16478,G__16459_16479,G__16460_16480));
 
-cljs.core.reset_BANG_.call(null,dmm_tracker,re_com.dmm_tracker.make_dmm_tracker.call(null,cljs.core.partial.call(null,on_drag_change,sel_fn),cljs.core.partial.call(null,on_drag_end,sel_fn)));
+cljs.core.reset_BANG_(dmm_tracker,re_com.dmm_tracker.make_dmm_tracker(cljs.core.partial.cljs$core$IFn$_invoke$arity$2(on_drag_change,sel_fn),cljs.core.partial.cljs$core$IFn$_invoke$arity$2(on_drag_end,sel_fn)));
 
-re_com.dmm_tracker.captureMouseMoves.call(null,cljs.core.deref.call(null,dmm_tracker),event);
+re_com.dmm_tracker.captureMouseMoves(cljs.core.deref(dmm_tracker),event);
 
-cljs.core.reset_BANG_.call(null,dragging_QMARK_,true);
+cljs.core.reset_BANG_(dragging_QMARK_,true);
 
-return cljs.core.reset_BANG_.call(null,dragging_outside_QMARK_,false);
+return cljs.core.reset_BANG_(dragging_outside_QMARK_,false);
 });
 var on_mouse_enter = (function re_com$v_table$on_mouse_enter(sel_target){
-if(cljs.core.truth_((function (){var and__4149__auto__ = cljs.core.deref.call(null,dragging_QMARK_);
+if(cljs.core.truth_((function (){var and__4149__auto__ = cljs.core.deref(dragging_QMARK_);
 if(cljs.core.truth_(and__4149__auto__)){
-return cljs.core._EQ_.call(null,cljs.core.deref.call(null,selection_target),sel_target);
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(selection_target),sel_target);
 } else {
 return and__4149__auto__;
 }
 })())){
-return cljs.core.reset_BANG_.call(null,dragging_outside_QMARK_,false);
+return cljs.core.reset_BANG_(dragging_outside_QMARK_,false);
 } else {
 return null;
 }
 });
 var on_mouse_leave = (function re_com$v_table$on_mouse_leave(sel_target){
-if(cljs.core.truth_((function (){var and__4149__auto__ = cljs.core.deref.call(null,dragging_QMARK_);
+if(cljs.core.truth_((function (){var and__4149__auto__ = cljs.core.deref(dragging_QMARK_);
 if(cljs.core.truth_(and__4149__auto__)){
-return cljs.core._EQ_.call(null,cljs.core.deref.call(null,selection_target),sel_target);
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(selection_target),sel_target);
 } else {
 return and__4149__auto__;
 }
 })())){
-return cljs.core.reset_BANG_.call(null,dragging_outside_QMARK_,true);
+return cljs.core.reset_BANG_(dragging_outside_QMARK_,true);
 } else {
 return null;
 }
 });
 var selection_fns = new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [selection_renderer,on_mouse_down,on_mouse_enter,on_mouse_leave], null);
-if(cljs.core.not.call(null,(function (){var or__4160__auto____$1 = window.hasOwnProperty("addResizeListener");
+if(cljs.core.not((function (){var or__4160__auto____$1 = window.hasOwnProperty("addResizeListener");
 if(cljs.core.truth_(or__4160__auto____$1)){
 return or__4160__auto____$1;
 } else {
@@ -1073,67 +1153,67 @@ return window.hasOwnProperty("removeResizeListener");
 })())){
 return console.error("Your project is missing detect-element-resize.js or detect-element-resize-externs.js\n         could not setup v-table. See https://re-com.day8.com.au/#/v-table requirements");
 } else {
-return reagent.core.create_class.call(null,new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"display-name","display-name",694513143),"v-table",new cljs.core.Keyword(null,"component-did-mount","component-did-mount",-1126910518),(function re_com$v_table$v_table_component_did_mount(){
-cljs.core.reset_BANG_.call(null,row_viewport_element,document.getElementById(row_viewport_id));
+return reagent.core.create_class.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$display_DASH_name,"v-table",cljs.core.cst$kw$component_DASH_did_DASH_mount,(function re_com$v_table$v_table_component_did_mount(){
+cljs.core.reset_BANG_(row_viewport_element,document.getElementById(row_viewport_id));
 
-return window.addResizeListener(cljs.core.deref.call(null,row_viewport_element),on_viewport_resize);
-}),new cljs.core.Keyword(null,"component-will-unmount","component-will-unmount",-2058314698),(function re_com$v_table$v_table_component_will_unmount(){
-window.removeResizeListener(cljs.core.deref.call(null,row_viewport_element),on_viewport_resize);
+return window.addResizeListener(cljs.core.deref(row_viewport_element),on_viewport_resize);
+}),cljs.core.cst$kw$component_DASH_will_DASH_unmount,(function re_com$v_table$v_table_component_will_unmount(){
+window.removeResizeListener(cljs.core.deref(row_viewport_element),on_viewport_resize);
 
-return cljs.core.reset_BANG_.call(null,row_viewport_element,null);
-}),new cljs.core.Keyword(null,"reagent-render","reagent-render",-985383853),(function() { 
-var re_com$v_table$v_table_render__delegate = function (p__15853){
-var map__15854 = p__15853;
-var map__15854__$1 = cljs.core.__destructure_map.call(null,map__15854);
-var args__$1 = map__15854__$1;
-var bottom_left_renderer = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"bottom-left-renderer","bottom-left-renderer",768170713));
-var row_footer_renderer = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"row-footer-renderer","row-footer-renderer",2060844986));
-var bottom_right_renderer = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"bottom-right-renderer","bottom-right-renderer",1863950426));
-var max_row_viewport_height__$1 = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"max-row-viewport-height","max-row-viewport-height",2061202688));
-var row_renderer = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"row-renderer","row-renderer",314053346));
-var virtual_QMARK___$1 = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"virtual?","virtual?",1554264002),true);
-var top_left_renderer = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"top-left-renderer","top-left-renderer",2010514596));
-var column_footer_renderer = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"column-footer-renderer","column-footer-renderer",1437275846));
-var row_header_renderer = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"row-header-renderer","row-header-renderer",-355094585));
-var row_viewport_width__$1 = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"row-viewport-width","row-viewport-width",1520708232));
-var remove_empty_row_space_QMARK_ = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"remove-empty-row-space?","remove-empty-row-space?",2140501449),true);
-var scroll_rows_into_view = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"scroll-rows-into-view","scroll-rows-into-view",-984076694));
-var row_selection_fn = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"row-selection-fn","row-selection-fn",274335562));
-var column_header_selection_fn = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"column-header-selection-fn","column-header-selection-fn",2096757610));
-var parts = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"parts","parts",849007691));
-var row_height__$1 = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"row-height","row-height",527360749));
-var max_width = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"max-width","max-width",-1939924051));
-var src__$1 = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"src","src",-1651076051));
-var top_right_renderer = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"top-right-renderer","top-right-renderer",-1691262321));
-var row_content_width = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"row-content-width","row-content-width",-1986261648));
-var column_footer_height = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"column-footer-height","column-footer-height",-1662618224));
-var key_fn = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"key-fn","key-fn",-636154479),null);
-var column_header_height = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"column-header-height","column-header-height",-1680092558));
-var debug_as = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"debug-as","debug-as",283322354));
-var scroll_columns_into_view = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"scroll-columns-into-view","scroll-columns-into-view",1543196851));
-var class$ = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"class","class",-2030961996));
-var row_viewport_height__$1 = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"row-viewport-height","row-viewport-height",-532496779));
-var column_header_renderer = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"column-header-renderer","column-header-renderer",-1886265578));
-var row_header_selection_fn = cljs.core.get.call(null,map__15854__$1,new cljs.core.Keyword(null,"row-header-selection-fn","row-header-selection-fn",1835057464));
-var or__4160__auto____$1 = (((!(goog.DEBUG)))?null:re_com.validate.validate_args.call(null,re_com.validate.extract_arg_data.call(null,re_com.v_table.v_table_args_desc),args__$1));
+return cljs.core.reset_BANG_(row_viewport_element,null);
+}),cljs.core.cst$kw$reagent_DASH_render,(function() { 
+var re_com$v_table$v_table_render__delegate = function (p__16461){
+var map__16462 = p__16461;
+var map__16462__$1 = cljs.core.__destructure_map(map__16462);
+var args__$1 = map__16462__$1;
+var bottom_left_renderer = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$bottom_DASH_left_DASH_renderer);
+var row_footer_renderer = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$row_DASH_footer_DASH_renderer);
+var bottom_right_renderer = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$bottom_DASH_right_DASH_renderer);
+var max_row_viewport_height__$1 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$max_DASH_row_DASH_viewport_DASH_height);
+var row_renderer = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$row_DASH_renderer);
+var virtual_QMARK___$1 = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__16462__$1,cljs.core.cst$kw$virtual_QMARK_,true);
+var top_left_renderer = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$top_DASH_left_DASH_renderer);
+var column_footer_renderer = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$column_DASH_footer_DASH_renderer);
+var row_header_renderer = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$row_DASH_header_DASH_renderer);
+var row_viewport_width__$1 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$row_DASH_viewport_DASH_width);
+var remove_empty_row_space_QMARK_ = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__16462__$1,cljs.core.cst$kw$remove_DASH_empty_DASH_row_DASH_space_QMARK_,true);
+var scroll_rows_into_view = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$scroll_DASH_rows_DASH_into_DASH_view);
+var row_selection_fn = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$row_DASH_selection_DASH_fn);
+var column_header_selection_fn = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$column_DASH_header_DASH_selection_DASH_fn);
+var parts = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$parts);
+var row_height__$1 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$row_DASH_height);
+var max_width = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$max_DASH_width);
+var src__$1 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$src);
+var top_right_renderer = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$top_DASH_right_DASH_renderer);
+var row_content_width = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$row_DASH_content_DASH_width);
+var column_footer_height = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$column_DASH_footer_DASH_height);
+var key_fn = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__16462__$1,cljs.core.cst$kw$key_DASH_fn,null);
+var column_header_height = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$column_DASH_header_DASH_height);
+var debug_as = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$debug_DASH_as);
+var scroll_columns_into_view = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$scroll_DASH_columns_DASH_into_DASH_view);
+var class$ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$class);
+var row_viewport_height__$1 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$row_DASH_viewport_DASH_height);
+var column_header_renderer = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$column_DASH_header_DASH_renderer);
+var row_header_selection_fn = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16462__$1,cljs.core.cst$kw$row_DASH_header_DASH_selection_DASH_fn);
+var or__4160__auto____$1 = (((!(goog.DEBUG)))?null:re_com.validate.validate_args(re_com.validate.extract_arg_data(re_com.v_table.v_table_args_desc),args__$1));
 if(cljs.core.truth_(or__4160__auto____$1)){
 return or__4160__auto____$1;
 } else {
-cljs.core.reset_BANG_.call(null,content_rows_width,row_content_width);
+cljs.core.reset_BANG_(content_rows_width,row_content_width);
 
-cljs.core.reset_BANG_.call(null,content_rows_height,(cljs.core.deref.call(null,m_size) * row_height__$1));
+cljs.core.reset_BANG_(content_rows_height,(cljs.core.deref(m_size) * row_height__$1));
 
-if(cljs.core.not_EQ_.call(null,re_com.util.deref_or_value.call(null,scroll_rows_into_view),cljs.core.deref.call(null,internal_scroll_rows_into_view))){
-var map__15855_15860 = re_com.util.deref_or_value.call(null,scroll_rows_into_view);
-var map__15855_15861__$1 = cljs.core.__destructure_map.call(null,map__15855_15860);
-var start_row_15862 = cljs.core.get.call(null,map__15855_15861__$1,new cljs.core.Keyword(null,"start-row","start-row",164678470));
-var end_row_15863 = cljs.core.get.call(null,map__15855_15861__$1,new cljs.core.Keyword(null,"end-row","end-row",-545103581));
-var new_scroll_y_15864 = (((((start_row_15862 == null)) && ((end_row_15863 == null))))?null:(((start_row_15862 <= cljs.core.deref.call(null,top_row_index)))?(start_row_15862 * row_height__$1):(((end_row_15863 >= cljs.core.deref.call(null,bot_row_index)))?(((end_row_15863 * row_height__$1) + row_height__$1) + (- cljs.core.deref.call(null,rl_row_viewport_height))):null
+if(cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(re_com.util.deref_or_value(scroll_rows_into_view),cljs.core.deref(internal_scroll_rows_into_view))){
+var map__16463_16481 = re_com.util.deref_or_value(scroll_rows_into_view);
+var map__16463_16482__$1 = cljs.core.__destructure_map(map__16463_16481);
+var start_row_16483 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16463_16482__$1,cljs.core.cst$kw$start_DASH_row);
+var end_row_16484 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16463_16482__$1,cljs.core.cst$kw$end_DASH_row);
+var new_scroll_y_16485 = (((((start_row_16483 == null)) && ((end_row_16484 == null))))?null:(((start_row_16483 <= cljs.core.deref(top_row_index)))?(start_row_16483 * row_height__$1):(((end_row_16484 >= cljs.core.deref(bot_row_index)))?(((end_row_16484 * row_height__$1) + row_height__$1) + (- cljs.core.deref(rl_row_viewport_height))):null
 )));
-if((!((new_scroll_y_15864 == null)))){
-cljs.core.reset_BANG_.call(null,scroll_y,(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,max_scroll_y);
-var y__4253__auto__ = new_scroll_y_15864;
+if((!((new_scroll_y_16485 == null)))){
+cljs.core.reset_BANG_(scroll_y,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(max_scroll_y);
+var y__4253__auto__ = new_scroll_y_16485;
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
@@ -1141,23 +1221,23 @@ return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__)
 } else {
 }
 
-cljs.core.reset_BANG_.call(null,internal_scroll_rows_into_view,re_com.util.deref_or_value.call(null,scroll_rows_into_view));
+cljs.core.reset_BANG_(internal_scroll_rows_into_view,re_com.util.deref_or_value(scroll_rows_into_view));
 } else {
 }
 
-if(cljs.core.not_EQ_.call(null,re_com.util.deref_or_value.call(null,scroll_columns_into_view),cljs.core.deref.call(null,internal_scroll_columns_into_view))){
-var map__15856_15865 = re_com.util.deref_or_value.call(null,scroll_columns_into_view);
-var map__15856_15866__$1 = cljs.core.__destructure_map.call(null,map__15856_15865);
-var start_col_15867 = cljs.core.get.call(null,map__15856_15866__$1,new cljs.core.Keyword(null,"start-col","start-col",668080143));
-var end_col_15868 = cljs.core.get.call(null,map__15856_15866__$1,new cljs.core.Keyword(null,"end-col","end-col",-724155879));
-var left_col_px_15869 = cljs.core.deref.call(null,scroll_x);
-var right_col_px_15870 = ((cljs.core.deref.call(null,scroll_x) + cljs.core.deref.call(null,rl_row_viewport_width)) + (-1));
-var new_scroll_x_15871 = (((start_col_15867 < left_col_px_15869))?start_col_15867:(((end_col_15868 > right_col_px_15870))?(end_col_15868 - cljs.core.deref.call(null,rl_row_viewport_width)):null
+if(cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(re_com.util.deref_or_value(scroll_columns_into_view),cljs.core.deref(internal_scroll_columns_into_view))){
+var map__16464_16486 = re_com.util.deref_or_value(scroll_columns_into_view);
+var map__16464_16487__$1 = cljs.core.__destructure_map(map__16464_16486);
+var start_col_16488 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16464_16487__$1,cljs.core.cst$kw$start_DASH_col);
+var end_col_16489 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__16464_16487__$1,cljs.core.cst$kw$end_DASH_col);
+var left_col_px_16490 = cljs.core.deref(scroll_x);
+var right_col_px_16491 = ((cljs.core.deref(scroll_x) + cljs.core.deref(rl_row_viewport_width)) + (-1));
+var new_scroll_x_16492 = (((start_col_16488 < left_col_px_16490))?start_col_16488:(((end_col_16489 > right_col_px_16491))?(end_col_16489 - cljs.core.deref(rl_row_viewport_width)):null
 ));
-if((!((new_scroll_x_15871 == null)))){
-cljs.core.reset_BANG_.call(null,scroll_x,(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,max_scroll_x);
-var y__4253__auto__ = new_scroll_x_15871;
+if((!((new_scroll_x_16492 == null)))){
+cljs.core.reset_BANG_(scroll_x,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(max_scroll_x);
+var y__4253__auto__ = new_scroll_x_16492;
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
@@ -1165,14 +1245,14 @@ return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__)
 } else {
 }
 
-cljs.core.reset_BANG_.call(null,internal_scroll_columns_into_view,re_com.util.deref_or_value.call(null,scroll_columns_into_view));
+cljs.core.reset_BANG_(internal_scroll_columns_into_view,re_com.util.deref_or_value(scroll_columns_into_view));
 } else {
 }
 
-if((cljs.core.deref.call(null,scroll_y) > cljs.core.deref.call(null,max_scroll_y))){
-cljs.core.reset_BANG_.call(null,scroll_y,(function (){var x__4249__auto__ = (0);
-var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref.call(null,max_scroll_y);
-var y__4253__auto__ = cljs.core.deref.call(null,scroll_y);
+if((cljs.core.deref(scroll_y) > cljs.core.deref(max_scroll_y))){
+cljs.core.reset_BANG_(scroll_y,(function (){var x__4249__auto__ = (0);
+var y__4250__auto__ = (function (){var x__4252__auto__ = cljs.core.deref(max_scroll_y);
+var y__4253__auto__ = cljs.core.deref(scroll_y);
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 })();
 return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__);
@@ -1180,13 +1260,13 @@ return ((x__4249__auto__ > y__4250__auto__) ? x__4249__auto__ : y__4250__auto__)
 } else {
 }
 
-return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.h_box,new cljs.core.Keyword(null,"src","src",-1651076051),src__$1,new cljs.core.Keyword(null,"debug-as","debug-as",283322354),(function (){var or__4160__auto____$2 = debug_as;
+return new cljs.core.PersistentVector(null, 15, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.h_box,cljs.core.cst$kw$src,src__$1,cljs.core.cst$kw$debug_DASH_as,(function (){var or__4160__auto____$2 = debug_as;
 if(cljs.core.truth_(or__4160__auto____$2)){
 return or__4160__auto____$2;
 } else {
-return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"component","component",1555936782),re_com.debug.short_component_name.call(null,reagent.impl.component.component_name.call(null,reagent.core.current_component.call(null))),new cljs.core.Keyword(null,"args","args",1315556576),args__$1], null);
+return new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$component,re_com.debug.short_component_name(reagent.impl.component.component_name(reagent.core.current_component())),cljs.core.cst$kw$args,args__$1], null);
 }
-})(),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"wrapper","wrapper",-969103524),new cljs.core.Keyword(null,"class","class",-2030961996)], null)))].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"max-width","max-width",-1939924051),max_width,new cljs.core.Keyword(null,"max-height","max-height",-612563804),(cljs.core.truth_(remove_empty_row_space_QMARK_)?((((function (){var or__4160__auto____$2 = column_header_height;
+})(),cljs.core.cst$kw$class,["rc-v-table ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(class$)," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$wrapper,cljs.core.cst$kw$class], null)))].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$max_DASH_width,max_width,cljs.core.cst$kw$max_DASH_height,(cljs.core.truth_(remove_empty_row_space_QMARK_)?((((function (){var or__4160__auto____$2 = column_header_height;
 if(cljs.core.truth_(or__4160__auto____$2)){
 return or__4160__auto____$2;
 } else {
@@ -1196,7 +1276,7 @@ return (0);
 if(cljs.core.truth_(or__4160__auto____$2)){
 return or__4160__auto____$2;
 } else {
-return (cljs.core.deref.call(null,content_rows_height) + (1));
+return (cljs.core.deref(content_rows_height) + (1));
 }
 })()) + (function (){var or__4160__auto____$2 = column_footer_height;
 if(cljs.core.truth_(or__4160__auto____$2)){
@@ -1204,70 +1284,76 @@ return or__4160__auto____$2;
 } else {
 return (0);
 }
-})()) + re_com.v_table.scrollbar_tot_thick):null)], null),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"wrapper","wrapper",-969103524),new cljs.core.Keyword(null,"style","style",-496642736)], null))),new cljs.core.Keyword(null,"attr","attr",-604132353),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-wheel","on-wheel",-1971630708),(function (event){
-on_wheel.call(null,event);
+})()) + re_com.v_table.scrollbar_tot_thick):null)], null),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$wrapper,cljs.core.cst$kw$style], null))], 0)),cljs.core.cst$kw$attr,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$on_DASH_wheel,(function (event){
+on_wheel(event);
 
 return null;
-})], null),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"wrapper","wrapper",-969103524),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))),new cljs.core.Keyword(null,"size","size",1098693007),"auto",new cljs.core.Keyword(null,"children","children",-940561982),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1164], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-left-section ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"left-section","left-section",1725153983),new cljs.core.Keyword(null,"class","class",-2030961996)], null)))].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"left-section","left-section",1725153983),new cljs.core.Keyword(null,"style","style",-496642736)], null)),new cljs.core.Keyword(null,"attr","attr",-604132353),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"left-section","left-section",1725153983),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),new cljs.core.Keyword(null,"children","children",-940561982),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.top_left_content,top_left_renderer,column_header_height,cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"top-left","top-left",-1396159636),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"top-left","top-left",-1396159636),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"top-left","top-left",-1396159636),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null),new cljs.core.PersistentVector(null, 20, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_header_viewport,row_header_renderer,key_fn,cljs.core.deref.call(null,top_row_index),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref.call(null,virtual_rows):cljs.core.deref.call(null,model)),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref.call(null,virtual_scroll_y):cljs.core.deref.call(null,scroll_y)),row_header_selection_fn,selection_fns,(function (){var and__4149__auto__ = row_header_selection_fn;
+})], null),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$wrapper,cljs.core.cst$kw$attr], null))], 0)),cljs.core.cst$kw$size,"auto",cljs.core.cst$kw$children,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1164], null)),cljs.core.cst$kw$class,["rc-v-table-left-section ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$left_DASH_section,cljs.core.cst$kw$class], null)))].join(''),cljs.core.cst$kw$style,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$left_DASH_section,cljs.core.cst$kw$style], null)),cljs.core.cst$kw$attr,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$left_DASH_section,cljs.core.cst$kw$attr], null)),cljs.core.cst$kw$children,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.top_left_content,top_left_renderer,column_header_height,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$top_DASH_left,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$top_DASH_left,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$top_DASH_left,cljs.core.cst$kw$attr], null))], null),new cljs.core.PersistentVector(null, 20, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_header_viewport,row_header_renderer,key_fn,cljs.core.deref(top_row_index),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref(virtual_rows):cljs.core.deref(model)),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref(virtual_scroll_y):cljs.core.deref(scroll_y)),row_header_selection_fn,selection_fns,(function (){var and__4149__auto__ = row_header_selection_fn;
 if(cljs.core.truth_(and__4149__auto__)){
-var and__4149__auto____$1 = cljs.core.deref.call(null,sel_parent_bounding_rect);
+var and__4149__auto____$1 = cljs.core.deref(sel_parent_bounding_rect);
 if(cljs.core.truth_(and__4149__auto____$1)){
-return cljs.core._EQ_.call(null,cljs.core.deref.call(null,selection_target),new cljs.core.Keyword(null,"row-header","row-header",1799050794));
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(selection_target),cljs.core.cst$kw$row_DASH_header);
 } else {
 return and__4149__auto____$1;
 }
 } else {
 return and__4149__auto__;
 }
-})(),row_viewport_height__$1,cljs.core.deref.call(null,content_rows_height),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-headers","row-headers",1790514903),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-headers","row-headers",1790514903),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-headers","row-headers",1790514903),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-header-selection-rect","row-header-selection-rect",-1802701930),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-header-selection-rect","row-header-selection-rect",-1802701930),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-header-selection-rect","row-header-selection-rect",-1802701930),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-header-content","row-header-content",-594512165),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-header-content","row-header-content",-594512165),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-header-content","row-header-content",-594512165),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null),new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.bottom_left_content,bottom_left_renderer,column_footer_height,cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"bottom-left","bottom-left",1607421488),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"bottom-left","bottom-left",1607421488),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"bottom-left","bottom-left",1607421488),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.gap,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1218], null)),new cljs.core.Keyword(null,"size","size",1098693007),re_com.v_table.px.call(null,re_com.v_table.scrollbar_tot_thick)], null)], null)], null),new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1224], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-middle-section ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"middle-section","middle-section",-353695846),new cljs.core.Keyword(null,"class","class",-2030961996)], null)))].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"max-width","max-width",-1939924051),re_com.v_table.px.call(null,cljs.core.deref.call(null,content_rows_width))], null),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"middle-section","middle-section",-353695846),new cljs.core.Keyword(null,"style","style",-496642736)], null))),new cljs.core.Keyword(null,"attr","attr",-604132353),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"middle-section","middle-section",-353695846),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),new cljs.core.Keyword(null,"size","size",1098693007),(cljs.core.truth_(row_viewport_width__$1)?"none":"auto"),new cljs.core.Keyword(null,"children","children",-940561982),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 18, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.column_header_viewport,column_header_renderer,cljs.core.deref.call(null,scroll_x),column_header_selection_fn,selection_fns,(function (){var and__4149__auto__ = column_header_selection_fn;
+})(),row_viewport_height__$1,cljs.core.deref(content_rows_height),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_headers,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_headers,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_headers,cljs.core.cst$kw$attr], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_header_DASH_selection_DASH_rect,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_header_DASH_selection_DASH_rect,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_header_DASH_selection_DASH_rect,cljs.core.cst$kw$attr], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_header_DASH_content,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_header_DASH_content,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_header_DASH_content,cljs.core.cst$kw$attr], null))], null),new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.bottom_left_content,bottom_left_renderer,column_footer_height,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$bottom_DASH_left,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$bottom_DASH_left,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$bottom_DASH_left,cljs.core.cst$kw$attr], null))], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.gap,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1218], null)),cljs.core.cst$kw$size,(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(re_com.v_table.scrollbar_tot_thick) : re_com.v_table.px.call(null,re_com.v_table.scrollbar_tot_thick))], null)], null)], null),new cljs.core.PersistentVector(null, 13, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1224], null)),cljs.core.cst$kw$class,["rc-v-table-middle-section ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$middle_DASH_section,cljs.core.cst$kw$class], null)))].join(''),cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$max_DASH_width,(function (){var G__16465 = cljs.core.deref(content_rows_width);
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16465) : re_com.v_table.px.call(null,G__16465));
+})()], null),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$middle_DASH_section,cljs.core.cst$kw$style], null))], 0)),cljs.core.cst$kw$attr,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$middle_DASH_section,cljs.core.cst$kw$attr], null)),cljs.core.cst$kw$size,(cljs.core.truth_(row_viewport_width__$1)?"none":"auto"),cljs.core.cst$kw$children,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 18, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.column_header_viewport,column_header_renderer,cljs.core.deref(scroll_x),column_header_selection_fn,selection_fns,(function (){var and__4149__auto__ = column_header_selection_fn;
 if(cljs.core.truth_(and__4149__auto__)){
-var and__4149__auto____$1 = cljs.core.deref.call(null,sel_parent_bounding_rect);
+var and__4149__auto____$1 = cljs.core.deref(sel_parent_bounding_rect);
 if(cljs.core.truth_(and__4149__auto____$1)){
-return cljs.core._EQ_.call(null,cljs.core.deref.call(null,selection_target),new cljs.core.Keyword(null,"column-header","column-header",-1495823888));
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(selection_target),cljs.core.cst$kw$column_DASH_header);
 } else {
 return and__4149__auto____$1;
 }
 } else {
 return and__4149__auto__;
 }
-})(),row_viewport_width__$1,column_header_height,cljs.core.deref.call(null,content_rows_width),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-headers","column-headers",-966500841),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-headers","column-headers",-966500841),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-headers","column-headers",-966500841),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-header-selection-rect","column-header-selection-rect",-790796749),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-header-selection-rect","column-header-selection-rect",-790796749),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-header-selection-rect","column-header-selection-rect",-790796749),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-header-content","column-header-content",-2026517060),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-header-content","column-header-content",-2026517060),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-header-content","column-header-content",-2026517060),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null),new cljs.core.PersistentVector(null, 24, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_viewport,row_renderer,key_fn,cljs.core.deref.call(null,top_row_index),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref.call(null,virtual_rows):cljs.core.deref.call(null,model)),cljs.core.deref.call(null,scroll_x),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref.call(null,virtual_scroll_y):cljs.core.deref.call(null,scroll_y)),row_selection_fn,selection_fns,(function (){var and__4149__auto__ = row_selection_fn;
+})(),row_viewport_width__$1,column_header_height,cljs.core.deref(content_rows_width),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_headers,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_headers,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_headers,cljs.core.cst$kw$attr], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_header_DASH_selection_DASH_rect,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_header_DASH_selection_DASH_rect,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_header_DASH_selection_DASH_rect,cljs.core.cst$kw$attr], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_header_DASH_content,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_header_DASH_content,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_header_DASH_content,cljs.core.cst$kw$attr], null))], null),new cljs.core.PersistentVector(null, 24, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_viewport,row_renderer,key_fn,cljs.core.deref(top_row_index),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref(virtual_rows):cljs.core.deref(model)),cljs.core.deref(scroll_x),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref(virtual_scroll_y):cljs.core.deref(scroll_y)),row_selection_fn,selection_fns,(function (){var and__4149__auto__ = row_selection_fn;
 if(cljs.core.truth_(and__4149__auto__)){
-var and__4149__auto____$1 = cljs.core.deref.call(null,sel_parent_bounding_rect);
+var and__4149__auto____$1 = cljs.core.deref(sel_parent_bounding_rect);
 if(cljs.core.truth_(and__4149__auto____$1)){
-return cljs.core._EQ_.call(null,cljs.core.deref.call(null,selection_target),new cljs.core.Keyword(null,"row","row",-570139521));
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(selection_target),cljs.core.cst$kw$row);
 } else {
 return and__4149__auto____$1;
 }
 } else {
 return and__4149__auto__;
 }
-})(),row_viewport_height__$1,row_viewport_width__$1,row_viewport_id,cljs.core.deref.call(null,content_rows_height),cljs.core.deref.call(null,content_rows_width),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"rows","rows",850049680),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"rows","rows",850049680),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"rows","rows",850049680),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-selection-rect","row-selection-rect",-1945553775),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-selection-rect","row-selection-rect",-1945553775),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-selection-rect","row-selection-rect",-1945553775),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-content","row-content",-203238520),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-content","row-content",-203238520),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-content","row-content",-203238520),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null),new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.column_footer_viewport,column_footer_renderer,cljs.core.deref.call(null,scroll_x),row_viewport_width__$1,column_footer_height,cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-footers","column-footers",-1188771065),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-footers","column-footers",-1188771065),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-footers","column-footers",-1188771065),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-footer-content","column-footer-content",-2077092556),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-footer-content","column-footer-content",-2077092556),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"column-footer-content","column-footer-content",-2077092556),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null),new cljs.core.PersistentVector(null, 21, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.scrollbar,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1304], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-h-scroll ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"h-scroll","h-scroll",-1200000150),new cljs.core.Keyword(null,"class","class",-2030961996)], null)))].join(''),new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"horizontal","horizontal",2062109475),new cljs.core.Keyword(null,"length","length",588987862),cljs.core.deref.call(null,rl_row_viewport_width),new cljs.core.Keyword(null,"width","width",-384071477),re_com.v_table.scrollbar_thickness,new cljs.core.Keyword(null,"content-length","content-length",441319507),cljs.core.deref.call(null,content_rows_width),new cljs.core.Keyword(null,"scroll-pos","scroll-pos",292123569),cljs.core.deref.call(null,scroll_x),new cljs.core.Keyword(null,"on-change","on-change",-732046149),on_h_scroll_change,new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"margin","margin",-995903681),re_com.util.px_n.call(null,re_com.v_table.scrollbar_margin,(0))], null),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"h-scroll","h-scroll",-1200000150),new cljs.core.Keyword(null,"style","style",-496642736)], null))),new cljs.core.Keyword(null,"attr","attr",-604132353),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"h-scroll","h-scroll",-1200000150),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null)], null)], null),new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1319], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-right-section ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"right-section","right-section",-1581313735),new cljs.core.Keyword(null,"class","class",-2030961996)], null)))].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"right-section","right-section",-1581313735),new cljs.core.Keyword(null,"style","style",-496642736)], null)),new cljs.core.Keyword(null,"attr","attr",-604132353),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"right-section","right-section",-1581313735),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),new cljs.core.Keyword(null,"children","children",-940561982),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.top_right_content,top_right_renderer,column_header_height,cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"top-right","top-right",284698505),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"top-right","top-right",284698505),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"top-right","top-right",284698505),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null),new cljs.core.PersistentVector(null, 14, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_footer_viewport,row_footer_renderer,key_fn,cljs.core.deref.call(null,top_row_index),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref.call(null,virtual_rows):cljs.core.deref.call(null,model)),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref.call(null,virtual_scroll_y):cljs.core.deref.call(null,scroll_y)),row_viewport_height__$1,cljs.core.deref.call(null,content_rows_height),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-footers","row-footers",-681026731),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-footers","row-footers",-681026731),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-footers","row-footers",-681026731),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-footer-content","row-footer-content",1483533894),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-footer-content","row-footer-content",1483533894),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"row-footer-content","row-footer-content",1483533894),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null),new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.bottom_right_content,bottom_right_renderer,column_footer_height,cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"bottom-right","bottom-right",956401646),new cljs.core.Keyword(null,"class","class",-2030961996)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"bottom-right","bottom-right",956401646),new cljs.core.Keyword(null,"style","style",-496642736)], null)),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"bottom-right","bottom-right",956401646),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.gap,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1366], null)),new cljs.core.Keyword(null,"size","size",1098693007),re_com.v_table.px.call(null,re_com.v_table.scrollbar_tot_thick)], null)], null)], null),new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1372], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-v-scroll-section ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"v-scroll-section","v-scroll-section",-72114244),new cljs.core.Keyword(null,"class","class",-2030961996)], null)))].join(''),new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"v-scroll-section","v-scroll-section",-72114244),new cljs.core.Keyword(null,"style","style",-496642736)], null)),new cljs.core.Keyword(null,"attr","attr",-604132353),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"v-scroll-section","v-scroll-section",-72114244),new cljs.core.Keyword(null,"attr","attr",-604132353)], null)),new cljs.core.Keyword(null,"children","children",-940561982),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.gap,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1377], null)),new cljs.core.Keyword(null,"size","size",1098693007),re_com.v_table.px.call(null,(function (){var or__4160__auto____$2 = column_header_height;
+})(),row_viewport_height__$1,row_viewport_width__$1,row_viewport_id,cljs.core.deref(content_rows_height),cljs.core.deref(content_rows_width),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$rows,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$rows,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$rows,cljs.core.cst$kw$attr], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_selection_DASH_rect,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_selection_DASH_rect,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_selection_DASH_rect,cljs.core.cst$kw$attr], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_content,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_content,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_content,cljs.core.cst$kw$attr], null))], null),new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.column_footer_viewport,column_footer_renderer,cljs.core.deref(scroll_x),row_viewport_width__$1,column_footer_height,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_footers,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_footers,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_footers,cljs.core.cst$kw$attr], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_footer_DASH_content,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_footer_DASH_content,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$column_DASH_footer_DASH_content,cljs.core.cst$kw$attr], null))], null),new cljs.core.PersistentVector(null, 21, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.scrollbar,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1304], null)),cljs.core.cst$kw$class,["rc-v-table-h-scroll ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h_DASH_scroll,cljs.core.cst$kw$class], null)))].join(''),cljs.core.cst$kw$type,cljs.core.cst$kw$horizontal,cljs.core.cst$kw$length,cljs.core.deref(rl_row_viewport_width),cljs.core.cst$kw$width,re_com.v_table.scrollbar_thickness,cljs.core.cst$kw$content_DASH_length,cljs.core.deref(content_rows_width),cljs.core.cst$kw$scroll_DASH_pos,cljs.core.deref(scroll_x),cljs.core.cst$kw$on_DASH_change,on_h_scroll_change,cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$margin,re_com.util.px_n.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([re_com.v_table.scrollbar_margin,(0)], 0))], null),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h_DASH_scroll,cljs.core.cst$kw$style], null))], 0)),cljs.core.cst$kw$attr,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h_DASH_scroll,cljs.core.cst$kw$attr], null))], null)], null)], null),new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1319], null)),cljs.core.cst$kw$class,["rc-v-table-right-section ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$right_DASH_section,cljs.core.cst$kw$class], null)))].join(''),cljs.core.cst$kw$style,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$right_DASH_section,cljs.core.cst$kw$style], null)),cljs.core.cst$kw$attr,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$right_DASH_section,cljs.core.cst$kw$attr], null)),cljs.core.cst$kw$children,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.top_right_content,top_right_renderer,column_header_height,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$top_DASH_right,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$top_DASH_right,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$top_DASH_right,cljs.core.cst$kw$attr], null))], null),new cljs.core.PersistentVector(null, 14, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.row_footer_viewport,row_footer_renderer,key_fn,cljs.core.deref(top_row_index),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref(virtual_rows):cljs.core.deref(model)),(cljs.core.truth_(virtual_QMARK___$1)?cljs.core.deref(virtual_scroll_y):cljs.core.deref(scroll_y)),row_viewport_height__$1,cljs.core.deref(content_rows_height),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_footers,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_footers,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_footers,cljs.core.cst$kw$attr], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_footer_DASH_content,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_footer_DASH_content,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$row_DASH_footer_DASH_content,cljs.core.cst$kw$attr], null))], null),new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.bottom_right_content,bottom_right_renderer,column_footer_height,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$bottom_DASH_right,cljs.core.cst$kw$class], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$bottom_DASH_right,cljs.core.cst$kw$style], null)),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$bottom_DASH_right,cljs.core.cst$kw$attr], null))], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.gap,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1366], null)),cljs.core.cst$kw$size,(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(re_com.v_table.scrollbar_tot_thick) : re_com.v_table.px.call(null,re_com.v_table.scrollbar_tot_thick))], null)], null)], null),new cljs.core.PersistentVector(null, 11, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.v_box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1372], null)),cljs.core.cst$kw$class,["rc-v-table-v-scroll-section ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$v_DASH_scroll_DASH_section,cljs.core.cst$kw$class], null)))].join(''),cljs.core.cst$kw$style,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$v_DASH_scroll_DASH_section,cljs.core.cst$kw$style], null)),cljs.core.cst$kw$attr,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$v_DASH_scroll_DASH_section,cljs.core.cst$kw$attr], null)),cljs.core.cst$kw$children,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.gap,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1377], null)),cljs.core.cst$kw$size,(function (){var G__16466 = (function (){var or__4160__auto____$2 = column_header_height;
 if(cljs.core.truth_(or__4160__auto____$2)){
 return or__4160__auto____$2;
 } else {
 return (0);
 }
-})())], null),new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1380], null)),new cljs.core.Keyword(null,"size","size",1098693007),"auto",new cljs.core.Keyword(null,"child","child",623967545),new cljs.core.PersistentVector(null, 21, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.scrollbar,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1383], null)),new cljs.core.Keyword(null,"class","class",-2030961996),["rc-v-table-v-scroll ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"v-scroll","v-scroll",-1842185668),new cljs.core.Keyword(null,"class","class",-2030961996)], null)))].join(''),new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"vertical","vertical",718696748),new cljs.core.Keyword(null,"length","length",588987862),cljs.core.deref.call(null,rl_row_viewport_height),new cljs.core.Keyword(null,"width","width",-384071477),re_com.v_table.scrollbar_thickness,new cljs.core.Keyword(null,"content-length","content-length",441319507),cljs.core.deref.call(null,content_rows_height),new cljs.core.Keyword(null,"scroll-pos","scroll-pos",292123569),cljs.core.deref.call(null,scroll_y),new cljs.core.Keyword(null,"on-change","on-change",-732046149),on_v_scroll_change,new cljs.core.Keyword(null,"style","style",-496642736),cljs.core.merge.call(null,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"margin","margin",-995903681),re_com.util.px_n.call(null,(0),re_com.v_table.scrollbar_margin)], null),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"v-scroll","v-scroll",-1842185668),new cljs.core.Keyword(null,"style","style",-496642736)], null))),new cljs.core.Keyword(null,"attr","attr",-604132353),cljs.core.get_in.call(null,parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"v-scroll","v-scroll",-1842185668),new cljs.core.Keyword(null,"attr","attr",-604132353)], null))], null)], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.gap,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1395], null)),new cljs.core.Keyword(null,"size","size",1098693007),re_com.v_table.px.call(null,(function (){var or__4160__auto____$2 = column_footer_height;
+})();
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16466) : re_com.v_table.px.call(null,G__16466));
+})()], null),new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.box,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1380], null)),cljs.core.cst$kw$size,"auto",cljs.core.cst$kw$child,new cljs.core.PersistentVector(null, 21, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.v_table.scrollbar,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1383], null)),cljs.core.cst$kw$class,["rc-v-table-v-scroll ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$v_DASH_scroll,cljs.core.cst$kw$class], null)))].join(''),cljs.core.cst$kw$type,cljs.core.cst$kw$vertical,cljs.core.cst$kw$length,cljs.core.deref(rl_row_viewport_height),cljs.core.cst$kw$width,re_com.v_table.scrollbar_thickness,cljs.core.cst$kw$content_DASH_length,cljs.core.deref(content_rows_height),cljs.core.cst$kw$scroll_DASH_pos,cljs.core.deref(scroll_y),cljs.core.cst$kw$on_DASH_change,on_v_scroll_change,cljs.core.cst$kw$style,cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$margin,re_com.util.px_n.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(0),re_com.v_table.scrollbar_margin], 0))], null),cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$v_DASH_scroll,cljs.core.cst$kw$style], null))], 0)),cljs.core.cst$kw$attr,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(parts,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$v_DASH_scroll,cljs.core.cst$kw$attr], null))], null)], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.gap,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1395], null)),cljs.core.cst$kw$size,(function (){var G__16467 = (function (){var or__4160__auto____$2 = column_footer_height;
 if(cljs.core.truth_(or__4160__auto____$2)){
 return or__4160__auto____$2;
 } else {
 return (0);
 }
-})())], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.gap,new cljs.core.Keyword(null,"src","src",-1651076051),(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",new cljs.core.Keyword(null,"line","line",212345235),1398], null)),new cljs.core.Keyword(null,"size","size",1098693007),re_com.v_table.px.call(null,re_com.v_table.scrollbar_tot_thick)], null)], null)], null)], null)], null);
+})();
+return (re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(G__16467) : re_com.v_table.px.call(null,G__16467));
+})()], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_com.box.gap,cljs.core.cst$kw$src,(((!(goog.DEBUG)))?null:new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$file,"/Users/jb/Documents/PRIVAT/canastapp/canastref/target/public/cljs-out/canast/re_com/v_table.cljs",cljs.core.cst$kw$line,1398], null)),cljs.core.cst$kw$size,(re_com.v_table.px.cljs$core$IFn$_invoke$arity$1 ? re_com.v_table.px.cljs$core$IFn$_invoke$arity$1(re_com.v_table.scrollbar_tot_thick) : re_com.v_table.px.call(null,re_com.v_table.scrollbar_tot_thick))], null)], null)], null)], null)], null);
 }
 };
 var re_com$v_table$v_table_render = function (var_args){
-var p__15853 = null;
+var p__16461 = null;
 if (arguments.length > 0) {
-var G__15872__i = 0, G__15872__a = new Array(arguments.length -  0);
-while (G__15872__i < G__15872__a.length) {G__15872__a[G__15872__i] = arguments[G__15872__i + 0]; ++G__15872__i;}
-  p__15853 = new cljs.core.IndexedSeq(G__15872__a,0,null);
+var G__16493__i = 0, G__16493__a = new Array(arguments.length -  0);
+while (G__16493__i < G__16493__a.length) {G__16493__a[G__16493__i] = arguments[G__16493__i + 0]; ++G__16493__i;}
+  p__16461 = new cljs.core.IndexedSeq(G__16493__a,0,null);
 } 
-return re_com$v_table$v_table_render__delegate.call(this,p__15853);};
+return re_com$v_table$v_table_render__delegate.call(this,p__16461);};
 re_com$v_table$v_table_render.cljs$lang$maxFixedArity = 0;
-re_com$v_table$v_table_render.cljs$lang$applyTo = (function (arglist__15873){
-var p__15853 = cljs.core.seq(arglist__15873);
-return re_com$v_table$v_table_render__delegate(p__15853);
+re_com$v_table$v_table_render.cljs$lang$applyTo = (function (arglist__16494){
+var p__16461 = cljs.core.seq(arglist__16494);
+return re_com$v_table$v_table_render__delegate(p__16461);
 });
 re_com$v_table$v_table_render.cljs$core$IFn$_invoke$arity$variadic = re_com$v_table$v_table_render__delegate;
 return re_com$v_table$v_table_render;
@@ -1280,8 +1366,8 @@ return re_com$v_table$v_table_render;
 (re_com.v_table.v_table.cljs$lang$maxFixedArity = (0));
 
 /** @this {Function} */
-(re_com.v_table.v_table.cljs$lang$applyTo = (function (seq15850){
+(re_com.v_table.v_table.cljs$lang$applyTo = (function (seq16443){
 var self__4759__auto__ = this;
-return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq15850));
+return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq16443));
 }));
 

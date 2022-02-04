@@ -1,22 +1,53 @@
 (ns canastref.views
   (:require [re-frame.core :as rf]
+            [reagent.core :as reagent]
             [canastref.subs]
             [canastref.events] 
             [canastref.spiel :as sp]
             [canastref.spieler :as s] 
             [re-com.core :refer [v-box h-box box gap button title alert-box
-                                 scroller label input-text single-dropdown]]))
+                                 scroller label input-text single-dropdown]]
+            [cljs-time.local :as l]
+            [cljs-time.core :as t]))
 (def spielerbreite 85)
 
+(def monatsnamen
+  ["Jan" "Feb" "Mär" "Apr" "Mai" "Jun" "Jul" "Aug" "Sep" "Okt" "Nov" "Dez"])
+
 (defn gewonnene-spiele
-  [historie] 
+  [historie monatshistorie]  
   [v-box :children
    [[gap :size "20px"]
     [box :child [:b "Gewonnene Spiele: "]]
+    [h-box :gap "10px" :children
+     [[box :child [:b (monatsnamen (- (t/month (l/local-now)) 1))]]
+      [v-box :children
+       [[box :child (str (first (first monatshistorie)) ": "
+                         (second (first monatshistorie)))]
+        [box :child (str (first (second monatshistorie)) ": "
+                         (second (second monatshistorie)))]]]]]
     [gap :size "10px"]
-    [box :child (str (first (first historie)) ": " (second (first historie)))]
-    [gap :size "10px"]
-    [box :child (str (first (second historie)) ": " (second (second historie)))]]])
+    [h-box :gap "10px" :children
+     [[box :child [:b (t/year (l/local-now))]]
+      [v-box :children
+       [[box :child (str (first (first historie)) ": "
+                         (second (first historie)))]
+        [box :child (str (first (second historie)) ": "
+                         (second (second historie)))]]]]]]])
+
+(defn monatsbilanz-tabelle
+  [] 
+  (let [monate @(rf/subscribe [:monatsbilanz])]
+    [v-box :style {:font-size "12pt"} :children 
+     [[gap :size "20px"]
+      [h-box :style {:font-weight "bold"}
+       :children [[box :size "70px" :child "Monat"]
+                  [box :size "70px" :child "Sieger"]]]
+      [v-box :children
+       (into [] (for [m monate]
+                  [h-box :height "20px"
+                   :children [[box :size "70px" :child (monatsnamen (- (key m) 1))]
+                              [box :size "70px" :child (val m)]]]))]]]))
 
 (defn menue
   []
@@ -99,13 +130,13 @@
       [[box :child (namen (sp/geber spiel))] " muss geben."]]]))
 
 (defn kopfzeile
-[namen]
-[h-box :gap "10px" :children
- (cons [box :class "rTableHead" :width "50px" :child "Rde."]
-       (doall (mapv (fn [s]
-                      ^{:key s} 
-                      [box :class "rTableHead" :justify :end
-                       :width (str spielerbreite "px") :child s]) namen)))])
+  [namen]
+  [h-box :gap "10px" :children
+   (cons [box :class "rTableHead" :width "50px" :child "Rde."]
+         (doall (mapv (fn [s]
+                        ^{:key s} 
+                        [box :class "rTableHead" :justify :end
+                         :width (str spielerbreite "px") :child s]) namen)))])
 
 (defn ergebnis-eingabe
   [spiel]
@@ -116,10 +147,13 @@
       (fn [tln]
         ^{:key tln} 
         [input-text
-         :model (str (if (get (s/resultate tln) runde) (get (s/resultate tln) runde) ""))
+         :model (str (if (get (s/resultate tln) runde)
+                       (get (s/resultate tln) runde)
+                       ""))
          :on-change #(let [v (js/parseInt %)
                            index (.indexOf alle-teilnehmer tln)]
-                       (rf/dispatch [:resultat (s/neues-resultat tln v runde) index runde]))
+                       (rf/dispatch [:resultat
+                                     (s/neues-resultat tln v runde) index runde]))
          :change-on-blur? true
          :validation-regex  #"^[-+]?[0-9]*$"
          :width (str spielerbreite "px")
@@ -150,31 +184,34 @@
      :on-change #(rf/dispatch [:geber (.indexOf namen %)])]]])
 
 (defn spielablauf
-  [namen]
-  (let [spiel     @(rf/subscribe [:spiel])
-        historie  @(rf/subscribe [:historie])
+  [namen historie monatshistorie monatsbilanz]
+  (let [spiel @(rf/subscribe [:spiel])
         _ (when (sp/spiel-beendet? spiel) 
-            (rf/dispatch [:spiel-beendet historie]))]
-    (when spiel (if (not (sp/geber-festgelegt? spiel))
-                  (geber-auswahl (vec namen))
-                  [v-box :children
-                   [[gap :size "35px"]
-                    (kopfzeile namen)
-                    [scroller
-                     :v-scroll :auto
-                     :height  "700px"
-                     :child
-                     [v-box :width "800px" :children
-                      (conj (ergebnis-tabelle spiel)
-                            (if (not (sp/spiel-beendet? spiel))
-                              (naechste-runde namen spiel)
-                              [box :class "gewinner"
-                               :child (str "Gewonnen hat: "
-                                           (s/spieler-name (sp/sieger spiel)))]))]]]]))))
+            (rf/dispatch [:spiel-beendet [historie monatshistorie monatsbilanz]]))]
+    (when spiel
+      (if (not (sp/geber-festgelegt? spiel))
+        (geber-auswahl (vec namen))
+        [v-box :children
+         [[gap :size "35px"]
+          (kopfzeile namen)
+          [scroller
+           :v-scroll :auto
+           :height  "700px"
+           :child
+           [v-box :width "800px" :children
+            (conj (ergebnis-tabelle spiel)
+                  (if (not (sp/spiel-beendet? spiel))
+                    (naechste-runde namen spiel)
+                    [box :class "gewinner"
+                     :child (str "Gewonnen hat: "
+                                 (s/spieler-name (sp/sieger spiel)))]))]]]]))))
 
 (defn main-panel []
   (let [historie       @(rf/subscribe [:historie])
-        spieler-namen  @(rf/subscribe [:spieler-namen])] 
+        monatshistorie @(rf/subscribe [:monatshistorie])
+        monatsbilanz   @(rf/subscribe [:monatsbilanz])
+        spieler-namen  @(rf/subscribe [:spieler-namen])
+        fuehrende      (sp/fuehrende monatshistorie)] 
     (if (and historie spieler-namen)
       [h-box :children
        [[v-box :children
@@ -182,8 +219,9 @@
           [gap :size "10px"]
           [v-box :children
            [[box :child [menue]]           
-            (gewonnene-spiele historie)]]]] 
-        [spielablauf spieler-namen]]]
+            (gewonnene-spiele historie monatshistorie)
+            (monatsbilanz-tabelle)]]]]
+        [spielablauf spieler-namen historie monatshistorie monatsbilanz]]]
       (fehlende-dateien-anzeigen historie spieler-namen))))
 
 

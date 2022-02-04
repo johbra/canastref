@@ -12,6 +12,16 @@
    (:historie db)))
 
 (rf/reg-sub
+ :monatshistorie
+ (fn [db] 
+   (:monatshistorie db)))
+
+(rf/reg-sub
+ :monatsbilanz
+ (fn [db] 
+   (:monatsbilanz db)))
+
+(rf/reg-sub
  :spieler-namen
  (fn [db] 
    (:spieler-namen db)))

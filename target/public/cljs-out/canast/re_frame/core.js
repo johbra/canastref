@@ -1,6 +1,7 @@
-// Compiled by ClojureScript 1.10.844 {}
+// Compiled by ClojureScript 1.10.844 {:static-fns true, :optimize-constants true}
 goog.provide('re_frame.core');
 goog.require('cljs.core');
+goog.require('cljs.core.constants');
 goog.require('re_frame.events');
 goog.require('re_frame.subs');
 goog.require('re_frame.interop');
@@ -23,7 +24,7 @@ goog.require('clojure.set');
  * 
  *   The event will be added to a FIFO processing queue, so event
  *   handling does not happen immediately. It will happen 'very soon'
- *   bit not now. And if the queue already contains events, they
+ *   but not now. And if the queue already contains events, they
  *   will be processed first.
  * 
  *   Usage:
@@ -33,7 +34,7 @@ goog.require('clojure.set');
  *   
  */
 re_frame.core.dispatch = (function re_frame$core$dispatch(event){
-return re_frame.router.dispatch.call(null,event);
+return re_frame.router.dispatch(event);
 });
 /**
  * Synchronously (immediately) process `event`. It does **not** queue
@@ -61,7 +62,7 @@ return re_frame.router.dispatch.call(null,event);
  *   
  */
 re_frame.core.dispatch_sync = (function re_frame$core$dispatch_sync(event){
-return re_frame.router.dispatch_sync.call(null,event);
+return re_frame.router.dispatch_sync(event);
 });
 /**
  * Register the given event `handler` (function) for the given `id`. Optionally, provide
@@ -92,8 +93,8 @@ return re_frame.router.dispatch_sync.call(null,event);
  *   
  */
 re_frame.core.reg_event_db = (function re_frame$core$reg_event_db(var_args){
-var G__20597 = arguments.length;
-switch (G__20597) {
+var G__21561 = arguments.length;
+switch (G__21561) {
 case 2:
 return re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -109,11 +110,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2 = (function (id,handler){
-return re_frame.core.reg_event_db.call(null,id,null,handler);
+return re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$3(id,null,handler);
 }));
 
 (re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$3 = (function (id,interceptors,handler){
-return re_frame.events.register.call(null,id,new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_frame.cofx.inject_db,re_frame.fx.do_fx,re_frame.std_interceptors.inject_global_interceptors,interceptors,re_frame.std_interceptors.db_handler__GT_interceptor.call(null,handler)], null));
+return re_frame.events.register(id,new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_frame.cofx.inject_db,re_frame.fx.do_fx,re_frame.std_interceptors.inject_global_interceptors,interceptors,re_frame.std_interceptors.db_handler__GT_interceptor(handler)], null));
 }));
 
 (re_frame.core.reg_event_db.cljs$lang$maxFixedArity = 3);
@@ -143,13 +144,13 @@ return re_frame.events.register.call(null,id,new cljs.core.PersistentVector(null
  *      :namespaced/id           ;; <-- namespaced keywords are often used
  *      [one two three]          ;; <-- a seq of interceptors
  *      (fn [{:keys [db] :as cofx} [_ arg1 arg2]] ;; destructure both arguments
- *        {:db       (assoc db :some-key arg1)          ;; return a map of effects
- *         :dispatch [:some-event arg2]}))
+ *        {:db (assoc db :some-key arg1)          ;; return a map of effects
+ *         :fx [[:dispatch [:some-event arg2]]]}))
  *   
  */
 re_frame.core.reg_event_fx = (function re_frame$core$reg_event_fx(var_args){
-var G__20600 = arguments.length;
-switch (G__20600) {
+var G__21564 = arguments.length;
+switch (G__21564) {
 case 2:
 return re_frame.core.reg_event_fx.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -165,11 +166,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.reg_event_fx.cljs$core$IFn$_invoke$arity$2 = (function (id,handler){
-return re_frame.core.reg_event_fx.call(null,id,null,handler);
+return re_frame.core.reg_event_fx.cljs$core$IFn$_invoke$arity$3(id,null,handler);
 }));
 
 (re_frame.core.reg_event_fx.cljs$core$IFn$_invoke$arity$3 = (function (id,interceptors,handler){
-return re_frame.events.register.call(null,id,new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_frame.cofx.inject_db,re_frame.fx.do_fx,re_frame.std_interceptors.inject_global_interceptors,interceptors,re_frame.std_interceptors.fx_handler__GT_interceptor.call(null,handler)], null));
+return re_frame.events.register(id,new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_frame.cofx.inject_db,re_frame.fx.do_fx,re_frame.std_interceptors.inject_global_interceptors,interceptors,re_frame.std_interceptors.fx_handler__GT_interceptor(handler)], null));
 }));
 
 (re_frame.core.reg_event_fx.cljs$lang$maxFixedArity = 3);
@@ -201,8 +202,8 @@ return re_frame.events.register.call(null,id,new cljs.core.PersistentVector(null
  *   
  */
 re_frame.core.reg_event_ctx = (function re_frame$core$reg_event_ctx(var_args){
-var G__20603 = arguments.length;
-switch (G__20603) {
+var G__21567 = arguments.length;
+switch (G__21567) {
 case 2:
 return re_frame.core.reg_event_ctx.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -218,11 +219,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.reg_event_ctx.cljs$core$IFn$_invoke$arity$2 = (function (id,handler){
-return re_frame.core.reg_event_ctx.call(null,id,null,handler);
+return re_frame.core.reg_event_ctx.cljs$core$IFn$_invoke$arity$3(id,null,handler);
 }));
 
 (re_frame.core.reg_event_ctx.cljs$core$IFn$_invoke$arity$3 = (function (id,interceptors,handler){
-return re_frame.events.register.call(null,id,new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_frame.cofx.inject_db,re_frame.fx.do_fx,re_frame.std_interceptors.inject_global_interceptors,interceptors,re_frame.std_interceptors.ctx_handler__GT_interceptor.call(null,handler)], null));
+return re_frame.events.register(id,new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_frame.cofx.inject_db,re_frame.fx.do_fx,re_frame.std_interceptors.inject_global_interceptors,interceptors,re_frame.std_interceptors.ctx_handler__GT_interceptor(handler)], null));
 }));
 
 (re_frame.core.reg_event_ctx.cljs$lang$maxFixedArity = 3);
@@ -237,8 +238,8 @@ return re_frame.events.register.call(null,id,new cljs.core.PersistentVector(null
  *   console if it finds no matching registration.
  */
 re_frame.core.clear_event = (function re_frame$core$clear_event(var_args){
-var G__20606 = arguments.length;
-switch (G__20606) {
+var G__21570 = arguments.length;
+switch (G__21570) {
 case 0:
 return re_frame.core.clear_event.cljs$core$IFn$_invoke$arity$0();
 
@@ -254,11 +255,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.clear_event.cljs$core$IFn$_invoke$arity$0 = (function (){
-return re_frame.registrar.clear_handlers.call(null,re_frame.events.kind);
+return re_frame.registrar.clear_handlers.cljs$core$IFn$_invoke$arity$1(re_frame.events.kind);
 }));
 
 (re_frame.core.clear_event.cljs$core$IFn$_invoke$arity$1 = (function (id){
-return re_frame.registrar.clear_handlers.call(null,re_frame.events.kind,id);
+return re_frame.registrar.clear_handlers.cljs$core$IFn$_invoke$arity$2(re_frame.events.kind,id);
 }));
 
 (re_frame.core.clear_event.cljs$lang$maxFixedArity = 1);
@@ -272,11 +273,11 @@ return re_frame.registrar.clear_handlers.call(null,re_frame.events.kind,id);
  * 
  *   The three arguments are:
  * 
- *   - `query-id` - typically a namespaced keyword (later used in subscribe)
- *   - optionally, an `input signals` function which returns the input data
- *  flows required by this kind of node.
- *   - a `computation function` which computes the value (output) of the
- *  node (from the input data flows)
+ *  - `query-id` - typically a namespaced keyword (later used in subscribe)
+ *  - optionally, an `input signals` function which returns the input data
+ *    flows required by this kind of node.
+ *  - a `computation function` which computes the value (output) of the
+ *    node (from the input data flows)
  * 
  *   Later, during app execution, a call to `(subscribe [:sub-id 3 :blue])`,
  *   will trigger the need for a new `:sub-id` Signal Graph node (matching the
@@ -288,16 +289,104 @@ return re_frame.registrar.clear_handlers.call(null,re_frame.events.kind,id);
  *   can be created later, when a node is bought into existence by the
  *   use of `subscribe` in a `View Function`.
  * 
+ *   `reg-sub` arguments are:
+ * 
+ *  - a `query-id` (typically a namespaced keyword)
+ *  - a function which returns the inputs required by this kind of node (can be supplied  in one of three ways)
+ *  - a function which computes the value of this kind of node (can be supplied in one of three ways)
+ * 
+ *   The `computation function` is always the last argument supplied and has three ways to be called.
+ *   Two of these methods are syntactic sugar to provide easier access to functional abstractions around your data.
+ * 
+ *   1. A function that will accept two parameters, the `input-values` and `query-vector`. This is the
+ *   standard way to provide a `computation-function`
+ * 
+ *        #!clj
+ *        (reg-sub
+ *          :query-id
+ *          (fn [input-values query-vector]
+ *            (:foo input-values)))
+ * 
+ *   2. A single sugary tuple of `:->` and a 1-arity `computation-function`:
+ * 
+ *        #!clj
+ *        (reg-sub
+ *          :query-id
+ *          :-> computation-fn)
+ * 
+ *    This sugary variation allows you to pass a function that will expect only one parameter,
+ *    namely the `input-values` and entirely omit the `query-vector`. A typical `computation-function`
+ *    expects two parameters which can cause unfortunate results when attempting to use
+ *    clojure standard library functions, or other functions, in a functional manner.
+ * 
+ *    For example, a significant number of subscriptions exist only to get a value
+ *    from the `input-values`. As shown below, this subscription will simply retrieve
+ *    the value associated with the `:foo` key in our db:
+ * 
+ *        #!clj
+ *        (reg-sub
+ *          :query-id
+ *          (fn [db _]    ;; :<---- trivial boilerplate we might want to skip over
+ *            (:foo db)))
+ * 
+ *    This is slightly more boilerplate than we might like to do,
+ *    as we can use a keyword directly as a function, and we might like to do this:
+ * 
+ *        #!clj
+ *        (reg-sub
+ *          :query-id
+ *          :foo)  ;; :<---- This could be dangerous. If `:foo` is not in db, we get the `query-vector` instead of `nil`.
+ * 
+ *    By using `:->` our function would not contain the `query-vector`, and any
+ *    missing keys would be represented as such:
+ * 
+ *        #!clj
+ *        (reg-sub
+ *          :query-id
+ *          :-> :foo)
+ * 
+ *    This form allows us to ignore the `query-vector` if our `computation-function`
+ *    has no need for it, and be safe from any accidents. Any 1-arity function can be provided,
+ *    and for more complicated use cases, `partial`, `comp`, and anonymous functions can still be used.
+ * 
+ *   3. A single sugary tuple of `:=>` and a multi-arity `computation-function`
+ * 
+ *        #!clj
+ *        (reg-sub
+ *          :query-id
+ *          :=> computation-fn)
+ * 
+ *    The `query-vector` can be broken into two components `[query-id & optional-values]`, and
+ *    some subscriptions require the `optional-values` for extra work within the subscription.
+ *    To use them in variation #1, we need to destructure our `computation-function` parameters
+ *    in order to use them.
+ * 
+ *        #!clj
+ *        (reg-sub
+ *          :query-id
+ *          (fn [db [_ foo]]
+ *            [db foo]))
+ * 
+ *    Again we are writing boilerplate just to reach our values, and we might prefer to
+ *    have direction access through a parameter vector like `[input-values optional-values]`
+ *    instead, so we might be able to use a multi-arity function directly as our `computation-function`.
+ *    A rewrite of the above sub using this sugary syntax would look like this:
+ * 
+ *        #!clj
+ *        (reg-sub
+ *          :query-id
+ *          :=> vector)  ;; :<---- Could also be `(fn [db foo] [db foo])`
+ * 
  *   The `computation function` is expected to take two arguments:
  * 
- *  - `input-values` - the values which flow into this node (how is it wierd into the graph?)
+ *  - `input-values` - the values which flow into this node (how is it wired into the graph?)
  *  - `query-vector` - the vector given to `subscribe`
  * 
  *   and it returns a computed value (which then becomes the output of the node)
  * 
  *   When `computation function` is called, the 2nd `query-vector` argument will be that
  *   vector supplied to the `subscribe`. So, if the call was `(subscribe [:sub-id 3 :blue])`,
- *   then the `query-vector` supplied to the computaton function will be `[:sub-id 3 :blue]`.
+ *   then the `query-vector` supplied to the computation function will be `[:sub-id 3 :blue]`.
  * 
  *   The argument(s) supplied to `reg-sub` between `query-id` and the `computation-function`
  *   can vary in 3 ways, but whatever is there defines the `input signals` part
@@ -318,7 +407,7 @@ return re_frame.registrar.clear_handlers.call(null,re_frame.events.kind,id);
  * 
  *   In the absence of an explicit `signals function`, the node's input signal defaults to `app-db`
  *   and, as a result, the value within `app-db` (a map) is
- *   is given as the 1st argument when `a-computation-fn` is called.
+ *   given as the 1st argument when `a-computation-fn` is called.
  * 
  * 
  *   **Second variation** - a signal function is explicitly supplied:
@@ -375,7 +464,7 @@ return re_frame.registrar.clear_handlers.call(null,re_frame.events.kind,id);
  *      a-computation-fn)   ;; has signature:  (fn [db query-vec]  ... ret-value)
  * 
  *   is the equivalent of using this
- *   2nd variation and explicitly suppling a `signal-fn` which returns `app-db`:
+ *   2nd variation and explicitly supplying a `signal-fn` which returns `app-db`:
  * 
  *    #!clj
  *    (reg-sub
@@ -406,6 +495,17 @@ return re_frame.registrar.clear_handlers.call(null,re_frame.events.kind,id);
  *      (fn [a query-vec]      ;; only one pair, so 1st argument is a single value
  *        ...))
  * 
+ *   Syntactic sugar for both the `signal-fn` and `computation-fn` can be used together
+ *   and the direction of arrows shows the flow of data and functions. The example from
+ *   directly above is reproduced here:
+ * 
+ *    #!clj
+ *    (reg-sub
+ *      :a-b-sub
+ *      :<- [:a-sub]
+ *      :<- [:b-sub]
+ *      :-> (partial zipmap [:a :b]))
+ * 
  *   For further understanding, read the tutorials, and look at the detailed comments in
  *   /examples/todomvc/src/subs.cljs.
  * 
@@ -414,14 +514,14 @@ return re_frame.registrar.clear_handlers.call(null,re_frame.events.kind,id);
  */
 re_frame.core.reg_sub = (function re_frame$core$reg_sub(var_args){
 var args__4777__auto__ = [];
-var len__4771__auto___20610 = arguments.length;
-var i__4772__auto___20611 = (0);
+var len__4771__auto___21574 = arguments.length;
+var i__4772__auto___21575 = (0);
 while(true){
-if((i__4772__auto___20611 < len__4771__auto___20610)){
-args__4777__auto__.push((arguments[i__4772__auto___20611]));
+if((i__4772__auto___21575 < len__4771__auto___21574)){
+args__4777__auto__.push((arguments[i__4772__auto___21575]));
 
-var G__20612 = (i__4772__auto___20611 + (1));
-i__4772__auto___20611 = G__20612;
+var G__21576 = (i__4772__auto___21575 + (1));
+i__4772__auto___21575 = G__21576;
 continue;
 } else {
 }
@@ -433,17 +533,17 @@ return re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)
 });
 
 (re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic = (function (query_id,args){
-return cljs.core.apply.call(null,re_frame.subs.reg_sub,cljs.core.into.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [query_id], null),args));
+return cljs.core.apply.cljs$core$IFn$_invoke$arity$3(re_frame.subs.reg_sub,query_id,args);
 }));
 
 (re_frame.core.reg_sub.cljs$lang$maxFixedArity = (1));
 
 /** @this {Function} */
-(re_frame.core.reg_sub.cljs$lang$applyTo = (function (seq20608){
-var G__20609 = cljs.core.first.call(null,seq20608);
-var seq20608__$1 = cljs.core.next.call(null,seq20608);
+(re_frame.core.reg_sub.cljs$lang$applyTo = (function (seq21572){
+var G__21573 = cljs.core.first(seq21572);
+var seq21572__$1 = cljs.core.next(seq21572);
 var self__4758__auto__ = this;
-return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__20609,seq20608__$1);
+return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__21573,seq21572__$1);
 }));
 
 /**
@@ -505,8 +605,8 @@ return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__20609,seq20608
  *   
  */
 re_frame.core.subscribe = (function re_frame$core$subscribe(var_args){
-var G__20614 = arguments.length;
-switch (G__20614) {
+var G__21578 = arguments.length;
+switch (G__21578) {
 case 1:
 return re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -522,11 +622,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 = (function (query){
-return re_frame.subs.subscribe.call(null,query);
+return re_frame.subs.subscribe.cljs$core$IFn$_invoke$arity$1(query);
 }));
 
 (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$2 = (function (query,dynv){
-return re_frame.subs.subscribe.call(null,query,dynv);
+return re_frame.subs.subscribe.cljs$core$IFn$_invoke$arity$2(query,dynv);
 }));
 
 (re_frame.core.subscribe.cljs$lang$maxFixedArity = 2);
@@ -543,8 +643,8 @@ return re_frame.subs.subscribe.call(null,query,dynv);
  *   NOTE: Depending on the usecase, it may be necessary to call `clear-subscription-cache!` afterwards
  */
 re_frame.core.clear_sub = (function re_frame$core$clear_sub(var_args){
-var G__20617 = arguments.length;
-switch (G__20617) {
+var G__21581 = arguments.length;
+switch (G__21581) {
 case 0:
 return re_frame.core.clear_sub.cljs$core$IFn$_invoke$arity$0();
 
@@ -560,11 +660,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.clear_sub.cljs$core$IFn$_invoke$arity$0 = (function (){
-return re_frame.registrar.clear_handlers.call(null,re_frame.subs.kind);
+return re_frame.registrar.clear_handlers.cljs$core$IFn$_invoke$arity$1(re_frame.subs.kind);
 }));
 
 (re_frame.core.clear_sub.cljs$core$IFn$_invoke$arity$1 = (function (query_id){
-return re_frame.registrar.clear_handlers.call(null,re_frame.subs.kind,query_id);
+return re_frame.registrar.clear_handlers.cljs$core$IFn$_invoke$arity$2(re_frame.subs.kind,query_id);
 }));
 
 (re_frame.core.clear_sub.cljs$lang$maxFixedArity = 1);
@@ -577,12 +677,12 @@ return re_frame.registrar.clear_handlers.call(null,re_frame.subs.kind,query_id);
  *   <a href="http://day8.github.io/re-frame/flow-mechanics/" target="_blank">http://day8.github.io/re-frame/flow-mechanics/</a>
  */
 re_frame.core.reg_sub_raw = (function re_frame$core$reg_sub_raw(query_id,handler_fn){
-return re_frame.registrar.register_handler.call(null,re_frame.subs.kind,query_id,handler_fn);
+return re_frame.registrar.register_handler(re_frame.subs.kind,query_id,handler_fn);
 });
 /**
  * Removes all subscriptions from the cache.
  * 
- *   This function can be used at development time or test time. Useful when hot realoding
+ *   This function can be used at development time or test time. Useful when hot reloading
  *   namespaces containing subscription handlers. Also call it after a React/render exception,
  *   because React components won't have been cleaned up properly. And this, in turn, means
  *   the subscriptions within those components won't have been cleaned up correctly. So this
@@ -590,7 +690,7 @@ return re_frame.registrar.register_handler.call(null,re_frame.subs.kind,query_id
  *   
  */
 re_frame.core.clear_subscription_cache_BANG_ = (function re_frame$core$clear_subscription_cache_BANG_(){
-return re_frame.subs.clear_subscription_cache_BANG_.call(null);
+return re_frame.subs.clear_subscription_cache_BANG_();
 });
 /**
  * Register the given effect `handler` for the given `id`:
@@ -617,7 +717,7 @@ return re_frame.subs.clear_subscription_cache_BANG_.call(null);
  *   
  */
 re_frame.core.reg_fx = (function re_frame$core$reg_fx(id,handler){
-return re_frame.fx.reg_fx.call(null,id,handler);
+return re_frame.fx.reg_fx(id,handler);
 });
 /**
  * Unregisters effect handlers (presumably registered previously via the use of `reg-fx`).
@@ -630,8 +730,8 @@ return re_frame.fx.reg_fx.call(null,id,handler);
  *   
  */
 re_frame.core.clear_fx = (function re_frame$core$clear_fx(var_args){
-var G__20620 = arguments.length;
-switch (G__20620) {
+var G__21584 = arguments.length;
+switch (G__21584) {
 case 0:
 return re_frame.core.clear_fx.cljs$core$IFn$_invoke$arity$0();
 
@@ -647,11 +747,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.clear_fx.cljs$core$IFn$_invoke$arity$0 = (function (){
-return re_frame.registrar.clear_handlers.call(null,re_frame.fx.kind);
+return re_frame.registrar.clear_handlers.cljs$core$IFn$_invoke$arity$1(re_frame.fx.kind);
 }));
 
 (re_frame.core.clear_fx.cljs$core$IFn$_invoke$arity$1 = (function (id){
-return re_frame.registrar.clear_handlers.call(null,re_frame.fx.kind,id);
+return re_frame.registrar.clear_handlers.cljs$core$IFn$_invoke$arity$2(re_frame.fx.kind,id);
 }));
 
 (re_frame.core.clear_fx.cljs$lang$maxFixedArity = 1);
@@ -661,14 +761,14 @@ return re_frame.registrar.clear_handlers.call(null,re_frame.fx.kind,id);
  *   within `inject-cofx`:
  * 
  *  - `id` is keyword, often namespaced.
- *  - `handler` is a function which takes either one or two arguements, the first of which is
+ *  - `handler` is a function which takes either one or two arguments, the first of which is
  *     always `coeffects` and which returns an updated `coeffects`.
  * 
  *   See also: `inject-cofx`
  *   
  */
 re_frame.core.reg_cofx = (function re_frame$core$reg_cofx(id,handler){
-return re_frame.cofx.reg_cofx.call(null,id,handler);
+return re_frame.cofx.reg_cofx(id,handler);
 });
 /**
  * Given an `id`, and an optional, arbitrary `value`, returns an interceptor
@@ -730,8 +830,8 @@ return re_frame.cofx.reg_cofx.call(null,id,handler);
  *   
  */
 re_frame.core.inject_cofx = (function re_frame$core$inject_cofx(var_args){
-var G__20623 = arguments.length;
-switch (G__20623) {
+var G__21587 = arguments.length;
+switch (G__21587) {
 case 1:
 return re_frame.core.inject_cofx.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -747,11 +847,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.inject_cofx.cljs$core$IFn$_invoke$arity$1 = (function (id){
-return re_frame.cofx.inject_cofx.call(null,id);
+return re_frame.cofx.inject_cofx.cljs$core$IFn$_invoke$arity$1(id);
 }));
 
 (re_frame.core.inject_cofx.cljs$core$IFn$_invoke$arity$2 = (function (id,value){
-return re_frame.cofx.inject_cofx.call(null,id,value);
+return re_frame.cofx.inject_cofx.cljs$core$IFn$_invoke$arity$2(id,value);
 }));
 
 (re_frame.core.inject_cofx.cljs$lang$maxFixedArity = 2);
@@ -766,8 +866,8 @@ return re_frame.cofx.inject_cofx.call(null,id,value);
  *   console if it finds no matching registration.
  */
 re_frame.core.clear_cofx = (function re_frame$core$clear_cofx(var_args){
-var G__20626 = arguments.length;
-switch (G__20626) {
+var G__21590 = arguments.length;
+switch (G__21590) {
 case 0:
 return re_frame.core.clear_cofx.cljs$core$IFn$_invoke$arity$0();
 
@@ -783,11 +883,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.clear_cofx.cljs$core$IFn$_invoke$arity$0 = (function (){
-return re_frame.registrar.clear_handlers.call(null,re_frame.cofx.kind);
+return re_frame.registrar.clear_handlers.cljs$core$IFn$_invoke$arity$1(re_frame.cofx.kind);
 }));
 
 (re_frame.core.clear_cofx.cljs$core$IFn$_invoke$arity$1 = (function (id){
-return re_frame.registrar.clear_handlers.call(null,re_frame.cofx.kind,id);
+return re_frame.registrar.clear_handlers.cljs$core$IFn$_invoke$arity$2(re_frame.cofx.kind,id);
 }));
 
 (re_frame.core.clear_cofx.cljs$lang$maxFixedArity = 1);
@@ -856,14 +956,14 @@ re_frame.core.debug = re_frame.std_interceptors.debug;
  */
 re_frame.core.path = (function re_frame$core$path(var_args){
 var args__4777__auto__ = [];
-var len__4771__auto___20629 = arguments.length;
-var i__4772__auto___20630 = (0);
+var len__4771__auto___21593 = arguments.length;
+var i__4772__auto___21594 = (0);
 while(true){
-if((i__4772__auto___20630 < len__4771__auto___20629)){
-args__4777__auto__.push((arguments[i__4772__auto___20630]));
+if((i__4772__auto___21594 < len__4771__auto___21593)){
+args__4777__auto__.push((arguments[i__4772__auto___21594]));
 
-var G__20631 = (i__4772__auto___20630 + (1));
-i__4772__auto___20630 = G__20631;
+var G__21595 = (i__4772__auto___21594 + (1));
+i__4772__auto___21594 = G__21595;
 continue;
 } else {
 }
@@ -875,19 +975,19 @@ return re_frame.core.path.cljs$core$IFn$_invoke$arity$variadic(argseq__4778__aut
 });
 
 (re_frame.core.path.cljs$core$IFn$_invoke$arity$variadic = (function (args){
-return cljs.core.apply.call(null,re_frame.std_interceptors.path,args);
+return cljs.core.apply.cljs$core$IFn$_invoke$arity$2(re_frame.std_interceptors.path,args);
 }));
 
 (re_frame.core.path.cljs$lang$maxFixedArity = (0));
 
 /** @this {Function} */
-(re_frame.core.path.cljs$lang$applyTo = (function (seq20628){
+(re_frame.core.path.cljs$lang$applyTo = (function (seq21592){
 var self__4759__auto__ = this;
-return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq20628));
+return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq21592));
 }));
 
 /**
- * Returns an Interceptor which will run the given function `f` in the `:after`
+ * Returns an interceptor which will run the given function `f` in the `:after`
  *   position.
  * 
  *   `f` is called with two arguments: `db` and `v`, and is expected to
@@ -904,7 +1004,7 @@ return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.cal
  *   at the bottom of the panel.
  * 
  *   Almost any user action (edit text, add new todo, remove a todo) requires a
- *   complete reassessment of duplication errors and warnings. Eg: that edit
+ *   complete reassessment of duplication errors and warnings. E.g. that edit
  *   just made might have introduced a new duplicate, or removed one. Same with
  *   any todo removal. So we need to re-calculate warnings after any CRUD events
  *   associated with the todos list.
@@ -933,7 +1033,7 @@ return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.cal
  *   each time. This may be a very satisfactory trade-off in many cases.
  */
 re_frame.core.enrich = (function re_frame$core$enrich(f){
-return re_frame.std_interceptors.enrich.call(null,f);
+return re_frame.std_interceptors.enrich(f);
 });
 /**
  * > New in v1.2.0
@@ -995,7 +1095,7 @@ re_frame.core.trim_v = re_frame.std_interceptors.trim_v;
  *   - `f` writes to localstorage.
  */
 re_frame.core.after = (function re_frame$core$after(f){
-return re_frame.std_interceptors.after.call(null,f);
+return re_frame.std_interceptors.after(f);
 });
 /**
  * Returns an interceptor which will observe N paths within `db`, and if any of them
@@ -1020,7 +1120,7 @@ return re_frame.std_interceptors.after.call(null,f);
  *         ...))
  * 
  * 
- *   If you put this Interceptor on handlers which might change paths `:a` or `:b`,
+ *   If you put this interceptor on handlers which might change paths `:a` or `:b`,
  *   it will:
  * 
  *  - call `f` each time the value at path `[:a]` or `[:b]` changes
@@ -1030,14 +1130,14 @@ return re_frame.std_interceptors.after.call(null,f);
  */
 re_frame.core.on_changes = (function re_frame$core$on_changes(var_args){
 var args__4777__auto__ = [];
-var len__4771__auto___20635 = arguments.length;
-var i__4772__auto___20636 = (0);
+var len__4771__auto___21599 = arguments.length;
+var i__4772__auto___21600 = (0);
 while(true){
-if((i__4772__auto___20636 < len__4771__auto___20635)){
-args__4777__auto__.push((arguments[i__4772__auto___20636]));
+if((i__4772__auto___21600 < len__4771__auto___21599)){
+args__4777__auto__.push((arguments[i__4772__auto___21600]));
 
-var G__20637 = (i__4772__auto___20636 + (1));
-i__4772__auto___20636 = G__20637;
+var G__21601 = (i__4772__auto___21600 + (1));
+i__4772__auto___21600 = G__21601;
 continue;
 } else {
 }
@@ -1049,19 +1149,19 @@ return re_frame.core.on_changes.cljs$core$IFn$_invoke$arity$variadic((arguments[
 });
 
 (re_frame.core.on_changes.cljs$core$IFn$_invoke$arity$variadic = (function (f,out_path,in_paths){
-return cljs.core.apply.call(null,re_frame.std_interceptors.on_changes,cljs.core.into.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [f,out_path], null),in_paths));
+return cljs.core.apply.cljs$core$IFn$_invoke$arity$4(re_frame.std_interceptors.on_changes,f,out_path,in_paths);
 }));
 
 (re_frame.core.on_changes.cljs$lang$maxFixedArity = (2));
 
 /** @this {Function} */
-(re_frame.core.on_changes.cljs$lang$applyTo = (function (seq20632){
-var G__20633 = cljs.core.first.call(null,seq20632);
-var seq20632__$1 = cljs.core.next.call(null,seq20632);
-var G__20634 = cljs.core.first.call(null,seq20632__$1);
-var seq20632__$2 = cljs.core.next.call(null,seq20632__$1);
+(re_frame.core.on_changes.cljs$lang$applyTo = (function (seq21596){
+var G__21597 = cljs.core.first(seq21596);
+var seq21596__$1 = cljs.core.next(seq21596);
+var G__21598 = cljs.core.first(seq21596__$1);
+var seq21596__$2 = cljs.core.next(seq21596__$1);
 var self__4758__auto__ = this;
-return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__20633,G__20634,seq20632__$2);
+return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__21597,G__21598,seq21596__$2);
 }));
 
 /**
@@ -1075,7 +1175,7 @@ return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__20633,G__20634
  * Global interceptors are run in the order that they are registered.
  */
 re_frame.core.reg_global_interceptor = (function re_frame$core$reg_global_interceptor(interceptor){
-return re_frame.settings.reg_global_interceptor.call(null,interceptor);
+return re_frame.settings.reg_global_interceptor(interceptor);
 });
 /**
  * Unregisters global interceptors (presumably registered previously via the use of `reg-global-interceptor`).
@@ -1087,8 +1187,8 @@ return re_frame.settings.reg_global_interceptor.call(null,interceptor);
  *   console if it finds no matching registration.
  */
 re_frame.core.clear_global_interceptor = (function re_frame$core$clear_global_interceptor(var_args){
-var G__20639 = arguments.length;
-switch (G__20639) {
+var G__21603 = arguments.length;
+switch (G__21603) {
 case 0:
 return re_frame.core.clear_global_interceptor.cljs$core$IFn$_invoke$arity$0();
 
@@ -1104,11 +1204,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.clear_global_interceptor.cljs$core$IFn$_invoke$arity$0 = (function (){
-return re_frame.settings.clear_global_interceptors.call(null);
+return re_frame.settings.clear_global_interceptors.cljs$core$IFn$_invoke$arity$0();
 }));
 
 (re_frame.core.clear_global_interceptor.cljs$core$IFn$_invoke$arity$1 = (function (id){
-return re_frame.settings.clear_global_interceptors.call(null,id);
+return re_frame.settings.clear_global_interceptors.cljs$core$IFn$_invoke$arity$1(id);
 }));
 
 (re_frame.core.clear_global_interceptor.cljs$lang$maxFixedArity = 1);
@@ -1150,14 +1250,14 @@ return re_frame.settings.clear_global_interceptors.call(null,id);
  */
 re_frame.core.__GT_interceptor = (function re_frame$core$__GT_interceptor(var_args){
 var args__4777__auto__ = [];
-var len__4771__auto___20644 = arguments.length;
-var i__4772__auto___20645 = (0);
+var len__4771__auto___21608 = arguments.length;
+var i__4772__auto___21609 = (0);
 while(true){
-if((i__4772__auto___20645 < len__4771__auto___20644)){
-args__4777__auto__.push((arguments[i__4772__auto___20645]));
+if((i__4772__auto___21609 < len__4771__auto___21608)){
+args__4777__auto__.push((arguments[i__4772__auto___21609]));
 
-var G__20646 = (i__4772__auto___20645 + (1));
-i__4772__auto___20645 = G__20646;
+var G__21610 = (i__4772__auto___21609 + (1));
+i__4772__auto___21609 = G__21610;
 continue;
 } else {
 }
@@ -1168,36 +1268,36 @@ var argseq__4778__auto__ = ((((0) < args__4777__auto__.length))?(new cljs.core.I
 return re_frame.core.__GT_interceptor.cljs$core$IFn$_invoke$arity$variadic(argseq__4778__auto__);
 });
 
-(re_frame.core.__GT_interceptor.cljs$core$IFn$_invoke$arity$variadic = (function (p__20642){
-var map__20643 = p__20642;
-var map__20643__$1 = cljs.core.__destructure_map.call(null,map__20643);
-var m = map__20643__$1;
-var id = cljs.core.get.call(null,map__20643__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
-var before = cljs.core.get.call(null,map__20643__$1,new cljs.core.Keyword(null,"before","before",-1633692388));
-var after = cljs.core.get.call(null,map__20643__$1,new cljs.core.Keyword(null,"after","after",594996914));
-return re_frame.utils.apply_kw.call(null,re_frame.interceptor.__GT_interceptor,m);
+(re_frame.core.__GT_interceptor.cljs$core$IFn$_invoke$arity$variadic = (function (p__21606){
+var map__21607 = p__21606;
+var map__21607__$1 = cljs.core.__destructure_map(map__21607);
+var m = map__21607__$1;
+var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__21607__$1,cljs.core.cst$kw$id);
+var before = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__21607__$1,cljs.core.cst$kw$before);
+var after = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__21607__$1,cljs.core.cst$kw$after);
+return re_frame.utils.apply_kw.cljs$core$IFn$_invoke$arity$variadic(re_frame.interceptor.__GT_interceptor,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([m], 0));
 }));
 
 (re_frame.core.__GT_interceptor.cljs$lang$maxFixedArity = (0));
 
 /** @this {Function} */
-(re_frame.core.__GT_interceptor.cljs$lang$applyTo = (function (seq20641){
+(re_frame.core.__GT_interceptor.cljs$lang$applyTo = (function (seq21605){
 var self__4759__auto__ = this;
-return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq20641));
+return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq21605));
 }));
 
 /**
  * A utility function, typically used when writing an interceptor's `:before` function.
  * 
- * When called with one argument, it returns the `:coeffects` map from with that `context`.
+ * When called with one argument, it returns the `:coeffects` map from within that `context`.
  * 
  * When called with two or three arguments, behaves like `clojure.core/get` and
  * returns the value mapped to `key` in the `:coeffects` map within `context`, `not-found` or
  * `nil` if `key` is not present.
  */
 re_frame.core.get_coeffect = (function re_frame$core$get_coeffect(var_args){
-var G__20648 = arguments.length;
-switch (G__20648) {
+var G__21612 = arguments.length;
+switch (G__21612) {
 case 1:
 return re_frame.core.get_coeffect.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -1217,15 +1317,15 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.get_coeffect.cljs$core$IFn$_invoke$arity$1 = (function (context){
-return re_frame.interceptor.get_coeffect.call(null,context);
+return re_frame.interceptor.get_coeffect.cljs$core$IFn$_invoke$arity$1(context);
 }));
 
 (re_frame.core.get_coeffect.cljs$core$IFn$_invoke$arity$2 = (function (context,key){
-return re_frame.interceptor.get_coeffect.call(null,context,key);
+return re_frame.interceptor.get_coeffect.cljs$core$IFn$_invoke$arity$2(context,key);
 }));
 
 (re_frame.core.get_coeffect.cljs$core$IFn$_invoke$arity$3 = (function (context,key,not_found){
-return re_frame.interceptor.get_coeffect.call(null,context,key,not_found);
+return re_frame.interceptor.get_coeffect.cljs$core$IFn$_invoke$arity$3(context,key,not_found);
 }));
 
 (re_frame.core.get_coeffect.cljs$lang$maxFixedArity = 3);
@@ -1236,7 +1336,7 @@ return re_frame.interceptor.get_coeffect.call(null,context,key,not_found);
  * Adds or updates a key/value pair in the `:coeffects` map within `context`. 
  */
 re_frame.core.assoc_coeffect = (function re_frame$core$assoc_coeffect(context,key,value){
-return re_frame.interceptor.assoc_coeffect.call(null,context,key,value);
+return re_frame.interceptor.assoc_coeffect(context,key,value);
 });
 /**
  * A utility function, used when writing interceptors, typically within an `:after` function.
@@ -1248,8 +1348,8 @@ return re_frame.interceptor.assoc_coeffect.call(null,context,key,value);
  * `nil` if `key` is not present.
  */
 re_frame.core.get_effect = (function re_frame$core$get_effect(var_args){
-var G__20651 = arguments.length;
-switch (G__20651) {
+var G__21615 = arguments.length;
+switch (G__21615) {
 case 1:
 return re_frame.core.get_effect.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -1269,15 +1369,15 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.get_effect.cljs$core$IFn$_invoke$arity$1 = (function (context){
-return re_frame.interceptor.get_effect.call(null,context);
+return re_frame.interceptor.get_effect.cljs$core$IFn$_invoke$arity$1(context);
 }));
 
 (re_frame.core.get_effect.cljs$core$IFn$_invoke$arity$2 = (function (context,key){
-return re_frame.interceptor.get_effect.call(null,context,key);
+return re_frame.interceptor.get_effect.cljs$core$IFn$_invoke$arity$2(context,key);
 }));
 
 (re_frame.core.get_effect.cljs$core$IFn$_invoke$arity$3 = (function (context,key,not_found){
-return re_frame.interceptor.get_effect.call(null,context,key,not_found);
+return re_frame.interceptor.get_effect.cljs$core$IFn$_invoke$arity$3(context,key,not_found);
 }));
 
 (re_frame.core.get_effect.cljs$lang$maxFixedArity = 3);
@@ -1288,7 +1388,7 @@ return re_frame.interceptor.get_effect.call(null,context,key,not_found);
  * Adds or updates a key/value pair in the `:effects` map within `context`. 
  */
 re_frame.core.assoc_effect = (function re_frame$core$assoc_effect(context,key,value){
-return re_frame.interceptor.assoc_effect.call(null,context,key,value);
+return re_frame.interceptor.assoc_effect(context,key,value);
 });
 /**
  * A utility function, used when writing an interceptor's `:before` function.
@@ -1296,12 +1396,12 @@ return re_frame.interceptor.assoc_effect.call(null,context,key,value);
  *   Adds the given collection of `interceptors` to those already in `context's`
  *   execution `:queue`. It returns the updated `context`.
  * 
- *   So, it provides a way for one Interceptor to add more interceptors to the
+ *   So, it provides a way for one interceptor to add more interceptors to the
  *   currently executing interceptor chain.
  *   
  */
 re_frame.core.enqueue = (function re_frame$core$enqueue(context,interceptors){
-return re_frame.interceptor.enqueue.call(null,context,interceptors);
+return re_frame.interceptor.enqueue(context,interceptors);
 });
 /**
  * re-frame outputs warnings and errors via the API function `console`
@@ -1325,7 +1425,7 @@ return re_frame.interceptor.enqueue.call(null,context,interceptors);
  * 
  */
 re_frame.core.set_loggers_BANG_ = (function re_frame$core$set_loggers_BANG_(new_loggers){
-return re_frame.loggers.set_loggers_BANG_.call(null,new_loggers);
+return re_frame.loggers.set_loggers_BANG_(new_loggers);
 });
 /**
  * A utility logging function which is used internally within re-frame to produce
@@ -1346,14 +1446,14 @@ return re_frame.loggers.set_loggers_BANG_.call(null,new_loggers);
  */
 re_frame.core.console = (function re_frame$core$console(var_args){
 var args__4777__auto__ = [];
-var len__4771__auto___20655 = arguments.length;
-var i__4772__auto___20656 = (0);
+var len__4771__auto___21619 = arguments.length;
+var i__4772__auto___21620 = (0);
 while(true){
-if((i__4772__auto___20656 < len__4771__auto___20655)){
-args__4777__auto__.push((arguments[i__4772__auto___20656]));
+if((i__4772__auto___21620 < len__4771__auto___21619)){
+args__4777__auto__.push((arguments[i__4772__auto___21620]));
 
-var G__20657 = (i__4772__auto___20656 + (1));
-i__4772__auto___20656 = G__20657;
+var G__21621 = (i__4772__auto___21620 + (1));
+i__4772__auto___21620 = G__21621;
 continue;
 } else {
 }
@@ -1365,17 +1465,17 @@ return re_frame.core.console.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)
 });
 
 (re_frame.core.console.cljs$core$IFn$_invoke$arity$variadic = (function (level,args){
-return cljs.core.apply.call(null,re_frame.loggers.console,cljs.core.into.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [level], null),args));
+return cljs.core.apply.cljs$core$IFn$_invoke$arity$3(re_frame.loggers.console,level,args);
 }));
 
 (re_frame.core.console.cljs$lang$maxFixedArity = (1));
 
 /** @this {Function} */
-(re_frame.core.console.cljs$lang$applyTo = (function (seq20653){
-var G__20654 = cljs.core.first.call(null,seq20653);
-var seq20653__$1 = cljs.core.next.call(null,seq20653);
+(re_frame.core.console.cljs$lang$applyTo = (function (seq21617){
+var G__21618 = cljs.core.first(seq21617);
+var seq21617__$1 = cljs.core.next(seq21617);
 var self__4758__auto__ = this;
-return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__20654,seq20653__$1);
+return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__21618,seq21617__$1);
 }));
 
 /**
@@ -1388,59 +1488,59 @@ return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__20654,seq20653
  *   
  */
 re_frame.core.make_restore_fn = (function re_frame$core$make_restore_fn(){
-var handlers = cljs.core.deref.call(null,re_frame.registrar.kind__GT_id__GT_handler);
-var app_db = cljs.core.deref.call(null,re_frame.db.app_db);
-var subs_cache = cljs.core.deref.call(null,re_frame.subs.query__GT_reaction);
+var handlers = cljs.core.deref(re_frame.registrar.kind__GT_id__GT_handler);
+var app_db = cljs.core.deref(re_frame.db.app_db);
+var subs_cache = cljs.core.deref(re_frame.subs.query__GT_reaction);
 return (function (){
-var original_subs_20662 = cljs.core.set.call(null,cljs.core.vals.call(null,subs_cache));
-var current_subs_20663 = cljs.core.set.call(null,cljs.core.vals.call(null,cljs.core.deref.call(null,re_frame.subs.query__GT_reaction)));
-var seq__20658_20664 = cljs.core.seq.call(null,clojure.set.difference.call(null,current_subs_20663,original_subs_20662));
-var chunk__20659_20665 = null;
-var count__20660_20666 = (0);
-var i__20661_20667 = (0);
+var original_subs_21626 = cljs.core.set(cljs.core.vals(subs_cache));
+var current_subs_21627 = cljs.core.set(cljs.core.vals(cljs.core.deref(re_frame.subs.query__GT_reaction)));
+var seq__21622_21628 = cljs.core.seq(clojure.set.difference.cljs$core$IFn$_invoke$arity$2(current_subs_21627,original_subs_21626));
+var chunk__21623_21629 = null;
+var count__21624_21630 = (0);
+var i__21625_21631 = (0);
 while(true){
-if((i__20661_20667 < count__20660_20666)){
-var sub_20668 = cljs.core._nth.call(null,chunk__20659_20665,i__20661_20667);
-re_frame.interop.dispose_BANG_.call(null,sub_20668);
+if((i__21625_21631 < count__21624_21630)){
+var sub_21632 = chunk__21623_21629.cljs$core$IIndexed$_nth$arity$2(null,i__21625_21631);
+re_frame.interop.dispose_BANG_(sub_21632);
 
 
-var G__20669 = seq__20658_20664;
-var G__20670 = chunk__20659_20665;
-var G__20671 = count__20660_20666;
-var G__20672 = (i__20661_20667 + (1));
-seq__20658_20664 = G__20669;
-chunk__20659_20665 = G__20670;
-count__20660_20666 = G__20671;
-i__20661_20667 = G__20672;
+var G__21633 = seq__21622_21628;
+var G__21634 = chunk__21623_21629;
+var G__21635 = count__21624_21630;
+var G__21636 = (i__21625_21631 + (1));
+seq__21622_21628 = G__21633;
+chunk__21623_21629 = G__21634;
+count__21624_21630 = G__21635;
+i__21625_21631 = G__21636;
 continue;
 } else {
-var temp__5753__auto___20673 = cljs.core.seq.call(null,seq__20658_20664);
-if(temp__5753__auto___20673){
-var seq__20658_20674__$1 = temp__5753__auto___20673;
-if(cljs.core.chunked_seq_QMARK_.call(null,seq__20658_20674__$1)){
-var c__4591__auto___20675 = cljs.core.chunk_first.call(null,seq__20658_20674__$1);
-var G__20676 = cljs.core.chunk_rest.call(null,seq__20658_20674__$1);
-var G__20677 = c__4591__auto___20675;
-var G__20678 = cljs.core.count.call(null,c__4591__auto___20675);
-var G__20679 = (0);
-seq__20658_20664 = G__20676;
-chunk__20659_20665 = G__20677;
-count__20660_20666 = G__20678;
-i__20661_20667 = G__20679;
+var temp__5753__auto___21637 = cljs.core.seq(seq__21622_21628);
+if(temp__5753__auto___21637){
+var seq__21622_21638__$1 = temp__5753__auto___21637;
+if(cljs.core.chunked_seq_QMARK_(seq__21622_21638__$1)){
+var c__4591__auto___21639 = cljs.core.chunk_first(seq__21622_21638__$1);
+var G__21640 = cljs.core.chunk_rest(seq__21622_21638__$1);
+var G__21641 = c__4591__auto___21639;
+var G__21642 = cljs.core.count(c__4591__auto___21639);
+var G__21643 = (0);
+seq__21622_21628 = G__21640;
+chunk__21623_21629 = G__21641;
+count__21624_21630 = G__21642;
+i__21625_21631 = G__21643;
 continue;
 } else {
-var sub_20680 = cljs.core.first.call(null,seq__20658_20674__$1);
-re_frame.interop.dispose_BANG_.call(null,sub_20680);
+var sub_21644 = cljs.core.first(seq__21622_21638__$1);
+re_frame.interop.dispose_BANG_(sub_21644);
 
 
-var G__20681 = cljs.core.next.call(null,seq__20658_20674__$1);
-var G__20682 = null;
-var G__20683 = (0);
-var G__20684 = (0);
-seq__20658_20664 = G__20681;
-chunk__20659_20665 = G__20682;
-count__20660_20666 = G__20683;
-i__20661_20667 = G__20684;
+var G__21645 = cljs.core.next(seq__21622_21638__$1);
+var G__21646 = null;
+var G__21647 = (0);
+var G__21648 = (0);
+seq__21622_21628 = G__21645;
+chunk__21623_21629 = G__21646;
+count__21624_21630 = G__21647;
+i__21625_21631 = G__21648;
 continue;
 }
 } else {
@@ -1449,9 +1549,9 @@ continue;
 break;
 }
 
-cljs.core.reset_BANG_.call(null,re_frame.registrar.kind__GT_id__GT_handler,handlers);
+cljs.core.reset_BANG_(re_frame.registrar.kind__GT_id__GT_handler,handlers);
 
-cljs.core.reset_BANG_.call(null,re_frame.db.app_db,app_db);
+cljs.core.reset_BANG_(re_frame.db.app_db,app_db);
 
 return null;
 });
@@ -1460,7 +1560,7 @@ return null;
  * Removes all events currently queued for processing
  */
 re_frame.core.purge_event_queue = (function re_frame$core$purge_event_queue(){
-return re_frame.router.purge.call(null,re_frame.router.event_queue);
+return re_frame.router.event_queue.re_frame$router$IEventQueue$purge$arity$1(null);
 });
 /**
  * Registers the given function `f` to be called after each event is processed.
@@ -1482,8 +1582,8 @@ return re_frame.router.purge.call(null,re_frame.router.event_queue);
  *   
  */
 re_frame.core.add_post_event_callback = (function re_frame$core$add_post_event_callback(var_args){
-var G__20686 = arguments.length;
-switch (G__20686) {
+var G__21650 = arguments.length;
+switch (G__21650) {
 case 1:
 return re_frame.core.add_post_event_callback.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -1499,11 +1599,11 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (re_frame.core.add_post_event_callback.cljs$core$IFn$_invoke$arity$1 = (function (f){
-return re_frame.core.add_post_event_callback.call(null,f,f);
+return re_frame.core.add_post_event_callback.cljs$core$IFn$_invoke$arity$2(f,f);
 }));
 
 (re_frame.core.add_post_event_callback.cljs$core$IFn$_invoke$arity$2 = (function (id,f){
-return re_frame.router.add_post_event_callback.call(null,re_frame.router.event_queue,id,f);
+return re_frame.router.event_queue.re_frame$router$IEventQueue$add_post_event_callback$arity$3(null,id,f);
 }));
 
 (re_frame.core.add_post_event_callback.cljs$lang$maxFixedArity = 2);
@@ -1514,21 +1614,21 @@ return re_frame.router.add_post_event_callback.call(null,re_frame.router.event_q
  *   Such a function must have been previously registered via `add-post-event-callback`
  */
 re_frame.core.remove_post_event_callback = (function re_frame$core$remove_post_event_callback(id){
-return re_frame.router.remove_post_event_callback.call(null,re_frame.router.event_queue,id);
+return re_frame.router.event_queue.re_frame$router$IEventQueue$remove_post_event_callback$arity$2(null,id);
 });
 /**
  * Deprecated. Use `reg-event-db` instead.
  */
 re_frame.core.register_handler = (function re_frame$core$register_handler(var_args){
 var args__4777__auto__ = [];
-var len__4771__auto___20689 = arguments.length;
-var i__4772__auto___20690 = (0);
+var len__4771__auto___21653 = arguments.length;
+var i__4772__auto___21654 = (0);
 while(true){
-if((i__4772__auto___20690 < len__4771__auto___20689)){
-args__4777__auto__.push((arguments[i__4772__auto___20690]));
+if((i__4772__auto___21654 < len__4771__auto___21653)){
+args__4777__auto__.push((arguments[i__4772__auto___21654]));
 
-var G__20691 = (i__4772__auto___20690 + (1));
-i__4772__auto___20690 = G__20691;
+var G__21655 = (i__4772__auto___21654 + (1));
+i__4772__auto___21654 = G__21655;
 continue;
 } else {
 }
@@ -1540,17 +1640,17 @@ return re_frame.core.register_handler.cljs$core$IFn$_invoke$arity$variadic(argse
 });
 
 (re_frame.core.register_handler.cljs$core$IFn$_invoke$arity$variadic = (function (args){
-re_frame.core.console.call(null,new cljs.core.Keyword(null,"warn","warn",-436710552),"re-frame: \"register-handler\" has been renamed \"reg-event-db\" (look for registration of ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first.call(null,args)),")");
+re_frame.core.console.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$warn,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["re-frame: \"register-handler\" has been renamed \"reg-event-db\" (look for registration of ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(args)),")"], 0));
 
-return cljs.core.apply.call(null,re_frame.core.reg_event_db,args);
+return cljs.core.apply.cljs$core$IFn$_invoke$arity$2(re_frame.core.reg_event_db,args);
 }));
 
 (re_frame.core.register_handler.cljs$lang$maxFixedArity = (0));
 
 /** @this {Function} */
-(re_frame.core.register_handler.cljs$lang$applyTo = (function (seq20688){
+(re_frame.core.register_handler.cljs$lang$applyTo = (function (seq21652){
 var self__4759__auto__ = this;
-return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq20688));
+return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq21652));
 }));
 
 /**
@@ -1558,14 +1658,14 @@ return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.cal
  */
 re_frame.core.register_sub = (function re_frame$core$register_sub(var_args){
 var args__4777__auto__ = [];
-var len__4771__auto___20693 = arguments.length;
-var i__4772__auto___20694 = (0);
+var len__4771__auto___21657 = arguments.length;
+var i__4772__auto___21658 = (0);
 while(true){
-if((i__4772__auto___20694 < len__4771__auto___20693)){
-args__4777__auto__.push((arguments[i__4772__auto___20694]));
+if((i__4772__auto___21658 < len__4771__auto___21657)){
+args__4777__auto__.push((arguments[i__4772__auto___21658]));
 
-var G__20695 = (i__4772__auto___20694 + (1));
-i__4772__auto___20694 = G__20695;
+var G__21659 = (i__4772__auto___21658 + (1));
+i__4772__auto___21658 = G__21659;
 continue;
 } else {
 }
@@ -1577,16 +1677,16 @@ return re_frame.core.register_sub.cljs$core$IFn$_invoke$arity$variadic(argseq__4
 });
 
 (re_frame.core.register_sub.cljs$core$IFn$_invoke$arity$variadic = (function (args){
-re_frame.core.console.call(null,new cljs.core.Keyword(null,"warn","warn",-436710552),"re-frame: \"register-sub\" is used to register the event ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first.call(null,args))," but it is a deprecated part of the API. Please use \"reg-sub-raw\" instead.");
+re_frame.core.console.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$warn,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["re-frame: \"register-sub\" is used to register the event ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(args))," but it is a deprecated part of the API. Please use \"reg-sub-raw\" instead."], 0));
 
-return cljs.core.apply.call(null,re_frame.core.reg_sub_raw,args);
+return cljs.core.apply.cljs$core$IFn$_invoke$arity$2(re_frame.core.reg_sub_raw,args);
 }));
 
 (re_frame.core.register_sub.cljs$lang$maxFixedArity = (0));
 
 /** @this {Function} */
-(re_frame.core.register_sub.cljs$lang$applyTo = (function (seq20692){
+(re_frame.core.register_sub.cljs$lang$applyTo = (function (seq21656){
 var self__4759__auto__ = this;
-return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq20692));
+return self__4759__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq21656));
 }));
 

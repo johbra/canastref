@@ -72,8 +72,8 @@
 
   ;; -- API
   (push [this event])
-  (add-post-event-callback [this id callack])
-  (remove-post-event-callback [this f])
+  (add-post-event-callback [this id callback-fn])
+  (remove-post-event-callback [this id])
   (purge [this])
 
   ;; -- Implementation via a Finite State Machine

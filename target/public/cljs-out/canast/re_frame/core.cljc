@@ -28,7 +28,7 @@
 
   The event will be added to a FIFO processing queue, so event
   handling does not happen immediately. It will happen 'very soon'
-  bit not now. And if the queue already contains events, they
+  but not now. And if the queue already contains events, they
   will be processed first.
 
   Usage:
@@ -130,8 +130,8 @@
         :namespaced/id           ;; <-- namespaced keywords are often used
         [one two three]          ;; <-- a seq of interceptors
         (fn [{:keys [db] :as cofx} [_ arg1 arg2]] ;; destructure both arguments
-          {:db       (assoc db :some-key arg1)          ;; return a map of effects
-           :dispatch [:some-event arg2]}))
+          {:db (assoc db :some-key arg1)          ;; return a map of effects
+           :fx [[:dispatch [:some-event arg2]]]}))
   "
   {:api-docs/heading "Event Handlers"}
   ([id handler]
@@ -197,11 +197,11 @@
 
   The three arguments are:
 
-  - `query-id` - typically a namespaced keyword (later used in subscribe)
-  - optionally, an `input signals` function which returns the input data
-    flows required by this kind of node.
-  - a `computation function` which computes the value (output) of the
-    node (from the input data flows)
+    - `query-id` - typically a namespaced keyword (later used in subscribe)
+    - optionally, an `input signals` function which returns the input data
+      flows required by this kind of node.
+    - a `computation function` which computes the value (output) of the
+      node (from the input data flows)
 
   Later, during app execution, a call to `(subscribe [:sub-id 3 :blue])`,
   will trigger the need for a new `:sub-id` Signal Graph node (matching the
@@ -213,16 +213,104 @@
   can be created later, when a node is bought into existence by the
   use of `subscribe` in a `View Function`.
 
+  `reg-sub` arguments are:
+
+    - a `query-id` (typically a namespaced keyword)
+    - a function which returns the inputs required by this kind of node (can be supplied  in one of three ways)
+    - a function which computes the value of this kind of node (can be supplied in one of three ways)
+
+  The `computation function` is always the last argument supplied and has three ways to be called.
+  Two of these methods are syntactic sugar to provide easier access to functional abstractions around your data.
+
+  1. A function that will accept two parameters, the `input-values` and `query-vector`. This is the
+     standard way to provide a `computation-function`
+
+          #!clj
+          (reg-sub
+            :query-id
+            (fn [input-values query-vector]
+              (:foo input-values)))
+
+  2. A single sugary tuple of `:->` and a 1-arity `computation-function`:
+
+          #!clj
+          (reg-sub
+            :query-id
+            :-> computation-fn)
+
+      This sugary variation allows you to pass a function that will expect only one parameter,
+      namely the `input-values` and entirely omit the `query-vector`. A typical `computation-function`
+      expects two parameters which can cause unfortunate results when attempting to use
+      clojure standard library functions, or other functions, in a functional manner.
+
+      For example, a significant number of subscriptions exist only to get a value
+      from the `input-values`. As shown below, this subscription will simply retrieve
+      the value associated with the `:foo` key in our db:
+
+          #!clj
+          (reg-sub
+            :query-id
+            (fn [db _]    ;; :<---- trivial boilerplate we might want to skip over
+              (:foo db)))
+
+      This is slightly more boilerplate than we might like to do,
+      as we can use a keyword directly as a function, and we might like to do this:
+
+          #!clj
+          (reg-sub
+            :query-id
+            :foo)  ;; :<---- This could be dangerous. If `:foo` is not in db, we get the `query-vector` instead of `nil`.
+
+      By using `:->` our function would not contain the `query-vector`, and any
+      missing keys would be represented as such:
+
+          #!clj
+          (reg-sub
+            :query-id
+            :-> :foo)
+
+      This form allows us to ignore the `query-vector` if our `computation-function`
+      has no need for it, and be safe from any accidents. Any 1-arity function can be provided,
+      and for more complicated use cases, `partial`, `comp`, and anonymous functions can still be used.
+
+  3. A single sugary tuple of `:=>` and a multi-arity `computation-function`
+
+          #!clj
+          (reg-sub
+            :query-id
+            :=> computation-fn)
+
+      The `query-vector` can be broken into two components `[query-id & optional-values]`, and
+      some subscriptions require the `optional-values` for extra work within the subscription.
+      To use them in variation #1, we need to destructure our `computation-function` parameters
+      in order to use them.
+
+          #!clj
+          (reg-sub
+            :query-id
+            (fn [db [_ foo]]
+              [db foo]))
+
+      Again we are writing boilerplate just to reach our values, and we might prefer to
+      have direction access through a parameter vector like `[input-values optional-values]`
+      instead, so we might be able to use a multi-arity function directly as our `computation-function`.
+      A rewrite of the above sub using this sugary syntax would look like this:
+
+          #!clj
+          (reg-sub
+            :query-id
+            :=> vector)  ;; :<---- Could also be `(fn [db foo] [db foo])`
+
   The `computation function` is expected to take two arguments:
 
-    - `input-values` - the values which flow into this node (how is it wierd into the graph?)
+    - `input-values` - the values which flow into this node (how is it wired into the graph?)
     - `query-vector` - the vector given to `subscribe`
 
   and it returns a computed value (which then becomes the output of the node)
 
   When `computation function` is called, the 2nd `query-vector` argument will be that
   vector supplied to the `subscribe`. So, if the call was `(subscribe [:sub-id 3 :blue])`,
-  then the `query-vector` supplied to the computaton function will be `[:sub-id 3 :blue]`.
+  then the `query-vector` supplied to the computation function will be `[:sub-id 3 :blue]`.
 
   The argument(s) supplied to `reg-sub` between `query-id` and the `computation-function`
   can vary in 3 ways, but whatever is there defines the `input signals` part
@@ -243,7 +331,7 @@
 
      In the absence of an explicit `signals function`, the node's input signal defaults to `app-db`
      and, as a result, the value within `app-db` (a map) is
-     is given as the 1st argument when `a-computation-fn` is called.
+     given as the 1st argument when `a-computation-fn` is called.
 
 
   **Second variation** - a signal function is explicitly supplied:
@@ -300,7 +388,7 @@
         a-computation-fn)   ;; has signature:  (fn [db query-vec]  ... ret-value)
 
   is the equivalent of using this
-  2nd variation and explicitly suppling a `signal-fn` which returns `app-db`:
+  2nd variation and explicitly supplying a `signal-fn` which returns `app-db`:
 
       #!clj
       (reg-sub
@@ -331,6 +419,17 @@
         (fn [a query-vec]      ;; only one pair, so 1st argument is a single value
           ...))
 
+  Syntactic sugar for both the `signal-fn` and `computation-fn` can be used together
+  and the direction of arrows shows the flow of data and functions. The example from
+  directly above is reproduced here:
+
+      #!clj
+      (reg-sub
+        :a-b-sub
+        :<- [:a-sub]
+        :<- [:b-sub]
+        :-> (partial zipmap [:a :b]))
+
   For further understanding, read the tutorials, and look at the detailed comments in
   /examples/todomvc/src/subs.cljs.
 
@@ -338,7 +437,7 @@
   "
   {:api-docs/heading "Subscriptions"}
   [query-id & args]
-  (apply subs/reg-sub (into [query-id] args)))
+  (apply subs/reg-sub query-id args))
 
 (defn subscribe
   "Given a `query` vector, returns a Reagent `reaction` which will, over
@@ -435,7 +534,7 @@
 (defn clear-subscription-cache!
   "Removes all subscriptions from the cache.
 
-  This function can be used at development time or test time. Useful when hot realoding
+  This function can be used at development time or test time. Useful when hot reloading
   namespaces containing subscription handlers. Also call it after a React/render exception,
   because React components won't have been cleaned up properly. And this, in turn, means
   the subscriptions within those components won't have been cleaned up correctly. So this
@@ -497,7 +596,7 @@
   within `inject-cofx`:
 
     - `id` is keyword, often namespaced.
-    - `handler` is a function which takes either one or two arguements, the first of which is
+    - `handler` is a function which takes either one or two arguments, the first of which is
        always `coeffects` and which returns an updated `coeffects`.
 
   See also: `inject-cofx`
@@ -653,7 +752,7 @@
   (apply std-interceptors/path args))
 
 (defn enrich
-  "Returns an Interceptor which will run the given function `f` in the `:after`
+  "Returns an interceptor which will run the given function `f` in the `:after`
   position.
 
   `f` is called with two arguments: `db` and `v`, and is expected to
@@ -670,7 +769,7 @@
   at the bottom of the panel.
 
   Almost any user action (edit text, add new todo, remove a todo) requires a
-  complete reassessment of duplication errors and warnings. Eg: that edit
+  complete reassessment of duplication errors and warnings. E.g. that edit
   just made might have introduced a new duplicate, or removed one. Same with
   any todo removal. So we need to re-calculate warnings after any CRUD events
   associated with the todos list.
@@ -786,7 +885,7 @@
            ...))
 
 
-  If you put this Interceptor on handlers which might change paths `:a` or `:b`,
+  If you put this interceptor on handlers which might change paths `:a` or `:b`,
   it will:
 
     - call `f` each time the value at path `[:a]` or `[:b]` changes
@@ -795,7 +894,7 @@
   "
   {:api-docs/heading "Interceptors"}
   [f out-path & in-paths]
-  (apply std-interceptors/on-changes (into [f out-path] in-paths)))
+  (apply std-interceptors/on-changes f out-path in-paths))
 
 
 (defn reg-global-interceptor
@@ -867,7 +966,7 @@
 (defn get-coeffect
   "A utility function, typically used when writing an interceptor's `:before` function.
 
-   When called with one argument, it returns the `:coeffects` map from with that `context`.
+   When called with one argument, it returns the `:coeffects` map from within that `context`.
 
    When called with two or three arguments, behaves like `clojure.core/get` and
    returns the value mapped to `key` in the `:coeffects` map within `context`, `not-found` or
@@ -918,7 +1017,7 @@
   Adds the given collection of `interceptors` to those already in `context's`
   execution `:queue`. It returns the updated `context`.
 
-  So, it provides a way for one Interceptor to add more interceptors to the
+  So, it provides a way for one interceptor to add more interceptors to the
   currently executing interceptor chain.
   "
   {:api-docs/heading "Writing Interceptors"}
@@ -971,7 +1070,7 @@
   "
   {:api-docs/heading "Logging"}
   [level & args]
-  (apply loggers/console (into [level] args)))
+  (apply loggers/console level args))
 
 ;; -- unit testing ------------------------------------------------------------
 
