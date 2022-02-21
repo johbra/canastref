@@ -15,6 +15,9 @@ return cljs.core.cst$kw$monatshistorie.cljs$core$IFn$_invoke$arity$1(db);
 re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$monatsbilanz,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
 return cljs.core.cst$kw$monatsbilanz.cljs$core$IFn$_invoke$arity$1(db);
 })], 0));
+re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$monat,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
+return cljs.core.cst$kw$monat.cljs$core$IFn$_invoke$arity$1(db);
+})], 0));
 re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$spieler_DASH_namen,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db){
 return cljs.core.cst$kw$spieler_DASH_namen.cljs$core$IFn$_invoke$arity$1(db);
 })], 0));

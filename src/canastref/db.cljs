@@ -5,7 +5,7 @@
   {:hist-aus-datei nil
    :historie nil
    :monatshistorie nil
-   :monatsbilanz {1 "Meike", 2 "X"}
+   :monatsbilanz {1 "Meike"}
    :monat (t/month (t/now))
    :loading false
    :spieler-namen nil

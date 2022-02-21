@@ -22,6 +22,11 @@
    (:monatsbilanz db)))
 
 (rf/reg-sub
+ :monat
+ (fn [db] 
+   (:monat db)))
+
+(rf/reg-sub
  :spieler-namen
  (fn [db] 
    (:spieler-namen db)))

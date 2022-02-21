@@ -15,25 +15,26 @@
   ["Jan" "Feb" "Mär" "Apr" "Mai" "Jun" "Jul" "Aug" "Sep" "Okt" "Nov" "Dez"])
 
 (defn gewonnene-spiele
-  [historie monatshistorie]  
-  [v-box :children
-   [[gap :size "20px"]
-    [box :child [:b "Gewonnene Spiele: "]]
-    [h-box :gap "10px" :children
-     [[box :child [:b (monatsnamen (- (t/month (l/local-now)) 1))]]
-      [v-box :children
-       [[box :child (str (first (first monatshistorie)) ": "
-                         (second (first monatshistorie)))]
-        [box :child (str (first (second monatshistorie)) ": "
-                         (second (second monatshistorie)))]]]]]
-    [gap :size "10px"]
-    [h-box :gap "10px" :children
-     [[box :child [:b (t/year (l/local-now))]]
-      [v-box :children
-       [[box :child (str (first (first historie)) ": "
-                         (second (first historie)))]
-        [box :child (str (first (second historie)) ": "
-                         (second (second historie)))]]]]]]])
+  [historie monatshistorie]
+  (let [monat @(rf/subscribe [:monat])]
+    [v-box :children
+     [[gap :size "20px"]
+      [box :child [:b "Gewonnene Spiele: "]]
+      [h-box :gap "10px" :children
+       [[box :child [:b (monatsnamen (dec monat))]]
+        [v-box :children
+         [[box :child (str (first (first monatshistorie)) ": "
+                           (second (first monatshistorie)))]
+          [box :child (str (first (second monatshistorie)) ": "
+                           (second (second monatshistorie)))]]]]]
+      [gap :size "10px"]
+      [h-box :gap "10px" :children
+       [[box :child [:b (t/year (l/local-now))]]
+        [v-box :children
+         [[box :child (str (first (first historie)) ": "
+                           (second (first historie)))]
+          [box :child (str (first (second historie)) ": "
+                           (second (second historie)))]]]]]]]))
 
 (defn monatsbilanz-tabelle
   [] 
@@ -211,7 +212,7 @@
         monatshistorie @(rf/subscribe [:monatshistorie])
         monatsbilanz   @(rf/subscribe [:monatsbilanz])
         spieler-namen  @(rf/subscribe [:spieler-namen])
-        fuehrende      (sp/fuehrende monatshistorie)] 
+        ] 
     (if (and historie spieler-namen)
       [h-box :children
        [[v-box :children

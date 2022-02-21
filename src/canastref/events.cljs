@@ -3,7 +3,9 @@
             [canastref.db :as db]
             [canastref.spiel :as sp]
             [canastref.spieler :as s]
-            [canastref.drop-file-stream :as df] 
+            [canastref.drop-file-stream :as df]
+            [medley.core :as m]
+            [cljs-time.core :as t]
             #_[canastref.db :refer [default-db ]]))
 
 (rf/reg-event-db
@@ -120,23 +122,22 @@
  :schliesse-runde-ab
  [re-frame.core/debug]
  (fn [db]
-   (let [spiel (sp/schliesse-runde-ab (:spiel db))]
-     (-> db
-         (assoc :spiel spiel)
-         (assoc :historie
-                (sp/registriere-sieger (:historie db) (sp/sieger spiel)))
-         (assoc :monatshistorie
-                (sp/registriere-sieger (:monatshistorie db) (sp/sieger spiel)))))))
+   (let [spiel (sp/schliesse-runde-ab (:spiel db))] 
+     (assoc db
+            :spiel spiel
+            :historie (sp/registriere-sieger (:historie db) (sp/sieger spiel))
+            :monatshistorie
+            (sp/registriere-sieger (:monatshistorie db) (sp/sieger spiel))))))
 
 (rf/reg-event-db
  :korrigiere-ergebnis
  [re-frame.core/debug]
  (fn [db]
-   (-> db
-       (assoc :historie (sp/eliminiere-sieger (:historie db) (:sieger (:spiel db))))
-       (assoc :monatshistorie
-              (sp/eliminiere-sieger (:monatshistorie db) (:sieger (:spiel db))))
-       (assoc :spiel (sp/korrigiere (:spiel db))))))
+   (assoc db
+          :historie (sp/eliminiere-sieger (:historie db) (:sieger (:spiel db)))
+          :monatshistorie
+          (sp/eliminiere-sieger (:monatshistorie db) (:sieger (:spiel db)))
+          :spiel (sp/korrigiere (:spiel db)))))
 
 (rf/reg-event-db
  :geber
@@ -145,8 +146,24 @@
 
 (rf/reg-event-db
  :neues-spiel
- (fn [db [_ _]] 
-   (assoc db :spiel (sp/neues-spiel @(rf/subscribe [:spieler-namen])))))
+ [re-frame.core/debug]
+ (fn [db [_ _]]
+   (let [laufender-monat (:monat db)
+         neuer-monat? (< laufender-monat (t/month (t/now)))
+         monatsbilanz (if neuer-monat?
+                        (assoc (:monatsbilanz db)
+                               laufender-monat
+                               (sp/fuehrende (:monatshistorie db)))
+                        (:monatsbilanz db))
+         monatshistorie (if neuer-monat?
+                          (m/map-vals (fn [] 0) (:monatshistorie db))
+                          (:monatshistorie db))
+         _ (println monatshistorie)] 
+     (assoc db
+            :monat (inc laufender-monat)
+            :monatsbilanz monatsbilanz
+            :monatshistorie monatshistorie
+            :spiel (sp/neues-spiel @(rf/subscribe [:spieler-namen]))))))
 
 (rf/reg-event-db
  :monatsbilanz
