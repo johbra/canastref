@@ -6,7 +6,7 @@
             [canastref.drop-file-stream :as df]
             [medley.core :as m]
             [cljs-time.core :as t]
-            #_[canastref.db :refer [default-db ]]))
+            [cljs-time.local :as lt]))
 
 (rf/reg-event-db
  :initialize
@@ -149,7 +149,7 @@
  [re-frame.core/debug]
  (fn [db [_ _]]
    (let [laufender-monat (:monat db)
-         neuer-monat? (< laufender-monat (t/month (t/now)))
+         neuer-monat? (< laufender-monat (t/month (lt/local-now)))
          monatsbilanz (if neuer-monat?
                         (assoc (:monatsbilanz db)
                                laufender-monat
@@ -157,8 +157,7 @@
                         (:monatsbilanz db))
          monatshistorie (if neuer-monat?
                           (m/map-vals (fn [] 0) (:monatshistorie db))
-                          (:monatshistorie db))
-         _ (println monatshistorie)] 
+                          (:monatshistorie db))] 
      (assoc db
             :monat (inc laufender-monat)
             :monatsbilanz monatsbilanz
