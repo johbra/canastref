@@ -149,17 +149,17 @@
  [re-frame.core/debug]
  (fn [db [_ _]]
    (let [laufender-monat (:monat db)
-         neuer-monat? (< laufender-monat (t/month (lt/local-now)))
+         neuer-monat? (> laufender-monat (inc (apply max (keys (:monatsbilanz db)))))
          monatsbilanz (if neuer-monat?
                         (assoc (:monatsbilanz db)
-                               laufender-monat
+                               (dec laufender-monat)
                                (sp/fuehrende (:monatshistorie db)))
                         (:monatsbilanz db))
          monatshistorie (if neuer-monat?
                           (m/map-vals (fn [] 0) (:monatshistorie db))
                           (:monatshistorie db))] 
      (assoc db
-            :monat (inc laufender-monat)
+            ;:monat (inc laufender-monat)
             :monatsbilanz monatsbilanz
             :monatshistorie monatshistorie
             :spiel (sp/neues-spiel @(rf/subscribe [:spieler-namen]))))))
