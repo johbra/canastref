@@ -601,9 +601,9 @@ return cljs.core.into.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVect
 return (new cljs.core.LazySeq(null,(function (){
 var s__20797__$1 = s__20797;
 while(true){
-var temp__5753__auto__ = cljs.core.seq(s__20797__$1);
-if(temp__5753__auto__){
-var s__20797__$2 = temp__5753__auto__;
+var temp__5804__auto__ = cljs.core.seq(s__20797__$1);
+if(temp__5804__auto__){
+var s__20797__$2 = temp__5804__auto__;
 if(cljs.core.chunked_seq_QMARK_(s__20797__$2)){
 var c__4562__auto__ = cljs.core.chunk_first(s__20797__$2);
 var size__4563__auto__ = cljs.core.count(c__4562__auto__);

@@ -58,9 +58,9 @@ return cljs.core.first((function (){var iter__4564__auto__ = (function cljs_time
 return (new cljs.core.LazySeq(null,(function (){
 var s__20711__$1 = s__20711;
 while(true){
-var temp__5753__auto__ = cljs.core.seq(s__20711__$1);
-if(temp__5753__auto__){
-var s__20711__$2 = temp__5753__auto__;
+var temp__5804__auto__ = cljs.core.seq(s__20711__$1);
+if(temp__5804__auto__){
+var s__20711__$2 = temp__5804__auto__;
 if(cljs.core.chunked_seq_QMARK_(s__20711__$2)){
 var c__4562__auto__ = cljs.core.chunk_first(s__20711__$2);
 var size__4563__auto__ = cljs.core.count(c__4562__auto__);
@@ -202,9 +202,9 @@ if(cljs.core.truth_(obj)){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(goog.date.Date,cljs.core.type(obj))){
 return obj;
 } else {
-var temp__5751__auto__ = cljs_time.coerce.to_date_time(obj);
-if(cljs.core.truth_(temp__5751__auto__)){
-var dt = temp__5751__auto__;
+var temp__5802__auto__ = cljs_time.coerce.to_date_time(obj);
+if(cljs.core.truth_(temp__5802__auto__)){
+var dt = temp__5802__auto__;
 return (new goog.date.Date(dt.getYear(),dt.getMonth(),dt.getDate()));
 } else {
 return null;
@@ -219,9 +219,9 @@ return null;
  */
 cljs_time.coerce.to_local_date_time = (function cljs_time$coerce$to_local_date_time(obj){
 if(cljs.core.truth_(obj)){
-var temp__5751__auto__ = cljs_time.coerce.to_date_time(obj);
-if(cljs.core.truth_(temp__5751__auto__)){
-var dt = temp__5751__auto__;
+var temp__5802__auto__ = cljs_time.coerce.to_date_time(obj);
+if(cljs.core.truth_(temp__5802__auto__)){
+var dt = temp__5802__auto__;
 var G__20723 = (new goog.date.DateTime(dt.getYear(),dt.getMonth(),dt.getDate()));
 G__20723.setHours(dt.getHours());
 

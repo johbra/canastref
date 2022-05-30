@@ -38,9 +38,9 @@ var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15574__$1,cljs.core.cs
 var before = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15574__$1,cljs.core.cst$kw$before);
 var after = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15574__$1,cljs.core.cst$kw$after);
 if(re_frame.interop.debug_enabled_QMARK_){
-var temp__5751__auto___15578 = cljs.core.seq(clojure.set.difference.cljs$core$IFn$_invoke$arity$2(cljs.core.set(cljs.core.keys(m)),re_frame.interceptor.mandatory_interceptor_keys));
-if(temp__5751__auto___15578){
-var unknown_keys_15579 = temp__5751__auto___15578;
+var temp__5802__auto___15578 = cljs.core.seq(clojure.set.difference.cljs$core$IFn$_invoke$arity$2(cljs.core.set(cljs.core.keys(m)),re_frame.interceptor.mandatory_interceptor_keys));
+if(temp__5802__auto___15578){
+var unknown_keys_15579 = temp__5802__auto___15578;
 re_frame.loggers.console.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$error,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["re-frame: ->interceptor",m,"has unknown keys:",unknown_keys_15579], 0));
 } else {
 }
@@ -217,9 +217,9 @@ return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__15594,G__15595
 }));
 
 re_frame.interceptor.invoke_interceptor_fn = (function re_frame$interceptor$invoke_interceptor_fn(context,interceptor,direction){
-var temp__5751__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(interceptor,direction);
-if(cljs.core.truth_(temp__5751__auto__)){
-var f = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(interceptor,direction);
+if(cljs.core.truth_(temp__5802__auto__)){
+var f = temp__5802__auto__;
 return (f.cljs$core$IFn$_invoke$arity$1 ? f.cljs$core$IFn$_invoke$arity$1(context) : f.call(null,context));
 } else {
 return context;

@@ -244,9 +244,9 @@ count__14322_14339 = G__14344;
 i__14323_14340 = G__14345;
 continue;
 } else {
-var temp__5753__auto___14346 = cljs.core.seq(seq__14320_14337);
-if(temp__5753__auto___14346){
-var seq__14320_14347__$1 = temp__5753__auto___14346;
+var temp__5804__auto___14346 = cljs.core.seq(seq__14320_14337);
+if(temp__5804__auto___14346){
+var seq__14320_14347__$1 = temp__5804__auto___14346;
 if(cljs.core.chunked_seq_QMARK_(seq__14320_14347__$1)){
 var c__4591__auto___14348 = cljs.core.chunk_first(seq__14320_14347__$1);
 var G__14349 = cljs.core.chunk_rest(seq__14320_14347__$1);
@@ -340,9 +340,9 @@ if((!(handler.cljs$core$async$impl$protocols$Handler$active_QMARK_$arity$1(null)
 return null;
 } else {
 if((((!((self__.buf == null)))) && ((cljs.core.count(self__.buf) > (0))))){
-var temp__5751__auto__ = handler.cljs$core$async$impl$protocols$Handler$commit$arity$1(null);
-if(cljs.core.truth_(temp__5751__auto__)){
-var take_cb = temp__5751__auto__;
+var temp__5802__auto__ = handler.cljs$core$async$impl$protocols$Handler$commit$arity$1(null);
+if(cljs.core.truth_(temp__5802__auto__)){
+var take_cb = temp__5802__auto__;
 var val = self__.buf.cljs$core$async$impl$protocols$Buffer$remove_BANG_$arity$1(null);
 var vec__14324 = ((((cljs.core.not(self__.buf.cljs$core$async$impl$protocols$Buffer$full_QMARK_$arity$1(null))) && ((self__.puts.length > (0)))))?(function (){var cbs = cljs.core.PersistentVector.EMPTY;
 while(true){
@@ -376,10 +376,10 @@ var i__14330_14362 = (0);
 while(true){
 if((i__14330_14362 < count__14329_14361)){
 var cb_14363 = chunk__14328_14360.cljs$core$IIndexed$_nth$arity$2(null,i__14330_14362);
-cljs.core.async.impl.dispatch.run(((function (seq__14327_14359,chunk__14328_14360,count__14329_14361,i__14330_14362,cb_14363,val,vec__14324,done_QMARK_,cbs,take_cb,temp__5751__auto__,this$__$1){
+cljs.core.async.impl.dispatch.run(((function (seq__14327_14359,chunk__14328_14360,count__14329_14361,i__14330_14362,cb_14363,val,vec__14324,done_QMARK_,cbs,take_cb,temp__5802__auto__,this$__$1){
 return (function (){
 return (cb_14363.cljs$core$IFn$_invoke$arity$1 ? cb_14363.cljs$core$IFn$_invoke$arity$1(true) : cb_14363.call(null,true));
-});})(seq__14327_14359,chunk__14328_14360,count__14329_14361,i__14330_14362,cb_14363,val,vec__14324,done_QMARK_,cbs,take_cb,temp__5751__auto__,this$__$1))
+});})(seq__14327_14359,chunk__14328_14360,count__14329_14361,i__14330_14362,cb_14363,val,vec__14324,done_QMARK_,cbs,take_cb,temp__5802__auto__,this$__$1))
 );
 
 
@@ -393,9 +393,9 @@ count__14329_14361 = G__14366;
 i__14330_14362 = G__14367;
 continue;
 } else {
-var temp__5753__auto___14368 = cljs.core.seq(seq__14327_14359);
-if(temp__5753__auto___14368){
-var seq__14327_14369__$1 = temp__5753__auto___14368;
+var temp__5804__auto___14368 = cljs.core.seq(seq__14327_14359);
+if(temp__5804__auto___14368){
+var seq__14327_14369__$1 = temp__5804__auto___14368;
 if(cljs.core.chunked_seq_QMARK_(seq__14327_14369__$1)){
 var c__4591__auto___14370 = cljs.core.chunk_first(seq__14327_14369__$1);
 var G__14371 = cljs.core.chunk_rest(seq__14327_14369__$1);
@@ -409,10 +409,10 @@ i__14330_14362 = G__14374;
 continue;
 } else {
 var cb_14375 = cljs.core.first(seq__14327_14369__$1);
-cljs.core.async.impl.dispatch.run(((function (seq__14327_14359,chunk__14328_14360,count__14329_14361,i__14330_14362,cb_14375,seq__14327_14369__$1,temp__5753__auto___14368,val,vec__14324,done_QMARK_,cbs,take_cb,temp__5751__auto__,this$__$1){
+cljs.core.async.impl.dispatch.run(((function (seq__14327_14359,chunk__14328_14360,count__14329_14361,i__14330_14362,cb_14375,seq__14327_14369__$1,temp__5804__auto___14368,val,vec__14324,done_QMARK_,cbs,take_cb,temp__5802__auto__,this$__$1){
 return (function (){
 return (cb_14375.cljs$core$IFn$_invoke$arity$1 ? cb_14375.cljs$core$IFn$_invoke$arity$1(true) : cb_14375.call(null,true));
-});})(seq__14327_14359,chunk__14328_14360,count__14329_14361,i__14330_14362,cb_14375,seq__14327_14369__$1,temp__5753__auto___14368,val,vec__14324,done_QMARK_,cbs,take_cb,temp__5751__auto__,this$__$1))
+});})(seq__14327_14359,chunk__14328_14360,count__14329_14361,i__14330_14362,cb_14375,seq__14327_14369__$1,temp__5804__auto___14368,val,vec__14324,done_QMARK_,cbs,take_cb,temp__5802__auto__,this$__$1))
 );
 
 

@@ -37,9 +37,9 @@ re_frame.loggers.console.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$e
 } else {
 }
 
-var temp__5753__auto___21123 = cljs.core.first(cljs.core.remove.cljs$core$IFn$_invoke$arity$2(re_frame.interceptor.interceptor_QMARK_,chain));
-if(cljs.core.truth_(temp__5753__auto___21123)){
-var not_i_21124 = temp__5753__auto___21123;
+var temp__5804__auto___21123 = cljs.core.first(cljs.core.remove.cljs$core$IFn$_invoke$arity$2(re_frame.interceptor.interceptor_QMARK_,chain));
+if(cljs.core.truth_(temp__5804__auto___21123)){
+var not_i_21124 = temp__5804__auto___21123;
 if(cljs.core.fn_QMARK_(not_i_21124)){
 re_frame.loggers.console.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$error,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["re-frame: when registering",id,", got a function instead of an interceptor. Did you provide old style middleware by mistake? Got:",not_i_21124], 0));
 } else {
@@ -70,9 +70,9 @@ re_frame.events._STAR_handling_STAR_ = null;
  */
 re_frame.events.handle = (function re_frame$events$handle(event_v){
 var event_id = re_frame.utils.first_in_vector(event_v);
-var temp__5751__auto__ = re_frame.registrar.get_handler.cljs$core$IFn$_invoke$arity$3(re_frame.events.kind,event_id,true);
-if(cljs.core.truth_(temp__5751__auto__)){
-var interceptors = temp__5751__auto__;
+var temp__5802__auto__ = re_frame.registrar.get_handler.cljs$core$IFn$_invoke$arity$3(re_frame.events.kind,event_id,true);
+if(cljs.core.truth_(temp__5802__auto__)){
+var interceptors = temp__5802__auto__;
 if(cljs.core.truth_(re_frame.events._STAR_handling_STAR_)){
 return re_frame.loggers.console.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$error,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["re-frame: while handling",re_frame.events._STAR_handling_STAR_,", dispatch-sync was called for",event_v,". You can't call dispatch-sync within an event handler."], 0));
 } else {

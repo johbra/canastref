@@ -170,10 +170,10 @@ var text_SINGLEQUOTE_ = re_com.dropdown.insert.cljs$core$IFn$_invoke$arity$varia
 var find = (function (p1__20981_SHARP_){
 return goog.string.caseInsensitiveStartsWith(p1__20981_SHARP_,text_SINGLEQUOTE_);
 });
-var ret = (function (){var temp__5753__auto__ = cljs.core.seq(cljs.core.filter.cljs$core$IFn$_invoke$arity$2(find,choices));
-if(temp__5753__auto__){
-var xs__6308__auto__ = temp__5753__auto__;
-var choice = cljs.core.first(xs__6308__auto__);
+var ret = (function (){var temp__5804__auto__ = cljs.core.seq(cljs.core.filter.cljs$core$IFn$_invoke$arity$2(find,choices));
+if(temp__5804__auto__){
+var xs__6360__auto__ = temp__5804__auto__;
+var choice = cljs.core.first(xs__6360__auto__);
 return new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$text,[text_SINGLEQUOTE_,cljs.core.subs.cljs$core$IFn$_invoke$arity$2(choice,((text_SINGLEQUOTE_).length))].join(''),cljs.core.cst$kw$sel_DASH_start,(sel_start + cljs.core.count(ins)),cljs.core.cst$kw$sel_DASH_end,cljs.core.count(choice)], null);
 } else {
 return null;
@@ -555,9 +555,9 @@ return (choices.cljs$core$IFn$_invoke$arity$3 ? choices.cljs$core$IFn$_invoke$ar
  */
 re_com.dropdown.load_choices = (function re_com$dropdown$load_choices(choices_state,choices,debounce_delay,text,regex_filter_QMARK_,debounce_QMARK_){
 if(cljs.core.fn_QMARK_(choices)){
-var temp__5753__auto___21015 = cljs.core.cst$kw$timer.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(choices_state));
-if(cljs.core.truth_(temp__5753__auto___21015)){
-var timer_21016 = temp__5753__auto___21015;
+var temp__5804__auto___21015 = cljs.core.cst$kw$timer.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(choices_state));
+if(cljs.core.truth_(temp__5804__auto___21015)){
+var timer_21016 = temp__5804__auto___21015;
 clearTimeout(timer_21016);
 } else {
 }
@@ -857,15 +857,15 @@ var y__4253__auto__ = maxh;
 return ((x__4252__auto__ < y__4253__auto__) ? x__4252__auto__ : y__4253__auto__);
 });
 var drop_height = reagent.core.track((function (){
-var temp__5751__auto__ = (function (){var and__4149__auto__ = cljs.core.deref(node);
+var temp__5802__auto__ = (function (){var and__4149__auto__ = cljs.core.deref(node);
 if(cljs.core.truth_(and__4149__auto__)){
 return cljs.core.deref(node).getElementsByClassName("chosen-drop").item((0));
 } else {
 return and__4149__auto__;
 }
 })();
-if(cljs.core.truth_(temp__5751__auto__)){
-var drop_node = temp__5751__auto__;
+if(cljs.core.truth_(temp__5802__auto__)){
+var drop_node = temp__5802__auto__;
 return drop_node.getBoundingClientRect().height;
 } else {
 return est_drop_height();

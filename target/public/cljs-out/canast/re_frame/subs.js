@@ -41,9 +41,9 @@ count__21445_21461 = G__21468;
 i__21446_21462 = G__21469;
 continue;
 } else {
-var temp__5753__auto___21470 = cljs.core.seq(seq__21443_21459);
-if(temp__5753__auto___21470){
-var seq__21443_21471__$1 = temp__5753__auto___21470;
+var temp__5804__auto___21470 = cljs.core.seq(seq__21443_21459);
+if(temp__5804__auto___21470){
+var seq__21443_21471__$1 = temp__5804__auto___21470;
 if(cljs.core.chunked_seq_QMARK_(seq__21443_21471__$1)){
 var c__4591__auto___21472 = cljs.core.chunk_first(seq__21443_21471__$1);
 var G__21473 = cljs.core.chunk_rest(seq__21443_21471__$1);
@@ -201,9 +201,9 @@ var _STAR_current_trace_STAR__orig_val__21494 = re_frame.trace._STAR_current_tra
 var _STAR_current_trace_STAR__temp_val__21495 = re_frame.trace.start_trace(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$operation,re_frame.utils.first_in_vector(query),cljs.core.cst$kw$op_DASH_type,cljs.core.cst$kw$sub_SLASH_create,cljs.core.cst$kw$tags,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$query_DASH_v,query], null)], null));
 (re_frame.trace._STAR_current_trace_STAR_ = _STAR_current_trace_STAR__temp_val__21495);
 
-try{try{var temp__5751__auto__ = re_frame.subs.cache_lookup.cljs$core$IFn$_invoke$arity$1(query);
-if(cljs.core.truth_(temp__5751__auto__)){
-var cached = temp__5751__auto__;
+try{try{var temp__5802__auto__ = re_frame.subs.cache_lookup.cljs$core$IFn$_invoke$arity$1(query);
+if(cljs.core.truth_(temp__5802__auto__)){
+var cached = temp__5802__auto__;
 if(re_frame.trace.is_trace_enabled_QMARK_()){
 var new_trace__15492__auto___21505 = cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.update.cljs$core$IFn$_invoke$arity$4(re_frame.trace._STAR_current_trace_STAR_,cljs.core.cst$kw$tags,cljs.core.merge,cljs.core.cst$kw$tags.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$tags,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$cached_QMARK_,true,cljs.core.cst$kw$reaction,re_frame.interop.reagent_id(cached)], null)], null))),cljs.core.dissoc.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$tags,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$cached_QMARK_,true,cljs.core.cst$kw$reaction,re_frame.interop.reagent_id(cached)], null)], null),cljs.core.cst$kw$tags)], 0));
 (re_frame.trace._STAR_current_trace_STAR_ = new_trace__15492__auto___21505);
@@ -245,9 +245,9 @@ re_frame.trace.run_tracing_callbacks_BANG_(end__15490__auto___21508);
 }
 }}finally {(re_frame.trace._STAR_current_trace_STAR_ = _STAR_current_trace_STAR__orig_val__21494);
 }} else {
-var temp__5751__auto__ = re_frame.subs.cache_lookup.cljs$core$IFn$_invoke$arity$1(query);
-if(cljs.core.truth_(temp__5751__auto__)){
-var cached = temp__5751__auto__;
+var temp__5802__auto__ = re_frame.subs.cache_lookup.cljs$core$IFn$_invoke$arity$1(query);
+if(cljs.core.truth_(temp__5802__auto__)){
+var cached = temp__5802__auto__;
 if(re_frame.trace.is_trace_enabled_QMARK_()){
 var new_trace__15492__auto___21510 = cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.update.cljs$core$IFn$_invoke$arity$4(re_frame.trace._STAR_current_trace_STAR_,cljs.core.cst$kw$tags,cljs.core.merge,cljs.core.cst$kw$tags.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$tags,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$cached_QMARK_,true,cljs.core.cst$kw$reaction,re_frame.interop.reagent_id(cached)], null)], null))),cljs.core.dissoc.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$tags,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$cached_QMARK_,true,cljs.core.cst$kw$reaction,re_frame.interop.reagent_id(cached)], null)], null),cljs.core.cst$kw$tags)], 0));
 (re_frame.trace._STAR_current_trace_STAR_ = new_trace__15492__auto___21510);
@@ -288,9 +288,9 @@ var _STAR_current_trace_STAR__orig_val__21496 = re_frame.trace._STAR_current_tra
 var _STAR_current_trace_STAR__temp_val__21497 = re_frame.trace.start_trace(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$operation,re_frame.utils.first_in_vector(query),cljs.core.cst$kw$op_DASH_type,cljs.core.cst$kw$sub_SLASH_create,cljs.core.cst$kw$tags,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$query_DASH_v,query,cljs.core.cst$kw$dyn_DASH_v,dynv], null)], null));
 (re_frame.trace._STAR_current_trace_STAR_ = _STAR_current_trace_STAR__temp_val__21497);
 
-try{try{var temp__5751__auto__ = re_frame.subs.cache_lookup.cljs$core$IFn$_invoke$arity$2(query,dynv);
-if(cljs.core.truth_(temp__5751__auto__)){
-var cached = temp__5751__auto__;
+try{try{var temp__5802__auto__ = re_frame.subs.cache_lookup.cljs$core$IFn$_invoke$arity$2(query,dynv);
+if(cljs.core.truth_(temp__5802__auto__)){
+var cached = temp__5802__auto__;
 if(re_frame.trace.is_trace_enabled_QMARK_()){
 var new_trace__15492__auto___21513 = cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.update.cljs$core$IFn$_invoke$arity$4(re_frame.trace._STAR_current_trace_STAR_,cljs.core.cst$kw$tags,cljs.core.merge,cljs.core.cst$kw$tags.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$tags,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$cached_QMARK_,true,cljs.core.cst$kw$reaction,re_frame.interop.reagent_id(cached)], null)], null))),cljs.core.dissoc.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$tags,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$cached_QMARK_,true,cljs.core.cst$kw$reaction,re_frame.interop.reagent_id(cached)], null)], null),cljs.core.cst$kw$tags)], 0));
 (re_frame.trace._STAR_current_trace_STAR_ = new_trace__15492__auto___21513);
@@ -310,9 +310,9 @@ var new_trace__15492__auto___21514 = cljs.core.merge.cljs$core$IFn$_invoke$arity
 }
 
 if(re_frame.interop.debug_enabled_QMARK_){
-var temp__5753__auto___21515 = cljs.core.not_empty(cljs.core.remove.cljs$core$IFn$_invoke$arity$2(re_frame.interop.ratom_QMARK_,dynv));
-if(cljs.core.truth_(temp__5753__auto___21515)){
-var not_reactive_21516 = temp__5753__auto___21515;
+var temp__5804__auto___21515 = cljs.core.not_empty(cljs.core.remove.cljs$core$IFn$_invoke$arity$2(re_frame.interop.ratom_QMARK_,dynv));
+if(cljs.core.truth_(temp__5804__auto___21515)){
+var not_reactive_21516 = temp__5804__auto___21515;
 re_frame.loggers.console.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$warn,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["re-frame: your subscription's dynamic parameters that don't implement IReactiveAtom:",not_reactive_21516], 0));
 } else {
 }
@@ -353,9 +353,9 @@ re_frame.trace.run_tracing_callbacks_BANG_(end__15490__auto___21518);
 }
 }}finally {(re_frame.trace._STAR_current_trace_STAR_ = _STAR_current_trace_STAR__orig_val__21496);
 }} else {
-var temp__5751__auto__ = re_frame.subs.cache_lookup.cljs$core$IFn$_invoke$arity$2(query,dynv);
-if(cljs.core.truth_(temp__5751__auto__)){
-var cached = temp__5751__auto__;
+var temp__5802__auto__ = re_frame.subs.cache_lookup.cljs$core$IFn$_invoke$arity$2(query,dynv);
+if(cljs.core.truth_(temp__5802__auto__)){
+var cached = temp__5802__auto__;
 if(re_frame.trace.is_trace_enabled_QMARK_()){
 var new_trace__15492__auto___21520 = cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.update.cljs$core$IFn$_invoke$arity$4(re_frame.trace._STAR_current_trace_STAR_,cljs.core.cst$kw$tags,cljs.core.merge,cljs.core.cst$kw$tags.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$tags,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$cached_QMARK_,true,cljs.core.cst$kw$reaction,re_frame.interop.reagent_id(cached)], null)], null))),cljs.core.dissoc.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$tags,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$cached_QMARK_,true,cljs.core.cst$kw$reaction,re_frame.interop.reagent_id(cached)], null)], null),cljs.core.cst$kw$tags)], 0));
 (re_frame.trace._STAR_current_trace_STAR_ = new_trace__15492__auto___21520);
@@ -375,9 +375,9 @@ var new_trace__15492__auto___21521 = cljs.core.merge.cljs$core$IFn$_invoke$arity
 }
 
 if(re_frame.interop.debug_enabled_QMARK_){
-var temp__5753__auto___21522 = cljs.core.not_empty(cljs.core.remove.cljs$core$IFn$_invoke$arity$2(re_frame.interop.ratom_QMARK_,dynv));
-if(cljs.core.truth_(temp__5753__auto___21522)){
-var not_reactive_21523 = temp__5753__auto___21522;
+var temp__5804__auto___21522 = cljs.core.not_empty(cljs.core.remove.cljs$core$IFn$_invoke$arity$2(re_frame.interop.ratom_QMARK_,dynv));
+if(cljs.core.truth_(temp__5804__auto___21522)){
+var not_reactive_21523 = temp__5804__auto___21522;
 re_frame.loggers.console.cljs$core$IFn$_invoke$arity$variadic(cljs.core.cst$kw$warn,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2(["re-frame: your subscription's dynamic parameters that don't implement IReactiveAtom:",not_reactive_21523], 0));
 } else {
 }

@@ -338,9 +338,9 @@ if(cljs.core.map_QMARK_(arg__$1)){
 var arg_keys = cljs.core.set(cljs.core.keys(arg__$1));
 var contains_class_QMARK_ = cljs.core.contains_QMARK_(arg_keys,cljs.core.cst$kw$class);
 var contains_style_QMARK_ = cljs.core.contains_QMARK_(arg_keys,cljs.core.cst$kw$style);
-var result = ((contains_class_QMARK_)?":attr parameters (including :parts) do not allow :class":((contains_style_QMARK_)?":attr parameters (including :parts) do not allow :style":(function (){var temp__5753__auto__ = cljs.core.not_empty(re_com.validate.invalid_html_attrs(arg_keys));
-if(cljs.core.truth_(temp__5753__auto__)){
-var invalid = temp__5753__auto__;
+var result = ((contains_class_QMARK_)?":attr parameters (including :parts) do not allow :class":((contains_style_QMARK_)?":attr parameters (including :parts) do not allow :style":(function (){var temp__5804__auto__ = cljs.core.not_empty(re_com.validate.invalid_html_attrs(arg_keys));
+if(cljs.core.truth_(temp__5804__auto__)){
+var invalid = temp__5804__auto__;
 return ["Unknown HTML attribute(s): ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(invalid)].join('');
 } else {
 return null;

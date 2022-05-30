@@ -6,7 +6,7 @@
             [canastref.drop-file-stream :as df]
             [medley.core :as m]
             [cljs-time.core :as t]
-            [cljs-time.local :as lt]))
+            [cljs-time.local :as l]))
 
 (rf/reg-event-db
  :initialize
@@ -148,7 +148,7 @@
  :neues-spiel
  [re-frame.core/debug]
  (fn [db [_ _]]
-   (let [laufender-monat (:monat db)
+   (let [laufender-monat (t/month (l/local-now)) 
          neuer-monat? (> laufender-monat (inc (apply max (keys (:monatsbilanz db)))))
          monatsbilanz (if neuer-monat?
                         (assoc (:monatsbilanz db)
@@ -159,7 +159,7 @@
                           (m/map-vals (fn [] 0) (:monatshistorie db))
                           (:monatshistorie db))] 
      (assoc db
-            ;:monat (inc laufender-monat)
+            :monat laufender-monat
             :monatsbilanz monatsbilanz
             :monatshistorie monatshistorie
             :spiel (sp/neues-spiel @(rf/subscribe [:spieler-namen]))))))

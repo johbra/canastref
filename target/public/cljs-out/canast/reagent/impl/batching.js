@@ -107,11 +107,11 @@ this.scheduled_QMARK_ = scheduled_QMARK_;
 (reagent.impl.batching.RenderQueue.prototype.flush_after_render = (function (){
 var self__ = this;
 var this$ = this;
-var temp__5757__auto__ = this$.afterRender;
-if((temp__5757__auto__ == null)){
+var temp__5808__auto__ = this$.afterRender;
+if((temp__5808__auto__ == null)){
 return null;
 } else {
-var fs = temp__5757__auto__;
+var fs = temp__5808__auto__;
 (this$.afterRender = null);
 
 return reagent.impl.batching.run_funs(fs);
@@ -147,11 +147,11 @@ return (reagent.impl.batching.next_tick.cljs$core$IFn$_invoke$arity$1 ? reagent.
 (reagent.impl.batching.RenderQueue.prototype.flush_before_flush = (function (){
 var self__ = this;
 var this$ = this;
-var temp__5757__auto__ = this$.beforeFlush;
-if((temp__5757__auto__ == null)){
+var temp__5808__auto__ = this$.beforeFlush;
+if((temp__5808__auto__ == null)){
 return null;
 } else {
-var fs = temp__5757__auto__;
+var fs = temp__5808__auto__;
 (this$.beforeFlush = null);
 
 return reagent.impl.batching.run_funs(fs);
@@ -203,11 +203,11 @@ return reagent.impl.batching.enqueue(this$,this$.afterRender,f);
 (reagent.impl.batching.RenderQueue.prototype.flush_render = (function (){
 var self__ = this;
 var this$ = this;
-var temp__5757__auto__ = this$.componentQueue;
-if((temp__5757__auto__ == null)){
+var temp__5808__auto__ = this$.componentQueue;
+if((temp__5808__auto__ == null)){
 return null;
 } else {
-var fs = temp__5757__auto__;
+var fs = temp__5808__auto__;
 (this$.componentQueue = null);
 
 return reagent.impl.batching.run_queue(fs);

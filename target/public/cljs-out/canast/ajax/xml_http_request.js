@@ -60,9 +60,9 @@ this$__$1.open(method,uri,true);
 
 (this$__$1.timeout = timeout);
 
-var temp__5753__auto___14642 = cljs.core.cst$kw$type.cljs$core$IFn$_invoke$arity$1(response_format);
-if(cljs.core.truth_(temp__5753__auto___14642)){
-var response_type_14643 = temp__5753__auto___14642;
+var temp__5804__auto___14642 = cljs.core.cst$kw$type.cljs$core$IFn$_invoke$arity$1(response_format);
+if(cljs.core.truth_(temp__5804__auto___14642)){
+var response_type_14643 = temp__5804__auto___14642;
 (this$__$1.responseType = cljs.core.name(response_type_14643));
 } else {
 }
@@ -89,9 +89,9 @@ count__14628_14646 = G__14653;
 i__14629_14647 = G__14654;
 continue;
 } else {
-var temp__5753__auto___14655 = cljs.core.seq(seq__14626_14644);
-if(temp__5753__auto___14655){
-var seq__14626_14656__$1 = temp__5753__auto___14655;
+var temp__5804__auto___14655 = cljs.core.seq(seq__14626_14644);
+if(temp__5804__auto___14655){
+var seq__14626_14656__$1 = temp__5804__auto___14655;
 if(cljs.core.chunked_seq_QMARK_(seq__14626_14656__$1)){
 var c__4591__auto___14657 = cljs.core.chunk_first(seq__14626_14656__$1);
 var G__14658 = cljs.core.chunk_rest(seq__14626_14656__$1);

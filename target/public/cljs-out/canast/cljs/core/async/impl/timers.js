@@ -154,9 +154,9 @@ while(true){
 if((!((level < (0))))){
 var x__$1 = (function (){var x__$1 = x;
 while(true){
-var temp__5751__auto__ = (((level < x__$1.forward.length))?(x__$1.forward[level]):null);
-if(cljs.core.truth_(temp__5751__auto__)){
-var x_SINGLEQUOTE_ = temp__5751__auto__;
+var temp__5802__auto__ = (((level < x__$1.forward.length))?(x__$1.forward[level]):null);
+if(cljs.core.truth_(temp__5802__auto__)){
+var x_SINGLEQUOTE_ = temp__5802__auto__;
 if((x_SINGLEQUOTE_.key < k)){
 var G__18262 = x_SINGLEQUOTE_;
 x__$1 = G__18262;

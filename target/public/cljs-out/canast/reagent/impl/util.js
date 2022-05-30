@@ -603,12 +603,12 @@ return p2;
 }
 });
 reagent.impl.util.merge_style = (function reagent$impl$util$merge_style(p1,p2){
-var style = (function (){var temp__5753__auto__ = cljs.core.cst$kw$style.cljs$core$IFn$_invoke$arity$1(p1);
-if(cljs.core.truth_(temp__5753__auto__)){
-var s1 = temp__5753__auto__;
-var temp__5753__auto____$1 = cljs.core.cst$kw$style.cljs$core$IFn$_invoke$arity$1(p2);
-if(cljs.core.truth_(temp__5753__auto____$1)){
-var s2 = temp__5753__auto____$1;
+var style = (function (){var temp__5804__auto__ = cljs.core.cst$kw$style.cljs$core$IFn$_invoke$arity$1(p1);
+if(cljs.core.truth_(temp__5804__auto__)){
+var s1 = temp__5804__auto__;
+var temp__5804__auto____$1 = cljs.core.cst$kw$style.cljs$core$IFn$_invoke$arity$1(p2);
+if(cljs.core.truth_(temp__5804__auto____$1)){
+var s2 = temp__5804__auto____$1;
 return cljs.core.merge.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([s1,s2], 0));
 } else {
 return null;
@@ -665,9 +665,9 @@ return null;
 }));
 
 (reagent.impl.util.merge_props.cljs$core$IFn$_invoke$arity$1 = (function (p){
-var temp__5751__auto__ = cljs.core.cst$kw$class.cljs$core$IFn$_invoke$arity$1(p);
-if(cljs.core.truth_(temp__5751__auto__)){
-var c = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.cst$kw$class.cljs$core$IFn$_invoke$arity$1(p);
+if(cljs.core.truth_(temp__5802__auto__)){
+var c = temp__5802__auto__;
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(p,cljs.core.cst$kw$class,reagent.impl.util.class_names.cljs$core$IFn$_invoke$arity$1(c));
 } else {
 return p;
@@ -676,9 +676,9 @@ return p;
 
 (reagent.impl.util.merge_props.cljs$core$IFn$_invoke$arity$2 = (function (p1,p2){
 if((p1 == null)){
-var temp__5751__auto__ = cljs.core.cst$kw$class.cljs$core$IFn$_invoke$arity$1(p2);
-if(cljs.core.truth_(temp__5751__auto__)){
-var c = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.cst$kw$class.cljs$core$IFn$_invoke$arity$1(p2);
+if(cljs.core.truth_(temp__5802__auto__)){
+var c = temp__5802__auto__;
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(p2,cljs.core.cst$kw$class,reagent.impl.util.class_names.cljs$core$IFn$_invoke$arity$1(c));
 } else {
 return p2;

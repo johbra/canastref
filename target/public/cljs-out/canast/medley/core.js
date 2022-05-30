@@ -105,9 +105,9 @@ return medley.core.dissoc_in.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)
 });
 
 (medley.core.dissoc_in.cljs$core$IFn$_invoke$arity$2 = (function (m,ks){
-var temp__5751__auto__ = cljs.core.seq(ks);
-if(temp__5751__auto__){
-var vec__21720 = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.seq(ks);
+if(temp__5802__auto__){
+var vec__21720 = temp__5802__auto__;
 var seq__21721 = cljs.core.seq(vec__21720);
 var first__21722 = cljs.core.first(seq__21721);
 var seq__21721__$1 = cljs.core.next(seq__21721);
@@ -130,9 +130,9 @@ return m;
 
 (medley.core.dissoc_in.cljs$core$IFn$_invoke$arity$variadic = (function (m,ks,kss){
 while(true){
-var temp__5751__auto__ = cljs.core.seq(kss);
-if(temp__5751__auto__){
-var vec__21723 = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.seq(kss);
+if(temp__5802__auto__){
+var vec__21723 = temp__5802__auto__;
 var seq__21724 = cljs.core.seq(vec__21723);
 var first__21725 = cljs.core.first(seq__21724);
 var seq__21724__$1 = cljs.core.next(seq__21724);
@@ -273,9 +273,9 @@ return medley.core.update_existing.cljs$core$IFn$_invoke$arity$variadic((argumen
 });
 
 (medley.core.update_existing.cljs$core$IFn$_invoke$arity$3 = (function (m,k,f){
-var temp__5751__auto__ = cljs.core.find(m,k);
-if(cljs.core.truth_(temp__5751__auto__)){
-var kv = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.find(m,k);
+if(cljs.core.truth_(temp__5802__auto__)){
+var kv = temp__5802__auto__;
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(m,k,(function (){var G__21756 = cljs.core.val(kv);
 return (f.cljs$core$IFn$_invoke$arity$1 ? f.cljs$core$IFn$_invoke$arity$1(G__21756) : f.call(null,G__21756));
 })());
@@ -285,9 +285,9 @@ return m;
 }));
 
 (medley.core.update_existing.cljs$core$IFn$_invoke$arity$4 = (function (m,k,f,x){
-var temp__5751__auto__ = cljs.core.find(m,k);
-if(cljs.core.truth_(temp__5751__auto__)){
-var kv = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.find(m,k);
+if(cljs.core.truth_(temp__5802__auto__)){
+var kv = temp__5802__auto__;
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(m,k,(function (){var G__21757 = cljs.core.val(kv);
 var G__21758 = x;
 return (f.cljs$core$IFn$_invoke$arity$2 ? f.cljs$core$IFn$_invoke$arity$2(G__21757,G__21758) : f.call(null,G__21757,G__21758));
@@ -298,9 +298,9 @@ return m;
 }));
 
 (medley.core.update_existing.cljs$core$IFn$_invoke$arity$5 = (function (m,k,f,x,y){
-var temp__5751__auto__ = cljs.core.find(m,k);
-if(cljs.core.truth_(temp__5751__auto__)){
-var kv = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.find(m,k);
+if(cljs.core.truth_(temp__5802__auto__)){
+var kv = temp__5802__auto__;
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(m,k,(function (){var G__21759 = cljs.core.val(kv);
 var G__21760 = x;
 var G__21761 = y;
@@ -312,9 +312,9 @@ return m;
 }));
 
 (medley.core.update_existing.cljs$core$IFn$_invoke$arity$6 = (function (m,k,f,x,y,z){
-var temp__5751__auto__ = cljs.core.find(m,k);
-if(cljs.core.truth_(temp__5751__auto__)){
-var kv = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.find(m,k);
+if(cljs.core.truth_(temp__5802__auto__)){
+var kv = temp__5802__auto__;
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(m,k,(function (){var G__21762 = cljs.core.val(kv);
 var G__21763 = x;
 var G__21764 = y;
@@ -327,9 +327,9 @@ return m;
 }));
 
 (medley.core.update_existing.cljs$core$IFn$_invoke$arity$variadic = (function (m,k,f,x,y,z,more){
-var temp__5751__auto__ = cljs.core.find(m,k);
-if(cljs.core.truth_(temp__5751__auto__)){
-var kv = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.find(m,k);
+if(cljs.core.truth_(temp__5802__auto__)){
+var kv = temp__5802__auto__;
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(m,k,cljs.core.apply.cljs$core$IFn$_invoke$arity$variadic(f,cljs.core.val(kv),x,y,z,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([more], 0)));
 } else {
 return m;
@@ -388,9 +388,9 @@ var first__21776 = cljs.core.first(seq__21775);
 var seq__21775__$1 = cljs.core.next(seq__21775);
 var k = first__21776;
 var ks__$2 = seq__21775__$1;
-var temp__5751__auto__ = cljs.core.find(m__$1,k);
-if(cljs.core.truth_(temp__5751__auto__)){
-var kv = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.find(m__$1,k);
+if(cljs.core.truth_(temp__5802__auto__)){
+var kv = temp__5802__auto__;
 if(ks__$2){
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(m__$1,k,medley$core$up(cljs.core.val(kv),ks__$2,f__$1,args__$1));
 } else {
@@ -835,9 +835,9 @@ return self__4758__auto__.cljs$core$IFn$_invoke$arity$variadic(G__21824,G__21825
  */
 medley.core.join = (function medley$core$join(colls){
 return (new cljs.core.LazySeq(null,(function (){
-var temp__5753__auto__ = cljs.core.seq(colls);
-if(temp__5753__auto__){
-var s = temp__5753__auto__;
+var temp__5804__auto__ = cljs.core.seq(colls);
+if(temp__5804__auto__){
+var s = temp__5804__auto__;
 return cljs.core.concat.cljs$core$IFn$_invoke$arity$2(cljs.core.first(s),(function (){var G__21831 = cljs.core.rest(s);
 return (medley.core.join.cljs$core$IFn$_invoke$arity$1 ? medley.core.join.cljs$core$IFn$_invoke$arity$1(G__21831) : medley.core.join.call(null,G__21831));
 })());
@@ -1176,9 +1176,9 @@ while(true){
 var vec__21869 = p__21868;
 var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__21869,(0),null);
 var xs__$1 = vec__21869;
-var temp__5753__auto__ = cljs.core.seq(xs__$1);
-if(temp__5753__auto__){
-var s = temp__5753__auto__;
+var temp__5804__auto__ = cljs.core.seq(xs__$1);
+if(temp__5804__auto__){
+var s = temp__5804__auto__;
 var fx = (f.cljs$core$IFn$_invoke$arity$1 ? f.cljs$core$IFn$_invoke$arity$1(x) : f.call(null,x));
 if(cljs.core.contains_QMARK_(seen__$1,fx)){
 var G__21874 = cljs.core.rest(s);
@@ -1331,9 +1331,9 @@ return G__21883;
 
 (medley.core.take_upto.cljs$core$IFn$_invoke$arity$2 = (function (pred,coll){
 return (new cljs.core.LazySeq(null,(function (){
-var temp__5753__auto__ = cljs.core.seq(coll);
-if(temp__5753__auto__){
-var s = temp__5753__auto__;
+var temp__5804__auto__ = cljs.core.seq(coll);
+if(temp__5804__auto__){
+var s = temp__5804__auto__;
 var x = cljs.core.first(s);
 return cljs.core.cons(x,((cljs.core.not((pred.cljs$core$IFn$_invoke$arity$1 ? pred.cljs$core$IFn$_invoke$arity$1(x) : pred.call(null,x))))?medley.core.take_upto.cljs$core$IFn$_invoke$arity$2(pred,cljs.core.rest(s)):null));
 } else {

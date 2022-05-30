@@ -35,9 +35,9 @@ return re_frame.core.dispatch(cljs.core.conj.cljs$core$IFn$_invoke$arity$2(on_fa
 }),api)], 0)),cljs.core.cst$kw$on_DASH_success,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$on_DASH_failure,cljs.core.cst$kw$on_DASH_request], 0));
 });
 day8.re_frame.http_fx.dispatch_on_request = (function day8$re_frame$http_fx$dispatch_on_request(request,xhrio){
-var temp__5751__auto__ = cljs.core.cst$kw$on_DASH_request.cljs$core$IFn$_invoke$arity$1(request);
-if(cljs.core.truth_(temp__5751__auto__)){
-var on_request = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.cst$kw$on_DASH_request.cljs$core$IFn$_invoke$arity$1(request);
+if(cljs.core.truth_(temp__5802__auto__)){
+var on_request = temp__5802__auto__;
 return re_frame.core.dispatch(cljs.core.conj.cljs$core$IFn$_invoke$arity$2(on_request,xhrio));
 } else {
 return null;
@@ -66,9 +66,9 @@ count__21689 = G__21694;
 i__21690 = G__21695;
 continue;
 } else {
-var temp__5753__auto__ = cljs.core.seq(seq__21687);
-if(temp__5753__auto__){
-var seq__21687__$1 = temp__5753__auto__;
+var temp__5804__auto__ = cljs.core.seq(seq__21687);
+if(temp__5804__auto__){
+var seq__21687__$1 = temp__5804__auto__;
 if(cljs.core.chunked_seq_QMARK_(seq__21687__$1)){
 var c__4591__auto__ = cljs.core.chunk_first(seq__21687__$1);
 var G__21696 = cljs.core.chunk_rest(seq__21687__$1);

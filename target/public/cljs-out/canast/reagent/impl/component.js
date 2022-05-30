@@ -27,11 +27,11 @@ return null;
 }
 });
 reagent.impl.component.props_argv = (function reagent$impl$component$props_argv(c,p){
-var temp__5755__auto__ = p.argv;
-if((temp__5755__auto__ == null)){
+var temp__5806__auto__ = p.argv;
+if((temp__5806__auto__ == null)){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [c.constructor,reagent.impl.util.shallow_obj_to_map(p)], null);
 } else {
-var a = temp__5755__auto__;
+var a = temp__5806__auto__;
 return a;
 }
 });
@@ -40,23 +40,23 @@ return reagent.impl.component.props_argv(c,c.props);
 });
 reagent.impl.component.get_props = (function reagent$impl$component$get_props(c){
 var p = c.props;
-var temp__5755__auto__ = p.argv;
-if((temp__5755__auto__ == null)){
+var temp__5806__auto__ = p.argv;
+if((temp__5806__auto__ == null)){
 return reagent.impl.util.shallow_obj_to_map(p);
 } else {
-var v = temp__5755__auto__;
+var v = temp__5806__auto__;
 return reagent.impl.component.extract_props(v);
 }
 });
 reagent.impl.component.get_children = (function reagent$impl$component$get_children(c){
 var p = c.props;
-var temp__5755__auto__ = p.argv;
-if((temp__5755__auto__ == null)){
+var temp__5806__auto__ = p.argv;
+if((temp__5806__auto__ == null)){
 return cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentVector.EMPTY,(function (){var G__13286 = p.children;
 return reagent.impl.component.global$module$react.Children.toArray(G__13286);
 })());
 } else {
-var v = temp__5755__auto__;
+var v = temp__5806__auto__;
 return reagent.impl.component.extract_children(v);
 }
 });
@@ -236,11 +236,11 @@ throw (new Error("getDefaultProps not supported"));
 break;
 case "getDerivedStateFromProps":
 return (function reagent$impl$component$custom_wrapper_$_getDerivedStateFromProps(props,state){
-return f.call(null,(function (){var temp__5755__auto__ = props.argv;
-if((temp__5755__auto__ == null)){
+return f.call(null,(function (){var temp__5806__auto__ = props.argv;
+if((temp__5806__auto__ == null)){
 return props;
 } else {
-var a = temp__5755__auto__;
+var a = temp__5806__auto__;
 return reagent.impl.component.extract_props(a);
 }
 })(),state);
@@ -606,11 +606,11 @@ return reagent.impl.component.cache_react_class(compiler,f,res);
 }
 });
 reagent.impl.component.as_class = (function reagent$impl$component$as_class(tag,compiler){
-var temp__5755__auto__ = reagent.impl.component.cached_react_class(compiler,tag);
-if((temp__5755__auto__ == null)){
+var temp__5806__auto__ = reagent.impl.component.cached_react_class(compiler,tag);
+if((temp__5806__auto__ == null)){
 return reagent.impl.component.fn_to_class(compiler,tag);
 } else {
-var cached_class = temp__5755__auto__;
+var cached_class = temp__5806__auto__;
 return cached_class;
 }
 });

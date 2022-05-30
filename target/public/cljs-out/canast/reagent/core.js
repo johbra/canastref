@@ -850,7 +850,7 @@ return cljs.core.apply.cljs$core$IFn$_invoke$arity$3(f,p1__13463_SHARP_,args);
 try{cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$2(a,(function (state){
 var s = cljs.core.apply.cljs$core$IFn$_invoke$arity$3(f,state,args);
 while(true){
-var temp__5755__auto__ = (function (){var G__13468 = a;
+var temp__5806__auto__ = (function (){var G__13468 = a;
 var G__13468__$1 = (((G__13468 == null))?null:G__13468.rswapfs);
 if((G__13468__$1 == null)){
 return null;
@@ -858,10 +858,10 @@ return null;
 return G__13468__$1.shift();
 }
 })();
-if((temp__5755__auto__ == null)){
+if((temp__5806__auto__ == null)){
 return s;
 } else {
-var sf = temp__5755__auto__;
+var sf = temp__5806__auto__;
 var G__13472 = (sf.cljs$core$IFn$_invoke$arity$1 ? sf.cljs$core$IFn$_invoke$arity$1(s) : sf.call(null,s));
 s = G__13472;
 continue;

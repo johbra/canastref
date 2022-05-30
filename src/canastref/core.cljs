@@ -19,4 +19,4 @@
   (main))
 
 ;; this only gets called once
-(defonce start-up (do (main) (js/console.log @re-frame.db/app-db ) true))
+(defonce start-up (do (main) (js/console.log @re-frame.db/app-db) true))

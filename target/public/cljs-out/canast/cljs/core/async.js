@@ -348,9 +348,9 @@ throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(
 });
 
 (cljs.core.async.put_BANG_.cljs$core$IFn$_invoke$arity$2 = (function (port,val){
-var temp__5751__auto__ = cljs.core.async.impl.protocols.put_BANG_(port,val,cljs.core.async.fhnop);
-if(cljs.core.truth_(temp__5751__auto__)){
-var ret = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.async.impl.protocols.put_BANG_(port,val,cljs.core.async.fhnop);
+if(cljs.core.truth_(temp__5802__auto__)){
+var ret = temp__5802__auto__;
 return cljs.core.deref(ret);
 } else {
 return true;
@@ -362,9 +362,9 @@ return cljs.core.async.put_BANG_.cljs$core$IFn$_invoke$arity$4(port,val,fn1,true
 }));
 
 (cljs.core.async.put_BANG_.cljs$core$IFn$_invoke$arity$4 = (function (port,val,fn1,on_caller_QMARK_){
-var temp__5751__auto__ = cljs.core.async.impl.protocols.put_BANG_(port,val,cljs.core.async.fn_handler.cljs$core$IFn$_invoke$arity$1(fn1));
-if(cljs.core.truth_(temp__5751__auto__)){
-var retb = temp__5751__auto__;
+var temp__5802__auto__ = cljs.core.async.impl.protocols.put_BANG_(port,val,cljs.core.async.fn_handler.cljs$core$IFn$_invoke$arity$1(fn1));
+if(cljs.core.truth_(temp__5802__auto__)){
+var retb = temp__5802__auto__;
 var ret = cljs.core.deref(retb);
 if(cljs.core.truth_(on_caller_QMARK_)){
 (fn1.cljs$core$IFn$_invoke$arity$1 ? fn1.cljs$core$IFn$_invoke$arity$1(ret) : fn1.call(null,ret));
@@ -609,15 +609,15 @@ if(cljs.core.truth_(or__4160__auto__)){
 return or__4160__auto__;
 } else {
 if(cljs.core.contains_QMARK_(opts,cljs.core.cst$kw$default)){
-var temp__5753__auto__ = (function (){var and__4149__auto__ = flag.cljs$core$async$impl$protocols$Handler$active_QMARK_$arity$1(null);
+var temp__5804__auto__ = (function (){var and__4149__auto__ = flag.cljs$core$async$impl$protocols$Handler$active_QMARK_$arity$1(null);
 if(cljs.core.truth_(and__4149__auto__)){
 return flag.cljs$core$async$impl$protocols$Handler$commit$arity$1(null);
 } else {
 return and__4149__auto__;
 }
 })();
-if(cljs.core.truth_(temp__5753__auto__)){
-var got = temp__5753__auto__;
+if(cljs.core.truth_(temp__5804__auto__)){
+var got = temp__5804__auto__;
 return cljs.core.async.impl.channels.box(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$default.cljs$core$IFn$_invoke$arity$1(opts),cljs.core.cst$kw$default], null));
 } else {
 return null;
@@ -4240,15 +4240,15 @@ var statearr_19211_19217 = state;
 (statearr_19211_19217[(1)] = cont_block);
 
 
-var temp__5753__auto__ = cljs.core.async.do_alts((function (val){
+var temp__5804__auto__ = cljs.core.async.do_alts((function (val){
 var statearr_19212_19218 = state;
 (statearr_19212_19218[(2)] = val);
 
 
 return cljs.core.async.impl.ioc_helpers.run_state_machine_wrapped(state);
 }),ports,opts);
-if(cljs.core.truth_(temp__5753__auto__)){
-var cb = temp__5753__auto__;
+if(cljs.core.truth_(temp__5804__auto__)){
+var cb = temp__5804__auto__;
 var statearr_19213_19219 = state;
 (statearr_19213_19219[(2)] = cljs.core.deref(cb));
 
@@ -5103,9 +5103,9 @@ return cljs.core.async.tap.cljs$core$IFn$_invoke$arity$3(m,ch__$1,close_QMARK_);
 (cljs.core.async.t_cljs$core$async19356.prototype.cljs$core$async$Pub$unsub_STAR_$arity$3 = (function (p,topic,ch__$1){
 var self__ = this;
 var p__$1 = this;
-var temp__5753__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(self__.mults),topic);
-if(cljs.core.truth_(temp__5753__auto__)){
-var m = temp__5753__auto__;
+var temp__5804__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(self__.mults),topic);
+if(cljs.core.truth_(temp__5804__auto__)){
+var m = temp__5804__auto__;
 return cljs.core.async.untap(m,ch__$1);
 } else {
 return null;

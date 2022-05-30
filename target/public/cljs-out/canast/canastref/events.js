@@ -132,13 +132,13 @@ re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$3(cljs.core.cst$kw$neues_
 var vec__21972 = p__21971;
 var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__21972,(0),null);
 var ___$1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__21972,(1),null);
-var laufender_monat = cljs.core.cst$kw$monat.cljs$core$IFn$_invoke$arity$1(db);
+var laufender_monat = cljs_time.core.month(cljs_time.local.local_now());
 var neuer_monat_QMARK_ = (laufender_monat > (cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.max,cljs.core.keys(cljs.core.cst$kw$monatsbilanz.cljs$core$IFn$_invoke$arity$1(db))) + (1)));
 var monatsbilanz = ((neuer_monat_QMARK_)?cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(cljs.core.cst$kw$monatsbilanz.cljs$core$IFn$_invoke$arity$1(db),(laufender_monat - (1)),canastref.spiel.fuehrende(cljs.core.cst$kw$monatshistorie.cljs$core$IFn$_invoke$arity$1(db))):cljs.core.cst$kw$monatsbilanz.cljs$core$IFn$_invoke$arity$1(db));
 var monatshistorie = ((neuer_monat_QMARK_)?medley.core.map_vals.cljs$core$IFn$_invoke$arity$2((function (){
 return (0);
 }),cljs.core.cst$kw$monatshistorie.cljs$core$IFn$_invoke$arity$1(db)):cljs.core.cst$kw$monatshistorie.cljs$core$IFn$_invoke$arity$1(db));
-return cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(db,cljs.core.cst$kw$monatsbilanz,monatsbilanz,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$monatshistorie,monatshistorie,cljs.core.cst$kw$spiel,canastref.spiel.neues_spiel(cljs.core.deref(re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$spieler_DASH_namen], null))))], 0));
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(db,cljs.core.cst$kw$monat,laufender_monat,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$monatsbilanz,monatsbilanz,cljs.core.cst$kw$monatshistorie,monatshistorie,cljs.core.cst$kw$spiel,canastref.spiel.neues_spiel(cljs.core.deref(re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$spieler_DASH_namen], null))))], 0));
 }));
 re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$3(cljs.core.cst$kw$monatsbilanz,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_frame.core.debug], null),(function (db,p__21975){
 var vec__21976 = p__21975;
